@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="style.css">
+<header>
+    <ul class="nav">
+        <button id="boton-logo"><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav"></button>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Work</a></li>
+        <ul class="registro">
+            <li><button id="miBoton" class="btn-registro iniciarSesion">Iniciar Sesión</button></li>
+            <li><button class="btn-registro registrarse">Registro</button></li>
+        </ul>
+    </ul>
+</header>
+<script>
+    document.getElementById("boton-logo").onclick = function () {
+        window.location.href = "../index/index.php";
+    };
+</script>
