@@ -10,7 +10,8 @@
 
 <body>
     <?php
-    include "../header y footer/header.html"
+    include "../header y footer/header.html";
+    include "../database/conect.php";
     ?>
     <!-- Aquí iría todo el código del index -->
     <?php
