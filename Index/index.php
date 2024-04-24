@@ -14,6 +14,8 @@
     include "../database/conect.php";
     ?>
     <!-- Aquí iría todo el código del index -->
+    <!-- <span onclick="playSound('https://zero-network.net/phasmophobia/static/assets/banshee_scream.mp3')">Icono de sonido</span> -->
+    <!-- codigo que hace que suene un sonido -->
     <?php
     // include "../header y footer/footer.html"
     ?>
