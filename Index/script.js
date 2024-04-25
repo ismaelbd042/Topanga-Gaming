@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   mostrarVentanaModal();
+  validarFormulariosAcceso();
 });
 
 function mostrarVentanaModal() {
@@ -47,11 +48,10 @@ function mostrarVentanaModal() {
   overlay.addEventListener("click", ocultarVentanaModal);
 }
 
-// Evento que se dispara cuando el DOM está completamente cargado
-document.addEventListener("DOMContentLoaded", function () {
+function validarFormulariosAcceso() {
   // Obtención de elementos del formulario de inicio de sesión y registro
-  var loginForm = document.getElementById("login");
-  var registerForm = document.getElementById("registrar");
+  let loginForm = document.getElementById("login");
+  let registerForm = document.getElementById("registrar");
 
   // Validación del formulario de inicio de sesión al enviar
   loginForm.addEventListener("submit", function (event) {
@@ -69,12 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función para validar el formulario de inicio de sesión
   function validateLoginForm() {
-    var email = loginForm.querySelector("input[type='email']").value;
-    var password = loginForm.querySelector("input[type='password']").value;
-    var errorMessage = loginForm.querySelector(".error-message");
+    let email = loginForm.querySelector("input[type='email']").value;
+    let password = loginForm.querySelector("input[type='password']").value;
+    let errorMessage = loginForm.querySelector(".error-message");
 
-    var emailErrorIcon = document.querySelector(".email-error2");
-    var passwordErrorIcon = document.querySelector(".password-error2");
+    let emailErrorIcon = document.querySelector(".email-error2");
+    let passwordErrorIcon = document.querySelector(".password-error2");
 
     // If para comprobar si el email esta vacio
     if (email.trim() === "") {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función para validar el formulario de registro
   function validateRegisterForm() {
-    var username = registerForm.querySelector("input[type='text']").value;
-    var email = registerForm.querySelector("input[type='email']").value;
-    var password = registerForm.querySelector("input[type='password']").value;
-    var errorMessage = registerForm.querySelector(".error-message-registro");
+    let username = registerForm.querySelector("input[type='text']").value;
+    let email = registerForm.querySelector("input[type='email']").value;
+    let password = registerForm.querySelector("input[type='password']").value;
+    let errorMessage = registerForm.querySelector(".error-message-registro");
 
-    var usernameErrorIcon = document.querySelector(".username-error");
-    var emailErrorIcon = document.querySelector(".email-error");
-    var passwordErrorIcon = document.querySelector(".password-error");
+    let usernameErrorIcon = document.querySelector(".username-error");
+    let emailErrorIcon = document.querySelector(".email-error");
+    let passwordErrorIcon = document.querySelector(".password-error");
 
     // If para comprobar si el usuario esta vacio
     if (username.trim() === "") {
@@ -177,22 +177,22 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMessage.style.display = "none";
     return true;
   }
-});
 
-// Función para validar la fortaleza de la contraseña
-function validatePassword(password) {
-  var minLength = 8;
-  var hasUpperCase = /[A-Z]/.test(password);
-  var hasLowerCase = /[a-z]/.test(password);
-  var hasNumbers = /\d/.test(password);
+  // Función para validar la fortaleza de la contraseña
+  function validatePassword(password) {
+    let minLength = 8;
+    let hasUpperCase = /[A-Z]/.test(password);
+    let hasLowerCase = /[a-z]/.test(password);
+    let hasNumbers = /\d/.test(password);
 
-  return (
-    password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers
-  );
-}
+    return (
+      password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers
+    );
+  }
 
-// Función para validar un correo electrónico con un patrón regex
-function validateEmail(email) {
-  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  return emailPattern.test(email);
+  // Función para validar un correo electrónico con un patrón regex
+  function validateEmail(email) {
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  }
 }
