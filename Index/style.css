@@ -27,3 +27,32 @@ body {
     z-index: 998;
     display: none;
 }
+
+
+/********************Mensaje form login y registro************************/
+.error-message {
+    color: red;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .error-message-registro {
+    color: red;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .input-container {
+    position: relative;
+}
+
+.error-icon {
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    color: red; /* Cambia el color a rojo */
+}
+  /***************************************************************/
