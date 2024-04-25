@@ -14,7 +14,7 @@
     <?php
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
-    include "../database/conect.php";
+    include "../database/connect.php";
     ?>
     <div class="containerIndex">
         <!-- Aquí iría todo el código del index -->

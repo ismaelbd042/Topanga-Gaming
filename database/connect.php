@@ -91,11 +91,12 @@ function crearTablas($conexion)
         img BLOB,
         tamaño ENUM('pequeño', 'mediano', 'grande'),
         plantas INT,
-        habitaciones INT,
+        habitaciones VARCHAR(10),
         salidas INT,
         grifos INT,
         camaras INT,
-        escondites INT
+        escondites INT,
+        nivel_desbloqueo INT
         )";
     mysqli_query($conexion, $sqlMapas);
 }
@@ -232,7 +233,6 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarObjetosMalditos);
 
-
     $insertarEquipamiento = "INSERT INTO equipamiento (nombre, tier, descripcion, nivel_desbloqueo, precio_mejora, coste, limite_mision, opcional, tipo) VALUES
     ('Proyector D.O.T.S.', 1, 'UN PEQUEÑO PUNTERO LÁSER QUE PROYECTA PEQUEÑOS RAYOS DE LUZ EN EL ENTORNO. SE PUEDE COLOCAR.', 0, 0, 65, 2, 'N', 'electrico'),
     ('Proyector D.O.T.S.', 2, 'ESTE SENSOR DE MOVIMIENTO INFRARROJO FUE AMPLIABLEMENTE ADAPTADO PARA PROYECTAR LUZ. ES PEQUEÑO, COMPACTO Y SE ADHIERE A LA MAYORÍA DE SUPERFICIES.', 29, 3000, 65, 2, 'N', 'electrico'),
@@ -296,4 +296,34 @@ function insertarDatos($conexion)
     ('Trípode', 3, 'ESTA VERSIÓN INCLUYE UN MOTOR ROTACIONAL LO QUE PERMITE AJUSTA LA VISIÓN DESDE LA PANTALLA QUE HAY EN EL CAMIÓN. TIENE MENOS POSIBILIDAD EL FANTASMA DE MOVERLO.', 62, 3000, 25, 4, 'S', 'ninguno');
     ";
     mysqli_query($conexion, $insertarEquipamiento);
+
+    // Ruta de la imagen del mapa
+    $TanglewoodDrive = "../img/6_Tanglewood_Drive_-_Floorplan.webp";
+    $RidgeviewCourt = "../img/10_Ridgeview_Court_-_Floorplan.webp";
+    $WillowStreet = "../img/13_Willow_Street_-_Floorplan.webp";
+    $EdgefieldRoad = "../img/42_Edgefield_Road_-_Floorplan.webp";
+    $BleasdaleFarmhouse = "../img/Bleasdale_Farmhouse_-_Floorplan.webp";
+    $CampWoodwind = "../img/Woodwind.webp";
+    $GraftonFarmhouse = "../img/Grafton_Farmhouse_-_Floorplan.webp";
+    $SunnyMeadowsMentalInstitutionRestricted = "../img/Sunny_Meadows_Mental_Institution_-_Restricted_Map-Courtyard_Floorplan.webp";
+    $MapleLodgeCampsite = "../img/Maple_Lodge_Campsite_-_Floorplan.webp";
+    $Prison = "../img/Prison_-_Floorplan.webp";
+    $BrownstoneHighSchool = "../img/Brownstone_High_School_-_Floorplan.webp";
+    $SunnyMeadowsMentalInstitution = "../img/Sunny_Meadows_Mental_Institution_-_Full_Map_Floorplan.webp";
+
+    $insertarMapas = "INSERT INTO mapas (nombre, img, tamaño, plantas, habitaciones, salidas, grifos, camaras, escondites, nivel_desbloqueo) VALUES
+        ('6 Tanglewood Drive', '$TanglewoodDrive', 'pequeño', 2, '10-1', 1, 3, 1, 6, 0),
+        ('10 Ridgeview Court', '$RidgeviewCourt', 'pequeño', 2, '6-9-1', 1, 5, 1, 10, 2),
+        ('13 Willow Street', $WillowStreet'', 'pequeño', 2, '7-3', 1, 2, 1, 8, 6),
+        ('42 Edgefield Road', '$EdgefieldRoad', 'pequeño', 3, '7-8-1', 1, 4, 1, 9, 2),
+        ('Bleasdale Farmhouse', '$BleasdaleFarmhouse', 'pequeño', 3, '1-7-8', 4, 4, 1, 7, 4),
+        ('Camp Woodwind', '$CampWoodwind', 'pequeño', 1, '11', 1, 0, 1, 7, 13),
+        ('Grafton Farmhouse', '$GraftonFarmhouse', 'pequeño', 2, '8-5', 2, 3, 1, 9, 4),
+        ('Sunny Meadows Mental Institution (Restricted)', '$SunnyMeadowsMentalInstitutionRestricted', 'pequeño', 1, '17', 1, 0, 4, 6, 17),
+        ('Maple Lodge Campsite', '$MapleLodgeCampsite', 'mediano', 1, '28', 1, 5, 2, 14, 13),
+        ('Prison', '$Prison', 'mediano', 2, '12-19', 3, 16, 11, 4, 11),
+        ('Brownstone High School', '$BrownstoneHighSchool', 'grande', 2, '34-30', 5, 8, 15, 0, 8),
+        ('Sunny Meadows Mental Institution', '$SunnyMeadowsMentalInstitution', 'grande', 2, '44-22-3', 1, 22, 8, 28, 17);
+    ";
+    mysqli_query($conexion, $insertarMapas);
 }
