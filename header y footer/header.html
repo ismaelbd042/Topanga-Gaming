@@ -1,4 +1,3 @@
-<!-- <link rel="stylesheet" href="style.css"> -->
 <style>
     @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
     @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
@@ -20,11 +19,12 @@
         text-align: center;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         background: #000000;
         height: 70px;
-        padding: 0 2em 0 2em;
+        font-size: 16px;
+        /* padding: 0 2em 0 2em; */
     }
 
     .registro {
@@ -32,7 +32,7 @@
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
-        gap: 1em;
+        gap: 1vw;
         width: auto;
         height: 50px;
         /* align-self: ; */
@@ -40,7 +40,7 @@
 
     .btn-registro {
         height: 50px;
-        padding: 0 1em;
+        padding: 0 1.5em;
         width: max-content;
         color: #fff;
         background: var(--Gradiente-Marca, radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5F1495 100%));
@@ -65,7 +65,7 @@
 
     .nav li {
         list-style: outside none none;
-        margin: .5em 1em;
+        /* margin: .5em 1em; */
         padding: 0px;
     }
 
@@ -127,6 +127,31 @@
     .nav a:hover {
         color: #E2E275;
     }
+
+    /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
+    @media (max-width: 948px) {
+
+        /* Aqui hacer que los botones de iniciar sesion y registrarse sean solo uno */
+        .iniciarSesion {
+            display: none;
+        }
+
+        .registrarse span {
+            display: none;
+        }
+
+        .registrarse::after {
+            content: "ACCEDE";
+        }
+
+        .registro {
+            gap: 0;
+        }
+    }
+
+    @media (max-width: 800px) {
+        /* Aqui  hacer algo porque se pega mucho a los bordes*/
+    }
 </style>
 <header>
     <ul class="nav">
@@ -136,10 +161,12 @@
         <li><a href="#">Search</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Work</a></li>
-        <ul class="registro">
-            <li><button id="miBoton" class="btn-registro iniciarSesion">Iniciar Sesión</button></li>
-            <li><button class="btn-registro registrarse">Registro</button></li>
-        </ul>
+        <li>
+            <ul class="registro">
+                <li><button class="btn-registro iniciarSesion">Iniciar Sesión</button></li>
+                <li><button class="btn-registro registrarse"><span>Registro</span></button></li>
+            </ul>
+        </li>
     </ul>
 </header>
 <script>
