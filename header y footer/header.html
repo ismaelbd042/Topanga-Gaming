@@ -1,176 +1,295 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600');
-    @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+  @import url("https://fonts.googleapis.com/css?family=Titillium+Web:400,600");
+  @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 
-    * {
-        box-sizing: border-box;
-        padding: 0px;
-        margin: 0px;
+  * {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  body {
+    /* background: #212121; */
+    padding: 0px 0;
+  }
+
+  .nav {
+    font-family: "Kanit", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    height: 70px;
+    font-size: 16px;
+    padding-left: 2%;
+    padding-right: 2%;
+    /* padding: 0 2em 0 2em; */
+    /* border: solid 1px white; */
+  }
+
+  .registro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1vw;
+    width: auto;
+    height: 50px;
+    /* align-self: ; */
+  }
+
+  .btn-registro {
+    height: 50px;
+    padding: 0 1.5em;
+    width: 150px;
+    color: #fff;
+    background: var(
+      --Gradiente-Marca,
+      radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%)
+    );
+    border: 0;
+    font-size: 16px;
+    border-radius: 30px;
+  }
+
+  .btn-registro:hover {
+    cursor: pointer;
+  }
+
+  .nav * {
+    transition: all 0.35s ease;
+  }
+
+  #boton-logo {
+    background-color: #000;
+    height: 60px;
+    border: 0;
+  }
+
+  .nav li {
+    list-style: outside none none;
+    /* margin: .5em 1em; */
+    padding: 0px;
+  }
+
+  .registro li {
+    padding: 0px;
+    margin: 0px 0px 0 0;
+  }
+
+  .nav img {
+    height: 60px;
+  }
+
+  .nav img:hover {
+    cursor: pointer;
+  }
+
+  .menu a {
+    padding: 0.5em 0.8em;
+    color: rgba(255, 255, 255, 0.829);
+    position: relative;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .menu a::before,
+  .menu a::after {
+    content: "";
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    transition: all 0.35s ease;
+    opacity: 0;
+  }
+
+  .menu a::before {
+    content: "";
+    right: 0;
+    top: 0;
+    border-top: 3px solid #e2e275;
+    border-right: 3px solid #a0a054;
+    transform: translate(-100%, 50%);
+  }
+
+  .menu a:after {
+    content: "";
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid #e2e275;
+    border-left: 3px solid #a0a054;
+    transform: translate(100%, -50%);
+  }
+
+  .menu a:hover:before,
+  .menu a:hover:after {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  .menu a:hover {
+    color: #e2e275;
+  }
+
+  .nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    position: relative;
+    font-family: "Kanit";
+    background: linear-gradient(65deg, #8abad3 0%, #a4d4ae 100%);
+    padding: 12px 20px;
+  }
+
+  .logo img {
+    width: 50px;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    /* border: solid 1px white; */
+  }
+
+  .open-menu,
+  .close-menu {
+    position: absolute;
+    /* color: black; */
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: none;
+  }
+
+  .open-menu {
+    top: 35px;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+
+  .close-menu {
+    top: 20px;
+    right: 20px;
+  }
+
+  #check {
+    display: none;
+  }
+
+  .div-botones {
+    display: flex;
+    gap: 25px;
+  }
+
+  /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
+  @media (max-width: 948px) {
+    /* Aqui hacer que los botones de iniciar sesion y registrarse sean solo uno */
+    .iniciarSesion {
+      display: none;
     }
 
-    body {
-        /* background: #212121; */
-        padding: 0px 0;
+    .registrarse span {
+      display: none;
     }
 
-    .nav {
-        font-family: 'Kanit', sans-serif;
-        text-transform: uppercase;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        background: #000000;
-        height: 70px;
-        font-size: 16px;
-        /* padding: 0 2em 0 2em; */
+    .registrarse::after {
+      content: "ACCEDE";
     }
 
     .registro {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 1vw;
-        width: auto;
-        height: 50px;
-        /* align-self: ; */
+      gap: 0;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .menu {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      z-index: 90;
+      background: black;
     }
 
-    .btn-registro {
-        height: 50px;
-        padding: 0 1.5em;
-        width: max-content;
-        color: #fff;
-        background: var(--Gradiente-Marca, radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5F1495 100%));
-        border: 0;
-        font-size: 16px;
-        border-radius: 30px;
+    .menu li {
+      margin: 20px;
     }
 
-    .btn-registro:hover {
-        cursor: pointer;
+    .open-menu,
+    .close-menu {
+      display: block;
+      color: white;
     }
 
-    .nav * {
-        transition: all .35s ease;
+    #check:checked ~ .menu {
+      right: 0;
     }
 
-    #boton-logo {
-        background-color: #000;
-        height: 60px;
-        border: 0;
+    .div-botones {
+      margin-right: 50px;
     }
 
-    .nav li {
-        list-style: outside none none;
-        /* margin: .5em 1em; */
-        padding: 0px;
+    #divFoto {
+      display: none;
     }
-
-    .registro li {
-        padding: 0px;
-        margin: 0px 0px 0 0;
-    }
-
-    .nav img {
-        height: 60px;
-    }
-
-    .nav img:hover {
-        cursor: pointer;
-    }
-
-    .nav a {
-        padding: .5em .8em;
-        color: rgba(255, 255, 255, 0.829);
-        position: relative;
-        text-decoration: none;
-        font-size: 24px;
-    }
-
-    .nav a::before,
-    .nav a::after {
-        content: '';
-        height: 14px;
-        width: 14px;
-        position: absolute;
-        transition: all .35s ease;
-        opacity: 0;
-    }
-
-    .nav a::before {
-        content: '';
-        right: 0;
-        top: 0;
-        border-top: 3px solid #E2E275;
-        border-right: 3px solid #A0A054;
-        transform: translate(-100%, 50%);
-    }
-
-    .nav a:after {
-        content: '';
-        left: 0;
-        bottom: 0;
-        border-bottom: 3px solid #E2E275;
-        border-left: 3px solid #a0a054;
-        transform: translate(100%, -50%)
-    }
-
-    .nav a:hover:before,
-    .nav a:hover:after {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-
-    .nav a:hover {
-        color: #E2E275;
-    }
-
-    /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
-    @media (max-width: 948px) {
-
-        /* Aqui hacer que los botones de iniciar sesion y registrarse sean solo uno */
-        .iniciarSesion {
-            display: none;
-        }
-
-        .registrarse span {
-            display: none;
-        }
-
-        .registrarse::after {
-            content: "ACCEDE";
-        }
-
-        .registro {
-            gap: 0;
-        }
-    }
-
-    @media (max-width: 800px) {
-        /* Aqui  hacer algo porque se pega mucho a los bordes*/
-    }
+  }
 </style>
 <header>
-    <ul class="nav">
-        <button id="boton-logo"><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav"></button>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Search</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Work</a></li>
+  <ul class="nav">
+    <li id="boton-logo">
+      <a href="../index/index.php"
+        ><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav"
+      /></a>
+    </li>
+    <input type="checkbox" id="check" />
+    <span class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Search</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Work</a></li>
+      <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+    </span>
+
+    <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+    <div class="div-botones" id="indexNoIniciadaSesion">
+      <button class="btn-registro iniciarSesion">Iniciar Sesión</button>
+      <button class="btn-registro registrarse"><span>Registro</span></button>
+    </div>
+    <div class="div-botones" id="indexSiIniciadaSesion" style="display: none">
+      <ul class="menuHorizontal">
+        <i class="fa-solid fa-user"></i>
         <li>
-            <ul class="registro">
-                <li><button class="btn-registro iniciarSesion">Iniciar Sesión</button></li>
-                <li><button class="btn-registro registrarse"><span>Registro</span></button></li>
-            </ul>
+          <a href="#" id="nombreSesionIniciada"></a>
+          <ul class="menuVertical">
+            <li><a href="#">Ver Perfil</a></li>
+            <li><a href="#">Mis Citas</a></li>
+            <li><a href="#">Mis Foros</a></li>
+            <li>
+              <a href="#" onclick="cerrarSesion()">Cerrar Sesión</a>
+            </li>
+          </ul>
         </li>
-    </ul>
+      </ul>
+    </div>
+  </ul>
 </header>
-<script>
-    document.getElementById("boton-logo").onclick = function () {
-        window.location.href = "../index/index.php";
-    };
-</script>
