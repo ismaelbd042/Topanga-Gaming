@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var emailErrorIcon = document.querySelector(".email-error2");
     var passwordErrorIcon = document.querySelector(".password-error2");
 
+    // If para comprobar si el email esta vacio
     if (email.trim() === "") {
       errorMessage.textContent = "Por favor, completa todos los campos.";
       errorMessage.style.display = "block";
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       emailErrorIcon.style.display = "none";
     }
-
+    // if para comprobar si la contraseña esta vacia
     if (password.trim() === "") {
       errorMessage.textContent = "Por favor, completa todos los campos.";
       errorMessage.style.display = "block";
@@ -121,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var emailErrorIcon = document.querySelector(".email-error");
     var passwordErrorIcon = document.querySelector(".password-error");
 
+    // If para comprobar si el usuario esta vacio
     if (username.trim() === "") {
       errorMessage.textContent = "Por favor, completa todos los campos.";
       errorMessage.style.display = "block";
@@ -129,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       usernameErrorIcon.style.display = "none";
     }
-
+    // If para comprobar si el email esta vacio
     if (email.trim() === "") {
       errorMessage.textContent = "Por favor, completa todos los campos.";
       errorMessage.style.display = "block";
@@ -139,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
       emailErrorIcon.style.display = "none";
     }
 
+    // If para comporbar si la contyraseña esta vacia
     if (password.trim() === "") {
       errorMessage.textContent = "Por favor, completa todos los campos.";
       errorMessage.style.display = "block";
