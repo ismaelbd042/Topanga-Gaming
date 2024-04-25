@@ -121,26 +121,45 @@
     <input type="checkbox" class="inputVentanaModal" id="chkVentanaModal" aria-hidden="true">
 
     <div class="signupVentanaModal">
-        <form>
+        <form method="POST" action="../php/guardarRegistro.php" id="registrar" class="input-group-accede">
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Sign up</label>
-            <input type="text" name="txt" class="inputVentanaModal" placeholder="User name" required=""
-                autocomplete="off">
-            <input type="email" name="email" class="inputVentanaModal" placeholder="Email" required=""
-                autocomplete="off">
-            <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" required=""
-                autocomplete="off">
-            <button class="buttonVentanaModal">Sign up</button>
-        </form>
+            <div class="input-container">
+                <input type="text" name="txt" class="inputVentanaModal" placeholder="User name" autocomplete="off">
+                <span class="error-icon username-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
+            </div>
+            
+            <div class="input-container">
+                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off">
+                <span class="error-icon email-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
+            </div>
+            
+            <div class="input-container">
+                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off">
+                <span class="error-icon password-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
+            </div>
+            
+            <span class="error-message-registro" id="mensaje-error-registro"></span>
+            <button class="buttonVentanaModal" type="submit">Sign up</button>
+        </form>      
     </div>
 
     <div class="loginVentanaModal">
-        <form>
+        <form method="POST" action="../php/login.php" id="login" class="input-group-accede">
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Login</label>
-            <input type="email" name="email" class="inputVentanaModal" placeholder="Email" required=""
-                autocomplete="off">
-            <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" required=""
-                autocomplete="off">
-            <button class="buttonVentanaModal">Login</button>
+            
+            <div class="input-container">
+                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off">
+                <span class="error-icon email-error2" style="display: none;"><i class="fas fa-times-circle"></i></span>
+            </div>
+            
+            <div class="input-container">
+                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off">
+                <span class="error-icon password-error2" style="display: none;"><i class="fas fa-times-circle"></i></span>
+            </div>
+            
+            <span class="error-message" id="mensaje-error-login"></span>
+            <button class="buttonVentanaModal" type="submit">Login</button>
         </form>
+        
     </div>
 </div>
