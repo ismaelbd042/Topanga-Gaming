@@ -46,11 +46,3 @@ function mostrarVentanaModal() {
   btnRegistrarse.addEventListener("click", mostrarSignUp);
   overlay.addEventListener("click", ocultarVentanaModal);
 }
-
-// function ocultarVentanaModal() {
-//   modal.style.transform = "translate(-50%, 100%)";
-//   setTimeout(function () {
-//     modal.style.display = "none";
-//   }, 500);
-//   overlay.style.display = "none";
-// }
