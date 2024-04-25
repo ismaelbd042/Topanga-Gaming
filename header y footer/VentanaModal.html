@@ -5,18 +5,19 @@
     @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
 
-    * {
+    /* * {
         box-sizing: border-box;
         padding: 0px;
         margin: 0px;
     }
 
     body {
-        /* background: #212121; */
+        background: #212121;
         padding: 0px 0;
-    }
+    } */
 
-    .main {
+    .mainVentanaModal {
+        font-family: "Jost", sans-serif;
         width: 350px;
         height: 500px;
         background: red;
@@ -24,19 +25,26 @@
         background: url("https://img.freepik.com/premium-vector/abstract-realistic-technology-particle-background_23-2148414765.jpg?w=740") no-repeat center/ cover;
         border-radius: 10px;
         box-shadow: 5px 20px 50px #000;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        transition: transform 0.5s ease;
+        z-index: 999;
     }
 
-    #chk {
+    #chkVentanaModal {
         display: none;
     }
 
-    .signup {
+    .signupVentanaModal {
         position: relative;
         width: 100%;
         height: 100%;
     }
 
-    label {
+    .labelVentanaModal {
         color: #fff;
         font-size: 2.3em;
         justify-content: center;
@@ -47,7 +55,8 @@
         transition: .5s ease-in-out;
     }
 
-    input {
+    .inputVentanaModal {
+        font-family: "Jost", sans-serif;
         width: 60%;
         height: 20px;
         background: #e0dede;
@@ -60,7 +69,7 @@
         border-radius: 5px;
     }
 
-    button {
+    .buttonVentanaModal {
         width: 60%;
         height: 40px;
         margin: 10px auto;
@@ -78,11 +87,11 @@
         cursor: pointer;
     }
 
-    button:hover {
+    .buttonVentanaModal:hover {
         background: #6d44b8;
     }
 
-    .login {
+    .loginVentanaModal {
         height: 460px;
         background: #eee;
         border-radius: 60% / 10%;
@@ -90,43 +99,48 @@
         transition: .8s ease-in-out;
     }
 
-    .login label {
+    .loginVentanaModal label {
         color: #573b8a;
         transform: scale(.6);
     }
 
-    #chk:checked~.login {
+    #chkVentanaModal:checked~.loginVentanaModal {
         transform: translateY(-500px);
     }
 
-    #chk:checked~.login label {
+    #chkVentanaModal:checked~.loginVentanaModal label {
         transform: scale(1);
     }
 
-    #chk:checked~.signup label {
+    #chkVentanaModal:checked~.signupVentanaModal label {
         transform: scale(.6);
     }
 </style>
 
-<div class="main">
-    <input type="checkbox" id="chk" aria-hidden="true">
+<div class="mainVentanaModal">
+    <input type="checkbox" class="inputVentanaModal" id="chkVentanaModal" aria-hidden="true">
 
-    <div class="signup">
+    <div class="signupVentanaModal">
         <form>
-            <label for="chk" aria-hidden="true">Sign up</label>
-            <input type="text" name="txt" placeholder="User name" required="">
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <button>Sign up</button>
+            <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Sign up</label>
+            <input type="text" name="txt" class="inputVentanaModal" placeholder="User name" required=""
+                autocomplete="off">
+            <input type="email" name="email" class="inputVentanaModal" placeholder="Email" required=""
+                autocomplete="off">
+            <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" required=""
+                autocomplete="off">
+            <button class="buttonVentanaModal">Sign up</button>
         </form>
     </div>
 
-    <div class="login">
+    <div class="loginVentanaModal">
         <form>
-            <label for="chk" aria-hidden="true">Login</label>
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <button>Login</button>
+            <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Login</label>
+            <input type="email" name="email" class="inputVentanaModal" placeholder="Email" required=""
+                autocomplete="off">
+            <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" required=""
+                autocomplete="off">
+            <button class="buttonVentanaModal">Login</button>
         </form>
     </div>
 </div>
