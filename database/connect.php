@@ -99,6 +99,14 @@ function crearTablas($conexion)
         nivel_desbloqueo INT
         )";
     mysqli_query($conexion, $sqlMapas);
+
+    // Crear tabla de usuarios
+    $sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,   
+        nombre_usuario VARCHAR(20),
+        correo VARCHAR(255),
+        contrasena TEXT;
+    )";
 }
 
 function insertarDatos($conexion)
