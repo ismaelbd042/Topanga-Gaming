@@ -99,6 +99,15 @@ function crearTablas($conexion)
         nivel_desbloqueo INT
         )";
     mysqli_query($conexion, $sqlMapas);
+
+    // Crear tabla de usuarios
+    $sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,   
+        nombre_usuario VARCHAR(20),
+        correo VARCHAR(255),
+        contrasena TEXT
+    )";
+    mysqli_query($conexion, $sqlUsuarios);
 }
 
 function insertarDatos($conexion)
@@ -314,7 +323,7 @@ function insertarDatos($conexion)
     $insertarMapas = "INSERT INTO mapas (nombre, img, tamaño, plantas, habitaciones, salidas, grifos, camaras, escondites, nivel_desbloqueo) VALUES
         ('6 Tanglewood Drive', '$TanglewoodDrive', 'pequeño', 2, '10-1', 1, 3, 1, 6, 0),
         ('10 Ridgeview Court', '$RidgeviewCourt', 'pequeño', 2, '6-9-1', 1, 5, 1, 10, 2),
-        ('13 Willow Street', $WillowStreet'', 'pequeño', 2, '7-3', 1, 2, 1, 8, 6),
+        ('13 Willow Street', '$WillowStreet', 'pequeño', 2, '7-3', 1, 2, 1, 8, 6),
         ('42 Edgefield Road', '$EdgefieldRoad', 'pequeño', 3, '7-8-1', 1, 4, 1, 9, 2),
         ('Bleasdale Farmhouse', '$BleasdaleFarmhouse', 'pequeño', 3, '1-7-8', 4, 4, 1, 7, 4),
         ('Camp Woodwind', '$CampWoodwind', 'pequeño', 1, '11', 1, 0, 1, 7, 13),
@@ -326,4 +335,9 @@ function insertarDatos($conexion)
         ('Sunny Meadows Mental Institution', '$SunnyMeadowsMentalInstitution', 'grande', 2, '44-22-3', 1, 22, 8, 28, 17);
     ";
     mysqli_query($conexion, $insertarMapas);
+
+    $insertarUsuarios = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES
+    ('1', '1@admin.com', '1');
+    ";
+    mysqli_query($conexion, $insertarUsuarios);
 }
