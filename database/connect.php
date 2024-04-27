@@ -309,17 +309,17 @@ function insertarDatos($conexion)
     mysqli_query($conexion, $insertarEquipamiento);
 
     // Ruta de la imagen del mapa
-    $TanglewoodDrive = "../img/6_Tanglewood_Drive_-_Floorplan.webp";
-    $RidgeviewCourt = "../img/10_Ridgeview_Court_-_Floorplan.webp";
-    $WillowStreet = "../img/13_Willow_Street_-_Floorplan.webp";
-    $EdgefieldRoad = "../img/42_Edgefield_Road_-_Floorplan.webp";
-    $BleasdaleFarmhouse = "../img/Bleasdale_Farmhouse_-_Floorplan.webp";
-    $CampWoodwind = "../img/Woodwind.webp";
-    $GraftonFarmhouse = "../img/Grafton_Farmhouse_-_Floorplan.webp";
-    $SunnyMeadowsMentalInstitutionRestricted = "../img/Sunny_Meadows_Mental_Institution_-_Restricted_Map-Courtyard_Floorplan.webp";
-    $MapleLodgeCampsite = "../img/Maple_Lodge_Campsite_-_Floorplan.webp";
-    $Prison = "../img/Prison_-_Floorplan.webp";
-    $BrownstoneHighSchool = "../img/Brownstone_High_School_-_Floorplan.webp";
+    $TanglewoodDrive = "../img/Planos mapas/6_Tanglewood_Drive_-_Floorplan.webp";
+    $RidgeviewCourt = "../img/Planos mapas/10_Ridgeview_Court_-_Floorplan.webp";
+    $WillowStreet = "../img/Planos mapas/13_Willow_Street_-_Floorplan.webp";
+    $EdgefieldRoad = "../img/Planos mapas/42_Edgefield_Road_-_Floorplan.webp";
+    $BleasdaleFarmhouse = "../img/Planos mapas/Bleasdale_Farmhouse_-_Floorplan.webp";
+    $CampWoodwind = "../img/Planos mapas/Woodwind.webp";
+    $GraftonFarmhouse = "../img/Planos mapas/Grafton_Farmhouse_-_Floorplan.webp";
+    $SunnyMeadowsMentalInstitutionRestricted = "../img/Planos mapas/Sunny_Meadows_Mental_Institution_-_Restricted_Map-Courtyard_Floorplan.webp";
+    $MapleLodgeCampsite = "../img/Planos mapas/Maple_Lodge_Campsite_-_Floorplan.webp";
+    $Prison = "../img/Planos mapas/Prison_-_Floorplan.webp";
+    $BrownstoneHighSchool = "../img/Planos mapas/Brownstone_High_School_-_Floorplan.webp";
     $SunnyMeadowsMentalInstitution = "../img/Sunny_Meadows_Mental_Institution_-_Full_Map_Floorplan.webp";
 
     //Insertar datos en tabla mapas
