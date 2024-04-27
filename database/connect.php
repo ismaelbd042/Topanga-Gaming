@@ -112,7 +112,7 @@ function crearTablas($conexion)
 
 function insertarDatos($conexion)
 {
-    // Insertar datos de ejemplo
+    //Insertar datos en tabla pruebas
     $insertarPruebas = "INSERT INTO pruebas (nombre, extra) VALUES 
         ('Medidor EMF 5', 'Nivel máximo de lecturas de EMF'),
         ('Orbes Espectrales', 'Apariciones visuales de orbes'),
@@ -124,8 +124,7 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarPruebas);
 
-    // cordura, velocidad y extra estan sacados de 'https://tybayn.github.io/phasmo-cheat-sheet-es/'
-    // y la descripción es la que pone en el libro del juego
+    //Insertar datos en tabla fantasmas
     $insertarFantasmas = "INSERT INTO fantasmas (nombre, cordura, velocidad, descripcion, extra) VALUES 
         ('Espíritu', 50, '1.7', 'Los espíritus son fantasmas muy comunes. Son muy poderosos, pero pasivos: solo atacan cuando es necesario. Defienden el lugar donde murieron hasta la saciedad, matando a cualquiera que se quede más tiempo de lo necesario.\nDebilidad:Utilizar incienso cerca de ellos los parará temporalmente.', 'Información:\n- Usando incienso cerca del fantasma evitará que cace en 180s(3m) en vez de 90s de normal(1,5m).'),
         ('Espectro', 50, '1.7', 'Un espectro es un tipo de fantasma de los más peligrosos que puedes hallar. También es el único tipo de fantasma que puede volar y en ocasiones atravesar paredes.\nFortaleza: Casi nunca tocan el suelo, por lo que no dejan pisadas.\nDebilidad: Al entrar en contacto con la sal, les produce una reacción tóxica.', 'Información:\n- El fantasma nunca pisara la sal sin importar su tier.|- No se ralentizará por la sal de tier 3 durante una cacería.&Comportamiento:\n- Se puede hacer tp a un jugador aleatorio dejando como resultado EMF 2 o EMF 5.'),
@@ -154,6 +153,7 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarFantasmas);
 
+    //Insertar datos en tabla pruebas_fantasmas
     $insertarPruebasFantasmas = "INSERT INTO pruebas_fantasmas (prueba_id, fantasma_id) VALUES 
         (1,1),
         (4,1),
@@ -231,6 +231,7 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarPruebasFantasmas);
 
+    //Insertar datos en tabla objetos_malditos
     $insertarObjetosMalditos = "INSERT INTO objetos_malditos (nombre, efecto, preguntas) VALUES 
         ('Pata de mono', 'Esta se caracteriza por tener la habilidad de conceder deseos.\n¿Cómo se utiliza?: dependiendo de la dificultad de la partida, tienes mas o menos deseos la cantidad de deseos por multiplicador es la siguiente:\n0x - 1.99x: 5 deseos   —   2x - 2.99x: 4 deseos   —   3x o más: 3 deseos\nFactores a tener en cuenta:\n1.- El listado de deseos se encuentra esparcido por el mapa de Sunny Meadows.\n2.- Puedes utilizar el chat en modo text para poder ver el listado.\n3.- Los deseos pueden ser algo bueno, algo neutro o algo malo.', 'Deseo ver al fantasma=El fantasma hace aparición, al que pide el deseo lo deja ciego (lo ve todo muy oscuro) en cacería, cuando acaba ve bien (la cacería es maldita). No quita cordura.\nDeseo actividad=Cierra la puerta de la calle durante 1 minuto y 40 segundos, rompe los plomos y no quita cordura.\nDeseo atrapar al fantasma=Cierra las puertas de donde se encuentre el fantasma y luego inicia ataque (duración 55segundos) la cacería no sería maldita, no quita cordura.\nDeseo tener cordura=Todos los jugadores se ponen con el 50% de cordura, ya tengan más o menos cordura. El fantasma cambia de habitación.\nDeseo irme=Este deseo se puede pedir en pleno ataque y la puerta de salida de la casa se abrirá y podrás salir sin problema, al que pide el deseo le da lentitud. No quita cordura.\nDeseo revivir a un amigo=50% de probabilidad de morir al pedir el deseo. No quita cordura.\nDeseo estar a salvo=Cualquier closet cerrado cercano, se despejara y podrás esconderte. No quita cordura\nDeseo saber más=Te quita una prueba, la cual el fantasma no te dará, pero el fantasma comenzará ataque cerca tuya y tu te quedarás ciego y sordo durante toda la partida. No quita cordura.\nDeseo cambiar el clima=Puedes cambiar el clima a soleado, lluvioso, con viento, nieve o despejado esto tiene una penalización de 25% de cordura a quien pide el deseo.\nDeseo lo que sea=Se escogerá un deseo al azar entre todos los que hay.'),
         ('Caja de música', 'Esta se caracteriza por una melodía que hace cantar al fantasma, haciendo así más fácil la localización de su habitación.\n¿Cómo se utiliza?: cuando la tenemos en la mano damos clic derecho y empieza a sonar la melodía. En ese mismo momento el fantasma se pondrá a cantar. Solo tiene 1 uso.\nFactores a tener en cuenta:\n1.- Los fantasmas se sienten atraído hacia la caja de música, por lo que si esta a menos de 5 metros se materializa y va hacia la caja, rompiéndola y provocando una cacería.\n2.- Cada segundo que suena la caja drena un 4% de cordura a todos los que estén en un radio de 3 metros circular a la caja.\n3.- Si tiras la caja al suelo cuando esta sonando se rompe y comienza una cacería.\n4.- La caja suena 28 segundos si tu cordura esta al 100%, si tu cordura baja a cero y quedan segundos se rompe y comienza cacería.\n5.- Si la cordura promedia no esta en el rango de ataque del fantasma una vez termine la melodía, NO comenzara la caza.\n6.- Es un objeto maldito muy útil tanto para saber la localización del fantasma como para hacer la foto al fantasma.', null),
@@ -242,67 +243,68 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarObjetosMalditos);
 
+    //Insertar datos en tabla equipamiento
     $insertarEquipamiento = "INSERT INTO equipamiento (nombre, tier, descripcion, nivel_desbloqueo, precio_mejora, coste, limite_mision, opcional, tipo) VALUES
-    ('Proyector D.O.T.S.', 1, 'UN PEQUEÑO PUNTERO LÁSER QUE PROYECTA PEQUEÑOS RAYOS DE LUZ EN EL ENTORNO. SE PUEDE COLOCAR.', 0, 0, 65, 2, 'N', 'electrico'),
-    ('Proyector D.O.T.S.', 2, 'ESTE SENSOR DE MOVIMIENTO INFRARROJO FUE AMPLIABLEMENTE ADAPTADO PARA PROYECTAR LUZ. ES PEQUEÑO, COMPACTO Y SE ADHIERE A LA MAYORÍA DE SUPERFICIES.', 29, 3000, 65, 2, 'N', 'electrico'),
-    ('Proyector D.O.T.S.', 3, 'UN PROYECTOR MOTORIZADO CON TRES LENTES QUE CUBREN UN AMPLIO RANGO LUMÍNICO. SE PUEDE COLOCAR EN PAREDES Y ALGUNOS TECHOS.', 60, 3000, 65, 2, 'N', 'electrico'),
-    ('Medidor EMF', 1, 'UN MEDIDOR EMF CON VARIOS MODOS PARA ANALIZAR LAS DISTINTAS INTERFERENCIAS DEL AIRE. SI LA AGUJA EMPIEZA A MOVERSE. SI EL FANTASMA TUVIERA ESTA PRUEBA, LLEGARA LA AGUJA AL NIVEL 5.', 0, 0, 45, 2, 'N', 'electrico'),
-    ('Medidor EMF', 2, 'EL MEDIDOR K2 TIENE MAS RANGO Y 5 LUCES LED QUE MUESTRAN LECTURAS EMF, ADEMÁS DE UN MODULO ADICIONAL CON ALTAVOZ.', 20, 3000, 45, 2, 'N', 'electrico'),
-    ('Medidor EMF', 3, 'LECTOR EMF CON PANTALLA, MUESTRA PRIMERO EL EMF QUE EMITE EL OBJETO, EL RNA(LA DISTANCIA DONDE ESTA EL OBJETO) Y LA DIR(UNAS FLECHAS QUE INDICAN EN QUE DIRECCIÓN ESTA EL OBJETO QUE TIENE EMF).', 52, 4500, 45, 2, 'N', 'electrico'),
-    ('Linterna', 1, 'LINTERNA CON UNA PEQUEÑA LUZ.', 0, 0, 30, 4, 'N', 'electrico'),
-    ('Linterna', 2, 'EMITE UN FOCO DE LUZ MÁS BRILLANTE.', 19, 3000, 30, 4, 'N', 'electrico'),
-    ('Linterna', 3, 'LINTERNA CON LUZ MUY POTENTE.', 35, 2500, 30, 4, 'N', 'electrico'),
-    ('Libro de escritura fantasma', 1, 'CUADERNO DE ESCRITURA PEQUEÑO, CON POCO ALCANCE Y SERÁ COMPLICADO QUE EL FANTASMA DE LA PRUEBA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 0, 0, 40, 2, 'N', 'ninguno'),
-    ('Libro de escritura fantasma', 2, 'MEJORES PÁGINAS Y BOLÍGRAFO, LOS FANTASMAS SE FIJAN MÁS HACIENDO QUE LOS TIEMPOS SEAN ALGO INFERIORES PARA OBTENER LA PRUEBA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 23, 3000, 40, 2, 'N', 'ninguno'),
-    ('Libro de escritura fantasma', 3, 'GRIMORIO DE GRAN TAMAÑO DONDE TIENE UN ALCANCE MUCHO MAYOR Y DA CON MAS FACILIDAD LA ESCRITURA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 63, 3000, 40, 2, 'N', 'ninguno'),
-    ('Spirit Box', 1, 'PEQUEÑA RADIO COMPACTA Y ANTIGUA. TARDA EN DAR RESULTADOS Y SU ALTAVOZ NO TIENE MUCHA CALIDAD. SI EL FANTASMA TUVIERA ESTA PRUEBA, SE PONDRÁ EN BLANCA LA LUZ DEL FANTASMA.', 0, 0, 50, 2, 'N', 'electrico'),
-    ('Spirit Box', 2, 'ALTAVOZ DE ALTA CALIDAD Y MÁS EFICIENTE AL ESCANEAR ENTRE DISTINTAS FRECUENCIAS LOGRANDO QUE LAS RESPUESTAS SEAN MÁS FÁCILES DE DESCIFRAR.', 27, 3000, 50, 2, 'N', 'electrico'),
-    ('Spirit Box', 3, 'ALTAVOZ DE ALTA CALIDAD Y MÁS EFICIENTE AL ESCANEAR ENTRE DISTINTAS FRECUENCIAS LOGRANDO QUE LAS RESPUESTAS SEAN MÁS FÁCILES DE DESCIFRAR.', 54, 3000, 50, 2, 'N', 'electrico'),
-    ('Termómetro', 1, 'TERMÓMETRO DE PARED QUE SIRVE PARA MEDIR LA TEMPERATURA DE UNA HABITACIÓN, TARDA BASTANTE TIEMPO EN DAR LAS TEMPERATURAS EXACTAS. SI EL FANTASMA TUVIERA ESTA PRUEBA, VERAS EL INDICADOR DEBAJO DEL CERO.', 0, 0, 30, 2, 'N', 'ninguno'),
-    ('Termómetro', 2, 'TERMÓMETRO DIGITAL MUCHO MÁS RÁPIDO LEYENDO TEMPERATURAS.', 36, 3000, 30, 2, 'N', 'ninguno'),
-    ('Termómetro', 3, 'TERMÓMETRO DIGITAL MUCHO MÁS RÁPIDO LEYENDO TEMPERATURAS. DEJAR PULSADO EL CLIC DERECHO PARA OBTENER LECTURA DE TEMPERATURA.', 64, 3000, 30, 2, 'N', 'electrico'),
-    ('Linterna ultravioleta', 1, 'BARRA LUMINOSA DE DURACIÓN 60 SEGUNDOS (LUZ FUERTE) PASADO 10 SEGUNDOS QUE SE VAYA SU POTENCIA, SE AGITA (CLIC DERECHO) Y SE REACTIVA.', 0, 0, 20, 2, 'N', 'ninguno'),
-    ('Linterna ultravioleta', 2, 'EMITE UN RATO DE LUZ DE LARGA DISTANCIA PERO ESTRECHO SIENDO PERFECTA PARA BUSCAR HUELLAS DACTILARES Y PISADAS. RECARGA DACTILOGRAMAS ULTRAVIOLETAS MÁS RÁPIDO QUE LA BARRA LUMINOSA.', 21, 3000, 20, 2, 'N', 'electrico'),
-    ('Linterna ultravioleta', 3, 'EMITE UN RATO DE LUZ DE LARGA DISTANCIA CON MUCHA AMPLITUD DE LUZ SIENDO PERFECTA PARA BUSCAR HUELLAS DACTILARES Y PISADAS. RECARGA DACTILOGRAMAS ULTRAVIOLETAS MÁS RÁPIDO QUE SUS ANTECESORAS.', 56, 2000, 20, 2, 'N', 'electrico'),
-    ('Cámara de vídeo', 1, 'CÁMARA DE VIDEO ANTIGUA PERO SE PUEDE VER ORBES SIN PROBLEMA. INTERFERENCIA ALTAS EN ATAQUE. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 0, 0, 50, 4, 'N', 'electrico'),
-    ('Cámara de vídeo', 2, 'MEJOR CALIDAD DE IMAGEN, MEJOR VISIÓN NOCTURNA Y MAS RESISTENCIA CONTRA LA INTERFERENCIA PARANORMAL. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 33, 3000, 50, 4, 'N', 'electrico'),
-    ('Cámara de vídeo', 3, 'LA MEJOR CALIDAD DE IMAGEN, MAS AMPLIA, MEJOR VISIÓN NOCTURNA Y MAS RESISTENCIA CONTRA LA INTERFERENCIA PARANORMAL. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 61, 3000, 50, 4, 'N', 'electrico'),
-    ('Crucifijo', 1, 'SOLO SIRVE PARA EVITAR 1 ATAQUE Y SU ALCANCE ES BAJO.', 8, 0, 30, 2, 'S', 'consumible'),
-    ('Crucifijo', 2, 'CRUCIFIJO DE METAL QUE PUEDE BLOQUEAR HASTA DOS ATAQUES, MAYOR RANGO DE ACCIÓN.', 37, 4000, 30, 2, 'S', 'consumible'),
-    ('Crucifijo', 3, 'CRUCIFIJO DE METAL QUE PUEDE BLOQUEAR HASTA DOS ATAQUES, O UN SOLO ATAQUE MALDITO. MAYOR RANGO DE ACCIÓN QUE SUS ANTECESORES.', 90, 20000, 30, 2, 'S', 'consumible'),
-    ('Lumbre', 1, 'PEQUEÑA, CON UNA DURACIÓN DE 3 MINUTOS Y REDUCE EN UN 33% LA CORDURA QUE PERDEMOS.', 12, 0, 15, 4, 'S', 'consumible'),
-    ('Lumbre', 2, 'CANDELABRO CON TRES VELAS CON UNA DURACIÓN DE 5 MINUTOS Y REDUCE EN UN 50% LA CORDURA QUE PERDEMOS. CUBRE CORDURA INCLUSO POSICIONANDOLA CERCA SIN TENER QUE TENERLA EN LA MANO.', 47, 3000, 15, 4, 'S', 'consumible'),
-    ('Lumbre', 3, 'FAROL DE ACEITE CON UNA DURACIÓN DE 10 MINUTOS(SE APAGARÍA Y SE PODRIA VOLVER A ENCEDER) Y REDUCE EN UN 66% LA CORDURA QUE PERDEMOS. CUBRE CORDURA INCLUSO POSICIONANDOLA CERCA SIN TENER QUE TENERLA EN LA MANO.', 79, 10000, 15, 4, 'S', 'consumible'),
-    ('Equipamiento para la cabeza', 1, 'CÁMARA EN LA CABEZA QUE SE PUEDE OBSERVAR DESDE EL CAMIÓN PARA VER ORBES.', 13, 0, 60, 4, 'S', 'electrico'),
-    ('Equipamiento para la cabeza', 2, 'EQUIPAMIENTO DE CABEZA QUE APORTA UNA BRILLANTE LUZ PARA ENCENDERLO DEJAR PULSADO LA LETRA T.', 49, 10000, 60, 4, 'S', 'electrico'),
-    ('Equipamiento para la cabeza', 3, 'LUZ INFLAROJA QUE PERMITE VER PERFECTAMENTE EN LA OSCURIDAD PARA ENCENDERLO DEJAR PULSADO LA LETRA T.', 82, 10000, 60, 4, 'S', 'electrico'),
-    ('Encendedor', 1, 'CAJA DE 10 CERILLAS QUE CADA UNA TIENE UNA DURACIÓN DE 10 SEGUNDOS.', 12, 0, 10, 4, 'S', 'consumible'),
-    ('Encendedor', 2, 'MECHERO DE GAS CON UNA DURACIÓN DE 5 MINUTOS.', 41, 500, 10, 4, 'S', 'consumible'),
-    ('Encendedor', 3, 'MECHERO DE GAS CON UNA DURACIÓN DE 10 MINUTOS (SE APAGA A LOS 10 MINUTOS Y DEJARA DE SER ÚTIL).', 57, 750, 10, 4, 'S', 'ninguno'),
-    ('Incienso', 1, 'INCIENSO CON EL QUE SE PUEDE HACER DESORIENTAR AL FANTASMAS 5 SEGUNDOS EN UN RADIO DE 3 METROS.', 14, 0, 15, 4, 'S', 'consumible'),
-    ('Incienso', 2, 'ESTA VERSIÓN AUMENTA EL RANGO Y LA DURACIÓN DE LA CREMACIÓN. ADEMÁS DURANTE EL ATAQUE RALENTIZA AL FANTASMA DURANTE 5 SEGUNDOS.', 42, 3500, 15, 4, 'S', 'consumible'),
-    ('Incienso', 3, 'ESTA VERSIÓN AUMENTA EL RANGO Y LA DURACIÓN DE LA CREMACIÓN. ADEMÁS DURANTE EL ATAQUE PARA EN EL SITIO AL FANTASMA DURANTE 5 SEGUNDOS (EL FANTASMA SIGUE TENIENDO VISION DE TI, AUMENTARA SU VELOCIDAD Y PODRA VER A DONDE FUISTE A ESCONDER).', 85, 15000, 15, 4, 'S', 'ninguno'),
-    ('Sensor de movimiento', 1, 'SENSOR QUE EMITE LUZ AL PASAR EL FANTASMA. SE ADHIERE A PAREDES O SUELO.', 5, 0, 100, 4, 'S', 'electrico'),
-    ('Sensor de movimiento', 2, 'ESTA VERSIÓN ES CONFIGURABLE PARA DETECTAR AL FANTASMA EN FORMA LINEAL O CÓNICA.', 45, 2500, 100, 4, 'S', 'electrico'),
-    ('Sensor de movimiento', 3, 'ESTA VERSIÓN ES SEMIESFERICA Y TIENE VISION 360º. SOLO DETECTA AL FANTASMA, TIENE UN SONIDO CARACTERISTICO DE DECTECCION Y UNA LUZ BLANCA INDICANDO LA DIRECCION DE DONDE SE MOVIO EL FANTASMA.', 74, 8000, 100, 4, 'S', 'electrico'),
-    ('Micrófono parabólico', 1, 'PARA ESCUCHAR SONIDOS LEJANOS, SE ENSORDECE TODO LO DEMÁS PARA ESCUCHAR MEJOR AL FANTASMA.', 7, 0, 50, 2, 'S', 'electrico'),
-    ('Micrófono parabólico', 2, 'AUMENTA EL RANGO DE DETECCIÓN E INCLUYE UNA PANTALLA PARA TENER LECTURAS VISUALES DE CUÁN FUERTES SON LOS SONIDOS. ALCANCE 30 METROS.', 31, 3000, 50, 2, 'S', 'electrico'),
-    ('Micrófono parabólico', 3, 'AUMENTA EL RANGO DE DETECCIÓN E INCLUYE UNA PANTALLA PARA TENER LECTURAS VISUALES DE CUÁN FUERTES SON LOS SONIDOS Y POR DONDE SE MUEVE EXACTAMENTE. COMO CURIOSIDAD SI LO DEJAS EN EL SUELO ENFOCANDO LA HABITAICIÓN ES POSIBLE QUE TE DE SOLO EL SENSOR DE SONIDO COMO PRUEBA SECUNDARIA. ALCANCE 30 METROS.', 72, 5000, 50, 2, 'S', 'electrico'),
-    ('Cámara de fotos', 1, 'CÁMARA POLAROID TARDA MUCHO MAS EN SACAR FOTOS DE SEGUIDO Y NO ES ELECTRÓNICA.', 3, 0, 40, 3, 'S', 'ninguno'),
-    ('Cámara de fotos', 2, 'REDUCE EL TIEMPO ENTRE CAPTURAS E INCLUYE UNA PANTALLA PARA VISUALIZAR. LA PANTALLA SUFRIRÁ INTERFERENCIA DURANTE ATAQUES O APARICIONES.', 25, 3000, 40, 3, 'S', 'electrico'),
-    ('Cámara de fotos', 3, 'EL TIEMPO ENTRE CAPTURAS ES MÍNIMO E INCLUYE UNA PANTALLA PARA VISUALIZAR. LA PANTALLA SUFRIRÁ INTERFERENCIA DURANTE ATAQUES O APARICIONES.', 70, 5000, 40, 3, 'S', 'electrico'),
-    ('Sal', 1, 'SAL QUE SE PUEDE UTILIZAR FUERA DE ATAQUE PARA QUE PISE EL FANTASMA Y PUEDA DEJAR LA EVIDENCIA ULTRAVIOLETA (TIENE 2 USOS).', 9, 0, 15, 3, 'S', 'consumible'),
-    ('Sal', 2, 'ESTA VERSIÓN CONTIENE MÁS SAL Y SE PUEDE ESPARCIR EN LARGAS LÍNEAS DE SAL PARA BLOQUEAR PASILLOS MÁS ANCHOS (TIENE 3 USOS). EL FANTASMA LA PISA EN ATAQUE Y FUERA DE ATAQUE.', 43, 2500, 15, 3, 'S', 'consumible'),
-    ('Sal', 3, 'ESTA VERSIÓN CONTIENE MÁS SAL Y SE PUEDE ESPARCIR EN LARGAS LÍNEAS DE SAL PARA BLOQUEAR PASILLOS MÁS ANCHOS. (TIENE 3 USOS) COMO CURIOSIDAD PUEDES PONER TODOS MONTONES JUNTOS, EL FANTASMA AL PISAR UNA LAS PISA TODAS Y PODRIAS HACER 9 FOTOS DE 3 ESTRELLAS EN POCO TIEMPO. SI EL FANTAMA LA PISA FUERA DE ATAQUE, LE HARIA VOLVER DE DONDE VINO. SI LA PISA EN CACERIA SE RALENTIZA 2 SEGUNDOS.', 68, 5000, 15, 3, 'S', 'consumible'),
-    ('Medicación para la cordura', 1, 'BOTELLA CON ACEITE DE SERPIENTE QUE RESTAURA LA CORDURA LENTAMENTE.', 16, 0, 20, 4, 'S', 'consumible'),
-    ('Medicación para la cordura', 2, 'PERMITE RECUPERAR LA CORDURA MÁS RÁPIDO.', 39, 2000, 20, 4, 'S', 'consumible'),
-    ('Medicación para la cordura', 3, 'PERMITE RECUPERAR LA CORDURA MÁS RÁPIDO Y DURANTE 10 SEGUNDOS NO SE TE AGOTA EL SPRINT. SI NO TIENES SPRINT NO TE LO DARIA, TENDRIAS QUE TENERLO SIN GASTAR PARA QUE SEA ILIMITADO 10 SEGUNDOS.', 77, 5000, 20, 4, 'S', 'consumible'),
-    ('Sensor de sonido', 1, 'SENSOR DE SONIDO QUE PUEDES ESCUCHAR DESDE EL CAMIÓN.', 11, 0, 80, 4, 'S', 'electrico'),
-    ('Sensor de sonido', 2, 'ESTÁ VERSIÓN DEL SENSOR PUEDE ADAPTARSE A TRES TIPOS DE TAMAÑO (5, 10 Y 15 METROS). SE PUEDE ACTIVAR O DESACTIVAR DESDE LA PANTALLA DEL CAMIÓN.', 32, 3000, 80, 4, 'S', 'electrico'),
-    ('Sensor de sonido', 3, 'ESTÁ VERSIÓN DEL SENSOR PUEDE ADAPTARSE A TRES TIPOS DE TAMAÑO (5, 10 Y 15 METROS). SE PUEDE ACTIVAR O DESACTIVAR DESDE LA PANTALLA DEL CAMIÓN.', 58, 1500, 80, 4, 'S', 'electrico'),
-    ('Trípode', 1, 'PARA COLOCAL UNA CÁMARA DE VIDEO A EL Y QUE SE PUEDA VER MEJOR LA ZONA. LOS FANTASMA PUEDEN INTERACTUAR CON EL Y TUMBARLO.', 10, 0, 25, 4, 'S', 'ninguno'),
-    ('Trípode', 2, 'ESTA VERSIÓN INCLUYE UN MOTOR ROTACIONAL LO QUE PERMITE AJUSTA LA VISIÓN DESDE LA PANTALLA QUE HAY EN EL CAMIÓN.', 34, 5000, 25, 4, 'S', 'ninguno'),
-    ('Trípode', 3, 'ESTA VERSIÓN INCLUYE UN MOTOR ROTACIONAL LO QUE PERMITE AJUSTA LA VISIÓN DESDE LA PANTALLA QUE HAY EN EL CAMIÓN. TIENE MENOS POSIBILIDAD EL FANTASMA DE MOVERLO.', 62, 3000, 25, 4, 'S', 'ninguno');
+        ('Proyector D.O.T.S.', 1, 'UN PEQUEÑO PUNTERO LÁSER QUE PROYECTA PEQUEÑOS RAYOS DE LUZ EN EL ENTORNO. SE PUEDE COLOCAR.', 0, 0, 65, 2, 'N', 'electrico'),
+        ('Proyector D.O.T.S.', 2, 'ESTE SENSOR DE MOVIMIENTO INFRARROJO FUE AMPLIABLEMENTE ADAPTADO PARA PROYECTAR LUZ. ES PEQUEÑO, COMPACTO Y SE ADHIERE A LA MAYORÍA DE SUPERFICIES.', 29, 3000, 65, 2, 'N', 'electrico'),
+        ('Proyector D.O.T.S.', 3, 'UN PROYECTOR MOTORIZADO CON TRES LENTES QUE CUBREN UN AMPLIO RANGO LUMÍNICO. SE PUEDE COLOCAR EN PAREDES Y ALGUNOS TECHOS.', 60, 3000, 65, 2, 'N', 'electrico'),
+        ('Medidor EMF', 1, 'UN MEDIDOR EMF CON VARIOS MODOS PARA ANALIZAR LAS DISTINTAS INTERFERENCIAS DEL AIRE. SI LA AGUJA EMPIEZA A MOVERSE. SI EL FANTASMA TUVIERA ESTA PRUEBA, LLEGARA LA AGUJA AL NIVEL 5.', 0, 0, 45, 2, 'N', 'electrico'),
+        ('Medidor EMF', 2, 'EL MEDIDOR K2 TIENE MAS RANGO Y 5 LUCES LED QUE MUESTRAN LECTURAS EMF, ADEMÁS DE UN MODULO ADICIONAL CON ALTAVOZ.', 20, 3000, 45, 2, 'N', 'electrico'),
+        ('Medidor EMF', 3, 'LECTOR EMF CON PANTALLA, MUESTRA PRIMERO EL EMF QUE EMITE EL OBJETO, EL RNA(LA DISTANCIA DONDE ESTA EL OBJETO) Y LA DIR(UNAS FLECHAS QUE INDICAN EN QUE DIRECCIÓN ESTA EL OBJETO QUE TIENE EMF).', 52, 4500, 45, 2, 'N', 'electrico'),
+        ('Linterna', 1, 'LINTERNA CON UNA PEQUEÑA LUZ.', 0, 0, 30, 4, 'N', 'electrico'),
+        ('Linterna', 2, 'EMITE UN FOCO DE LUZ MÁS BRILLANTE.', 19, 3000, 30, 4, 'N', 'electrico'),
+        ('Linterna', 3, 'LINTERNA CON LUZ MUY POTENTE.', 35, 2500, 30, 4, 'N', 'electrico'),
+        ('Libro de escritura fantasma', 1, 'CUADERNO DE ESCRITURA PEQUEÑO, CON POCO ALCANCE Y SERÁ COMPLICADO QUE EL FANTASMA DE LA PRUEBA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 0, 0, 40, 2, 'N', 'ninguno'),
+        ('Libro de escritura fantasma', 2, 'MEJORES PÁGINAS Y BOLÍGRAFO, LOS FANTASMAS SE FIJAN MÁS HACIENDO QUE LOS TIEMPOS SEAN ALGO INFERIORES PARA OBTENER LA PRUEBA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 23, 3000, 40, 2, 'N', 'ninguno'),
+        ('Libro de escritura fantasma', 3, 'GRIMORIO DE GRAN TAMAÑO DONDE TIENE UN ALCANCE MUCHO MAYOR Y DA CON MAS FACILIDAD LA ESCRITURA. SI EL FANTASMA NO TUVIESE ESTA PRUEBA LANZARIA EL LIBRO POR LOS AIRES, ES MUY ÚTIL PARA DESCARTAR TODOS LOS FANTASMAS SIN ESCRITURA SI LO LLEGA A LAZAR.', 63, 3000, 40, 2, 'N', 'ninguno'),
+        ('Spirit Box', 1, 'PEQUEÑA RADIO COMPACTA Y ANTIGUA. TARDA EN DAR RESULTADOS Y SU ALTAVOZ NO TIENE MUCHA CALIDAD. SI EL FANTASMA TUVIERA ESTA PRUEBA, SE PONDRÁ EN BLANCA LA LUZ DEL FANTASMA.', 0, 0, 50, 2, 'N', 'electrico'),
+        ('Spirit Box', 2, 'ALTAVOZ DE ALTA CALIDAD Y MÁS EFICIENTE AL ESCANEAR ENTRE DISTINTAS FRECUENCIAS LOGRANDO QUE LAS RESPUESTAS SEAN MÁS FÁCILES DE DESCIFRAR.', 27, 3000, 50, 2, 'N', 'electrico'),
+        ('Spirit Box', 3, 'ALTAVOZ DE ALTA CALIDAD Y MÁS EFICIENTE AL ESCANEAR ENTRE DISTINTAS FRECUENCIAS LOGRANDO QUE LAS RESPUESTAS SEAN MÁS FÁCILES DE DESCIFRAR.', 54, 3000, 50, 2, 'N', 'electrico'),
+        ('Termómetro', 1, 'TERMÓMETRO DE PARED QUE SIRVE PARA MEDIR LA TEMPERATURA DE UNA HABITACIÓN, TARDA BASTANTE TIEMPO EN DAR LAS TEMPERATURAS EXACTAS. SI EL FANTASMA TUVIERA ESTA PRUEBA, VERAS EL INDICADOR DEBAJO DEL CERO.', 0, 0, 30, 2, 'N', 'ninguno'),
+        ('Termómetro', 2, 'TERMÓMETRO DIGITAL MUCHO MÁS RÁPIDO LEYENDO TEMPERATURAS.', 36, 3000, 30, 2, 'N', 'ninguno'),
+        ('Termómetro', 3, 'TERMÓMETRO DIGITAL MUCHO MÁS RÁPIDO LEYENDO TEMPERATURAS. DEJAR PULSADO EL CLIC DERECHO PARA OBTENER LECTURA DE TEMPERATURA.', 64, 3000, 30, 2, 'N', 'electrico'),
+        ('Linterna ultravioleta', 1, 'BARRA LUMINOSA DE DURACIÓN 60 SEGUNDOS (LUZ FUERTE) PASADO 10 SEGUNDOS QUE SE VAYA SU POTENCIA, SE AGITA (CLIC DERECHO) Y SE REACTIVA.', 0, 0, 20, 2, 'N', 'ninguno'),
+        ('Linterna ultravioleta', 2, 'EMITE UN RATO DE LUZ DE LARGA DISTANCIA PERO ESTRECHO SIENDO PERFECTA PARA BUSCAR HUELLAS DACTILARES Y PISADAS. RECARGA DACTILOGRAMAS ULTRAVIOLETAS MÁS RÁPIDO QUE LA BARRA LUMINOSA.', 21, 3000, 20, 2, 'N', 'electrico'),
+        ('Linterna ultravioleta', 3, 'EMITE UN RATO DE LUZ DE LARGA DISTANCIA CON MUCHA AMPLITUD DE LUZ SIENDO PERFECTA PARA BUSCAR HUELLAS DACTILARES Y PISADAS. RECARGA DACTILOGRAMAS ULTRAVIOLETAS MÁS RÁPIDO QUE SUS ANTECESORAS.', 56, 2000, 20, 2, 'N', 'electrico'),
+        ('Cámara de vídeo', 1, 'CÁMARA DE VIDEO ANTIGUA PERO SE PUEDE VER ORBES SIN PROBLEMA. INTERFERENCIA ALTAS EN ATAQUE. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 0, 0, 50, 4, 'N', 'electrico'),
+        ('Cámara de vídeo', 2, 'MEJOR CALIDAD DE IMAGEN, MEJOR VISIÓN NOCTURNA Y MAS RESISTENCIA CONTRA LA INTERFERENCIA PARANORMAL. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 33, 3000, 50, 4, 'N', 'electrico'),
+        ('Cámara de vídeo', 3, 'LA MEJOR CALIDAD DE IMAGEN, MAS AMPLIA, MEJOR VISIÓN NOCTURNA Y MAS RESISTENCIA CONTRA LA INTERFERENCIA PARANORMAL. SE PUEDEN VISUALIZAR ORBES CON ELLA.', 61, 3000, 50, 4, 'N', 'electrico'),
+        ('Crucifijo', 1, 'SOLO SIRVE PARA EVITAR 1 ATAQUE Y SU ALCANCE ES BAJO.', 8, 0, 30, 2, 'S', 'consumible'),
+        ('Crucifijo', 2, 'CRUCIFIJO DE METAL QUE PUEDE BLOQUEAR HASTA DOS ATAQUES, MAYOR RANGO DE ACCIÓN.', 37, 4000, 30, 2, 'S', 'consumible'),
+        ('Crucifijo', 3, 'CRUCIFIJO DE METAL QUE PUEDE BLOQUEAR HASTA DOS ATAQUES, O UN SOLO ATAQUE MALDITO. MAYOR RANGO DE ACCIÓN QUE SUS ANTECESORES.', 90, 20000, 30, 2, 'S', 'consumible'),
+        ('Lumbre', 1, 'PEQUEÑA, CON UNA DURACIÓN DE 3 MINUTOS Y REDUCE EN UN 33% LA CORDURA QUE PERDEMOS.', 12, 0, 15, 4, 'S', 'consumible'),
+        ('Lumbre', 2, 'CANDELABRO CON TRES VELAS CON UNA DURACIÓN DE 5 MINUTOS Y REDUCE EN UN 50% LA CORDURA QUE PERDEMOS. CUBRE CORDURA INCLUSO POSICIONANDOLA CERCA SIN TENER QUE TENERLA EN LA MANO.', 47, 3000, 15, 4, 'S', 'consumible'),
+        ('Lumbre', 3, 'FAROL DE ACEITE CON UNA DURACIÓN DE 10 MINUTOS(SE APAGARÍA Y SE PODRIA VOLVER A ENCEDER) Y REDUCE EN UN 66% LA CORDURA QUE PERDEMOS. CUBRE CORDURA INCLUSO POSICIONANDOLA CERCA SIN TENER QUE TENERLA EN LA MANO.', 79, 10000, 15, 4, 'S', 'consumible'),
+        ('Equipamiento para la cabeza', 1, 'CÁMARA EN LA CABEZA QUE SE PUEDE OBSERVAR DESDE EL CAMIÓN PARA VER ORBES.', 13, 0, 60, 4, 'S', 'electrico'),
+        ('Equipamiento para la cabeza', 2, 'EQUIPAMIENTO DE CABEZA QUE APORTA UNA BRILLANTE LUZ PARA ENCENDERLO DEJAR PULSADO LA LETRA T.', 49, 10000, 60, 4, 'S', 'electrico'),
+        ('Equipamiento para la cabeza', 3, 'LUZ INFLAROJA QUE PERMITE VER PERFECTAMENTE EN LA OSCURIDAD PARA ENCENDERLO DEJAR PULSADO LA LETRA T.', 82, 10000, 60, 4, 'S', 'electrico'),
+        ('Encendedor', 1, 'CAJA DE 10 CERILLAS QUE CADA UNA TIENE UNA DURACIÓN DE 10 SEGUNDOS.', 12, 0, 10, 4, 'S', 'consumible'),
+        ('Encendedor', 2, 'MECHERO DE GAS CON UNA DURACIÓN DE 5 MINUTOS.', 41, 500, 10, 4, 'S', 'consumible'),
+        ('Encendedor', 3, 'MECHERO DE GAS CON UNA DURACIÓN DE 10 MINUTOS (SE APAGA A LOS 10 MINUTOS Y DEJARA DE SER ÚTIL).', 57, 750, 10, 4, 'S', 'ninguno'),
+        ('Incienso', 1, 'INCIENSO CON EL QUE SE PUEDE HACER DESORIENTAR AL FANTASMAS 5 SEGUNDOS EN UN RADIO DE 3 METROS.', 14, 0, 15, 4, 'S', 'consumible'),
+        ('Incienso', 2, 'ESTA VERSIÓN AUMENTA EL RANGO Y LA DURACIÓN DE LA CREMACIÓN. ADEMÁS DURANTE EL ATAQUE RALENTIZA AL FANTASMA DURANTE 5 SEGUNDOS.', 42, 3500, 15, 4, 'S', 'consumible'),
+        ('Incienso', 3, 'ESTA VERSIÓN AUMENTA EL RANGO Y LA DURACIÓN DE LA CREMACIÓN. ADEMÁS DURANTE EL ATAQUE PARA EN EL SITIO AL FANTASMA DURANTE 5 SEGUNDOS (EL FANTASMA SIGUE TENIENDO VISION DE TI, AUMENTARA SU VELOCIDAD Y PODRA VER A DONDE FUISTE A ESCONDER).', 85, 15000, 15, 4, 'S', 'ninguno'),
+        ('Sensor de movimiento', 1, 'SENSOR QUE EMITE LUZ AL PASAR EL FANTASMA. SE ADHIERE A PAREDES O SUELO.', 5, 0, 100, 4, 'S', 'electrico'),
+        ('Sensor de movimiento', 2, 'ESTA VERSIÓN ES CONFIGURABLE PARA DETECTAR AL FANTASMA EN FORMA LINEAL O CÓNICA.', 45, 2500, 100, 4, 'S', 'electrico'),
+        ('Sensor de movimiento', 3, 'ESTA VERSIÓN ES SEMIESFERICA Y TIENE VISION 360º. SOLO DETECTA AL FANTASMA, TIENE UN SONIDO CARACTERISTICO DE DECTECCION Y UNA LUZ BLANCA INDICANDO LA DIRECCION DE DONDE SE MOVIO EL FANTASMA.', 74, 8000, 100, 4, 'S', 'electrico'),
+        ('Micrófono parabólico', 1, 'PARA ESCUCHAR SONIDOS LEJANOS, SE ENSORDECE TODO LO DEMÁS PARA ESCUCHAR MEJOR AL FANTASMA.', 7, 0, 50, 2, 'S', 'electrico'),
+        ('Micrófono parabólico', 2, 'AUMENTA EL RANGO DE DETECCIÓN E INCLUYE UNA PANTALLA PARA TENER LECTURAS VISUALES DE CUÁN FUERTES SON LOS SONIDOS. ALCANCE 30 METROS.', 31, 3000, 50, 2, 'S', 'electrico'),
+        ('Micrófono parabólico', 3, 'AUMENTA EL RANGO DE DETECCIÓN E INCLUYE UNA PANTALLA PARA TENER LECTURAS VISUALES DE CUÁN FUERTES SON LOS SONIDOS Y POR DONDE SE MUEVE EXACTAMENTE. COMO CURIOSIDAD SI LO DEJAS EN EL SUELO ENFOCANDO LA HABITAICIÓN ES POSIBLE QUE TE DE SOLO EL SENSOR DE SONIDO COMO PRUEBA SECUNDARIA. ALCANCE 30 METROS.', 72, 5000, 50, 2, 'S', 'electrico'),
+        ('Cámara de fotos', 1, 'CÁMARA POLAROID TARDA MUCHO MAS EN SACAR FOTOS DE SEGUIDO Y NO ES ELECTRÓNICA.', 3, 0, 40, 3, 'S', 'ninguno'),
+        ('Cámara de fotos', 2, 'REDUCE EL TIEMPO ENTRE CAPTURAS E INCLUYE UNA PANTALLA PARA VISUALIZAR. LA PANTALLA SUFRIRÁ INTERFERENCIA DURANTE ATAQUES O APARICIONES.', 25, 3000, 40, 3, 'S', 'electrico'),
+        ('Cámara de fotos', 3, 'EL TIEMPO ENTRE CAPTURAS ES MÍNIMO E INCLUYE UNA PANTALLA PARA VISUALIZAR. LA PANTALLA SUFRIRÁ INTERFERENCIA DURANTE ATAQUES O APARICIONES.', 70, 5000, 40, 3, 'S', 'electrico'),
+        ('Sal', 1, 'SAL QUE SE PUEDE UTILIZAR FUERA DE ATAQUE PARA QUE PISE EL FANTASMA Y PUEDA DEJAR LA EVIDENCIA ULTRAVIOLETA (TIENE 2 USOS).', 9, 0, 15, 3, 'S', 'consumible'),
+        ('Sal', 2, 'ESTA VERSIÓN CONTIENE MÁS SAL Y SE PUEDE ESPARCIR EN LARGAS LÍNEAS DE SAL PARA BLOQUEAR PASILLOS MÁS ANCHOS (TIENE 3 USOS). EL FANTASMA LA PISA EN ATAQUE Y FUERA DE ATAQUE.', 43, 2500, 15, 3, 'S', 'consumible'),
+        ('Sal', 3, 'ESTA VERSIÓN CONTIENE MÁS SAL Y SE PUEDE ESPARCIR EN LARGAS LÍNEAS DE SAL PARA BLOQUEAR PASILLOS MÁS ANCHOS. (TIENE 3 USOS) COMO CURIOSIDAD PUEDES PONER TODOS MONTONES JUNTOS, EL FANTASMA AL PISAR UNA LAS PISA TODAS Y PODRIAS HACER 9 FOTOS DE 3 ESTRELLAS EN POCO TIEMPO. SI EL FANTAMA LA PISA FUERA DE ATAQUE, LE HARIA VOLVER DE DONDE VINO. SI LA PISA EN CACERIA SE RALENTIZA 2 SEGUNDOS.', 68, 5000, 15, 3, 'S', 'consumible'),
+        ('Medicación para la cordura', 1, 'BOTELLA CON ACEITE DE SERPIENTE QUE RESTAURA LA CORDURA LENTAMENTE.', 16, 0, 20, 4, 'S', 'consumible'),
+        ('Medicación para la cordura', 2, 'PERMITE RECUPERAR LA CORDURA MÁS RÁPIDO.', 39, 2000, 20, 4, 'S', 'consumible'),
+        ('Medicación para la cordura', 3, 'PERMITE RECUPERAR LA CORDURA MÁS RÁPIDO Y DURANTE 10 SEGUNDOS NO SE TE AGOTA EL SPRINT. SI NO TIENES SPRINT NO TE LO DARIA, TENDRIAS QUE TENERLO SIN GASTAR PARA QUE SEA ILIMITADO 10 SEGUNDOS.', 77, 5000, 20, 4, 'S', 'consumible'),
+        ('Sensor de sonido', 1, 'SENSOR DE SONIDO QUE PUEDES ESCUCHAR DESDE EL CAMIÓN.', 11, 0, 80, 4, 'S', 'electrico'),
+        ('Sensor de sonido', 2, 'ESTÁ VERSIÓN DEL SENSOR PUEDE ADAPTARSE A TRES TIPOS DE TAMAÑO (5, 10 Y 15 METROS). SE PUEDE ACTIVAR O DESACTIVAR DESDE LA PANTALLA DEL CAMIÓN.', 32, 3000, 80, 4, 'S', 'electrico'),
+        ('Sensor de sonido', 3, 'ESTÁ VERSIÓN DEL SENSOR PUEDE ADAPTARSE A TRES TIPOS DE TAMAÑO (5, 10 Y 15 METROS). SE PUEDE ACTIVAR O DESACTIVAR DESDE LA PANTALLA DEL CAMIÓN.', 58, 1500, 80, 4, 'S', 'electrico'),
+        ('Trípode', 1, 'PARA COLOCAL UNA CÁMARA DE VIDEO A EL Y QUE SE PUEDA VER MEJOR LA ZONA. LOS FANTASMA PUEDEN INTERACTUAR CON EL Y TUMBARLO.', 10, 0, 25, 4, 'S', 'ninguno'),
+        ('Trípode', 2, 'ESTA VERSIÓN INCLUYE UN MOTOR ROTACIONAL LO QUE PERMITE AJUSTA LA VISIÓN DESDE LA PANTALLA QUE HAY EN EL CAMIÓN.', 34, 5000, 25, 4, 'S', 'ninguno'),
+        ('Trípode', 3, 'ESTA VERSIÓN INCLUYE UN MOTOR ROTACIONAL LO QUE PERMITE AJUSTA LA VISIÓN DESDE LA PANTALLA QUE HAY EN EL CAMIÓN. TIENE MENOS POSIBILIDAD EL FANTASMA DE MOVERLO.', 62, 3000, 25, 4, 'S', 'ninguno');
     ";
     mysqli_query($conexion, $insertarEquipamiento);
 
@@ -320,6 +322,7 @@ function insertarDatos($conexion)
     $BrownstoneHighSchool = "../img/Brownstone_High_School_-_Floorplan.webp";
     $SunnyMeadowsMentalInstitution = "../img/Sunny_Meadows_Mental_Institution_-_Full_Map_Floorplan.webp";
 
+    //Insertar datos en tabla mapas
     $insertarMapas = "INSERT INTO mapas (nombre, img, tamaño, plantas, habitaciones, salidas, grifos, camaras, escondites, nivel_desbloqueo) VALUES
         ('6 Tanglewood Drive', '$TanglewoodDrive', 'pequeño', 2, '10-1', 1, 3, 1, 6, 0),
         ('10 Ridgeview Court', '$RidgeviewCourt', 'pequeño', 2, '6-9-1', 1, 5, 1, 10, 2),
@@ -336,8 +339,9 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarMapas);
 
+    //Insertar datos en tabla usuarios
     $insertarUsuarios = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES
-    ('1', '1@admin.com', '1');
+        ('1', '1@admin.com', '1');
     ";
     mysqli_query($conexion, $insertarUsuarios);
 }

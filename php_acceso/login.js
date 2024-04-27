@@ -1,36 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   validarFormularioRegistro();
-// });
-
-// Función para procesar el inicio de sesión
-function login(formLogin) {
-  const formData = new FormData(formLogin);
-
-  fetch("../php_acceso/login.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        window.location.href = "../header y footer/header.html"; // Redirecciona si el inicio de sesión fue exitoso
-      } else {
-        // Muestra el mensaje de error en el formulario
-        const errorMessage = document.getElementById("mensaje-error-login");
-        errorMessage.textContent = "Ha ocurrido un error";
-        errorMessage.style.display = "block";
-      }
-    })
-    .catch((error) => {
-      console.error("Fetch error: ", error);
-    });
-}
-
 // Función para procesar el inicio de sesión
 function registro(formRegistro) {
   const formData = new FormData(formRegistro);
@@ -60,6 +27,7 @@ function registro(formRegistro) {
     });
 }
 
+// Función para validar que el nombre de usuario que no este vacio
 function comprobarInputUsuarioRegistro() {
   let registerForm = document.getElementById("registrar");
   let inputUsername = registerForm.querySelector("input[type='text']").value;
@@ -78,6 +46,7 @@ function comprobarInputUsuarioRegistro() {
   }
 }
 
+// Función para validar que el nombre de usuario no existe
 async function comprobarUsuarioRegistro() {
   let registerForm = document.getElementById("registrar");
   let username = document.getElementById("usernameRegistro").value;
@@ -113,10 +82,11 @@ async function comprobarUsuarioRegistro() {
       errorMessage.textContent =
         "Error al verificar el usuario. Por favor, inténtalo de nuevo más tarde.";
       errorMessage.style.display = "block";
-      return true; // Considera si quieres devolver true o false en caso de error
+      return true;
     });
 }
 
+// Función para validar que el email que no este vacio
 function comprobarInputEmailRegistro() {
   let registerForm = document.getElementById("registrar");
   let emailErrorIcon = registerForm.querySelector(".email-error");
@@ -150,6 +120,7 @@ function comprobarInputEmailRegistro() {
   }
 }
 
+// Función para validar que el email no existe
 async function comprobarEmailRegistro() {
   let registerForm = document.getElementById("registrar");
   let emailInput = registerForm.querySelector("input[type='email']");
@@ -186,10 +157,11 @@ async function comprobarEmailRegistro() {
       errorMessage.textContent =
         "Error al verificar el correo. Por favor, inténtalo de nuevo más tarde.";
       errorMessage.style.display = "block";
-      return true; // Considera si quieres devolver true o false en caso de error
+      return true;
     });
 }
 
+// Función para validar contraseña
 function comprobarPasswordRegistro() {
   let registerForm = document.getElementById("registrar");
   let passwordInput = registerForm.querySelector("input[type='password']");
@@ -235,6 +207,7 @@ function comprobarPasswordRegistro() {
   return true;
 }
 
+// Función para validar registro
 async function validarFormularioRegistro() {
   let registerForm = document.getElementById("registrar");
   registerForm.addEventListener("submit", async function (event) {
@@ -257,7 +230,6 @@ async function validarFormularioRegistro() {
   });
 }
 
-
 // Función para mostrar la contraseña en el campo de contraseña
 function mostrarContraseña() {
   var contraseñaInput = document.getElementById("passwordInput");
@@ -277,7 +249,7 @@ function mostrarContraseña() {
 // Función para mostrar la contraseña en el campo de contraseña
 function mostrarContraseña2() {
   var contraseñaInput = document.getElementById("passwordInput2");
-  var icono = document.getElementById("ojoVerContraseña");
+  var icono = document.getElementById("ojoVerContraseña2");
 
   if (contraseñaInput.type === "password") {
     contraseñaInput.type = "text";
@@ -289,24 +261,3 @@ function mostrarContraseña2() {
     icono.classList.add("fa-eye");
   }
 }
-
-
-
-// // Función para mostrar la contraseña en el campo de confirmación de contraseña
-// function mostrarContraseña2() {
-//   var contraseñaInput = document.getElementById("passwordInput2");
-//   var icono = document.getElementById("ojoVerContraseña2");
-
-//   if (contraseñaInput.type === "password") {
-//     contraseñaInput.type = "text";
-//     icono.classList.remove("fa-eye");
-//     icono.classList.add("fa-eye-slash");
-//   } else {
-//     contraseñaInput.type = "password";
-//     icono.classList.remove("fa-eye-slash");
-//     icono.classList.add("fa-eye");
-//   }
-// }
-
-
-

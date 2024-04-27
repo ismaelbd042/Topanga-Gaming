@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../header y footer/style.css"> -->
     <link rel="stylesheet" href="style.css">
-    <title>Topanga</title>
+    <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
+    <title>Topanga Gaming</title>
 </head>
 
 <body>
@@ -18,7 +18,6 @@
     ?>
     <div class="containerIndex">
         <!-- Aquí iría todo el código del index -->
-        <h1>Cosas</h1>
     </div>
     <!-- <span onclick="playSound('https://zero-network.net/phasmophobia/static/assets/banshee_scream.mp3')">Icono de sonido</span> -->
     <!-- codigo que hace que suene un sonido -->
