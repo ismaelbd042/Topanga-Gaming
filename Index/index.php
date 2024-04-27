@@ -18,6 +18,7 @@
     ?>
     <div class="containerIndex">
         <!-- Aquí iría todo el código del index -->
+        <h1>Cosas</h1>
     </div>
     <!-- <span onclick="playSound('https://zero-network.net/phasmophobia/static/assets/banshee_scream.mp3')">Icono de sonido</span> -->
     <!-- codigo que hace que suene un sonido -->

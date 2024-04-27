@@ -48,4 +48,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica si la solicitud es de ti
         exit();
     }
 }
-?>

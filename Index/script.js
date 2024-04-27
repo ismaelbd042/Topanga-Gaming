@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   mostrarVentanaModal();
-  validarFormulariosAcceso();
+  // validarFormulariosAcceso();
 });
 
 function mostrarVentanaModal() {

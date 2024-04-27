@@ -116,47 +116,55 @@
         transform: scale(.6);
     }
 </style>
-<script src="../php/login.js"></script>
+<script src="../php_acceso/login.js"></script>
 <div class="mainVentanaModal">
     <input type="checkbox" class="inputVentanaModal" id="chkVentanaModal" aria-hidden="true">
 
     <div class="signupVentanaModal">
-        <form method="POST" action="../php/registro.php" id="registrar" class="input-group-accede">
+        <form method="POST" action="../php_acceso/registro.php" id="registrar" class="input-group-accede">
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Sign up</label>
             <div class="input-container">
-                <input type="text" name="txt" class="inputVentanaModal" placeholder="User name" autocomplete="off">
-                <span class="error-icon username-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
+                <input type="text" name="usuario" class="inputVentanaModal" id="usernameRegistro"
+                    placeholder="User name" autocomplete="off"
+                    onblur=" comprobarInputUsuarioRegistro(); comprobarUsuarioRegistro()">
+                <span class="error-icon username-error" style="display: none;"><i
+                        class="fas fa-times-circle"></i></span>
             </div>
-            
+
             <div class="input-container">
-                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off">
+                <input type="email" name="email" class="inputVentanaModal" id="emailRegistro" placeholder="Email"
+                    autocomplete="off" onblur="comprobarInputEmailRegistro(); comprobarEmailRegistro()">
                 <span class="error-icon email-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
             </div>
-            
+
             <div class="input-container">
-                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off">
-                <span class="error-icon password-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
+                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off"
+                    onblur="comprobarPasswordRegistro()">
+                <span class="error-icon password-error" style="display: none;"><i
+                        class="fas fa-times-circle"></i></span>
             </div>
-            
+
             <span class="error-message-registro" id="mensaje-error-registro"></span>
-            <button class="buttonVentanaModal" type="submit">Sign up</button>
-        </form>      
+            <button class="buttonVentanaModal" onclick="validarFormularioRegistro()">Sign up</button>
+        </form>
     </div>
 
     <div class="loginVentanaModal">
-        <form method="POST" action="../php/login.php" id="login" class="input-group-accede">
+        <form method="POST" action="../php_acceso/login.php" id="login" class="input-group-accede">
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Login</label>
-            
+
             <div class="input-container">
-                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off">
+                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off"
+                    onBlur="determinarTipoLogin()">
                 <span class="error-icon email-error2" style="display: none;"><i class="fas fa-times-circle"></i></span>
             </div>
-            
+
             <div class="input-container">
                 <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off">
-                <span class="error-icon password-error2" style="display: none;"><i class="fas fa-times-circle"></i></span>
+                <span class="error-icon password-error2" style="display: none;"><i
+                        class="fas fa-times-circle"></i></span>
             </div>
-            
+
             <span class="error-message" id="mensaje-error-login"></span>
             <button class="buttonVentanaModal" type="submit">Login</button>
         </form>
@@ -164,36 +172,37 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('registrar').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe normalmente
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     document.getElementById('registrar').addEventListener('submit', function (event) {
+    //         event.preventDefault(); // Evita que el formulario se envíe normalmente
 
-        // Obtener los datos del formulario
-        var formData = new FormData(this);
+    //         // Obtener los datos del formulario
+    //         var formData = new FormData(this);
 
-        // Realizar la solicitud Fetch
-        fetch(this.action, {
-            method: 'POST',
-            body: formData
-        })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            console.log(data); // Verificar la respuesta JSON recibida
-            if (data.success) {
-                // El registro fue exitoso, redirigir al usuario al índice u otra página si es necesario
-                window.location.href = '../Index/index.php';
-            } else {
-                // Mostrar el mensaje de error en la ventana modal
-                console.log(data.error); // Verificar el mensaje de error recibido
-                document.getElementById('mensaje-error-registro').textContent = data.error;
-            }
-        })
-        .catch(function(error) {
-            console.error('Error:', error); // Manejar errores de la solicitud Fetch si es necesario
-        });
-    });
-});
+    //         // Realizar la solicitud Fetch
+    //         fetch(this.action, {
+    //             method: 'POST',
+    //             body: formData
+    //         })
+    //             .then(function (response) {
+    //                 console.log(response)
+    //                 return response.json();
+    //             })
+    //             .then(function (data) {
+    //                 console.log(data); // Verificar la respuesta JSON recibida
+    //                 if (data.success) {
+    //                     // El registro fue exitoso, redirigir al usuario al índice u otra página si es necesario
+    //                     window.location.href = '../Index/index.php';
+    //                 } else {
+    //                     // Mostrar el mensaje de error en la ventana modal
+    //                     console.log(data.error); // Verificar el mensaje de error recibido
+    //                     document.getElementById('mensaje-error-registro').textContent = data.error;
+    //                 }
+    //             })
+    //             .catch(function (error) {
+    //                 console.error('Error:', error); // Manejar errores de la solicitud Fetch si es necesario
+    //             });
+    //     });
+    // });
 
-    </script>
+</script>
