@@ -256,3 +256,57 @@ async function validarFormularioRegistro() {
     registerForm.submit();
   });
 }
+
+
+// Función para mostrar la contraseña en el campo de contraseña
+function mostrarContraseña() {
+  var contraseñaInput = document.getElementById("passwordInput");
+  var icono = document.getElementById("ojoVerContraseña");
+
+  if (contraseñaInput.type === "password") {
+    contraseñaInput.type = "text";
+    icono.classList.remove("fa-eye");
+    icono.classList.add("fa-eye-slash");
+  } else {
+    contraseñaInput.type = "password";
+    icono.classList.remove("fa-eye-slash");
+    icono.classList.add("fa-eye");
+  }
+}
+
+// Función para mostrar la contraseña en el campo de contraseña
+function mostrarContraseña2() {
+  var contraseñaInput = document.getElementById("passwordInput2");
+  var icono = document.getElementById("ojoVerContraseña");
+
+  if (contraseñaInput.type === "password") {
+    contraseñaInput.type = "text";
+    icono.classList.remove("fa-eye");
+    icono.classList.add("fa-eye-slash");
+  } else {
+    contraseñaInput.type = "password";
+    icono.classList.remove("fa-eye-slash");
+    icono.classList.add("fa-eye");
+  }
+}
+
+
+
+// // Función para mostrar la contraseña en el campo de confirmación de contraseña
+// function mostrarContraseña2() {
+//   var contraseñaInput = document.getElementById("passwordInput2");
+//   var icono = document.getElementById("ojoVerContraseña2");
+
+//   if (contraseñaInput.type === "password") {
+//     contraseñaInput.type = "text";
+//     icono.classList.remove("fa-eye");
+//     icono.classList.add("fa-eye-slash");
+//   } else {
+//     contraseñaInput.type = "password";
+//     icono.classList.remove("fa-eye-slash");
+//     icono.classList.add("fa-eye");
+//   }
+// }
+
+
+

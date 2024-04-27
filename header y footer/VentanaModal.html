@@ -138,8 +138,9 @@
             </div>
 
             <div class="input-container">
-                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off"
+                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" id="passwordInput2" autocomplete="off"
                     onblur="comprobarPasswordRegistro()">
+                <i class="fas fa-eye" id="ojoVerContraseña" onclick="mostrarContraseña2()"></i>
                 <span class="error-icon password-error" style="display: none;"><i
                         class="fas fa-times-circle"></i></span>
             </div>
@@ -160,7 +161,8 @@
             </div>
 
             <div class="input-container">
-                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" autocomplete="off">
+                <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" id="passwordInput" autocomplete="off">
+                <i class="fas fa-eye" id="ojoVerContraseña" onclick="mostrarContraseña()"></i>
                 <span class="error-icon password-error2" style="display: none;"><i
                         class="fas fa-times-circle"></i></span>
             </div>
