@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica si la solicitud es de ti
     if (mysqli_num_rows($result) > 0) { // Verifica si se encontraron filas en el resultado
         $row = mysqli_fetch_assoc($result); // Obtiene la fila de resultados como un array asociativo
         $stored_password = $row['contrasena']; // Obtiene la contraseña almacenada del resultado
-        if ($password === $stored_password) { // Compara la contraseña proporcionada con la almacenada sin hash
+        if (password_verify($password, $stored_password)) { // Compara la contraseña proporcionada con la almacenada sin hash
             $respuesta['success'] = true; // Establece el éxito de la autenticación en verdadero
             $id_usuario = $row['id']; // Obtiene el ID del usuario
             $_SESSION['id'] = $id_usuario; // Establece el ID del usuario en la sesión
