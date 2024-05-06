@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: OctoberCrow;
+            src: url(fonts/October\ Crow.ttf);
+        }
+
+        .tarjeta_fantasma_general {
+            width: 1000px;
+            height: 500px;
+            background: #000;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .cuadrado_morado {
+            width: 60%;
+            height: 100%;
+            clip-path: polygon(60% 0, 100% 50%, 60% 100%, 0 100%, 0 0);
+            background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
+        }
+
+        .cuadrado_morado img {
+            height: 100%;
+        }
+
+        .info_fantasma {
+            height: 100%;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 0 20px 0 10px;
+            color: white;
+        }
+
+        .info_fantasma .nombre_fantasma {
+            font-family: OctoberCrow;
+            font-size: 56px;
+            position: relative;
+            left: -70px;
+        }
+
+        .info_fantasma .desc_fantasma {
+            font-size: 18px;
+        }
+
+        .pruebas_fantasmas {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            position: relative;
+            left: -70px;
+        }
+
+        .pruebas {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .pruebas img {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tarjeta_fantasma_general">
+        <div class="cuadrado_morado"><img src="img/Fotos fantasmas/fantasma.svg"></img></div>
+        <div class="info_fantasma">
+            <span class="nombre_fantasma">Poltergeist</span>
+            <div class="desc_fantasma">
+                El logo de Topanga presenta una letra “T” estilizada como su elemento central,
+                reflejando la identidad distintiva de nuestra empresa. La “T” se alza sobre un fondo que utiliza un
+                cautivador gradiente de color, fusionando el profundo negro estelar con el vibrante púrpura cósmico,
+                evoca una sensación de inmensidad y exploración del universo.
+            </div>
+            <div class="pruebas_fantasmas">
+                <div class="pruebas prueba1">
+                    <img src="img/Fotos pruebas/icono fantasma.svg" alt="">
+                    SpiritBox
+                </div>
+                <div class="pruebas prueba2">
+                    <img src="img/Fotos pruebas/huellas.svg" alt="">
+                    Huellas
+                </div>
+                <div class="pruebas prueba3">
+                    <img src="img/Fotos pruebas/escritura.svg" alt="">
+                    Escritura
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
