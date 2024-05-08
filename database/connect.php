@@ -339,9 +339,10 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarMapas);
 
+    $contraseña1 = password_hash('1', PASSWORD_DEFAULT);
     //Insertar datos en tabla usuarios
     $insertarUsuarios = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES
-        ('1', '1@admin.com', '1');
+        ('1', '1@admin.com', '$contraseña1');
     ";
     mysqli_query($conexion, $insertarUsuarios);
 }
