@@ -35,16 +35,16 @@ body {
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
-  }
-  
-  .error-message-registro {
+}
+
+.error-message-registro {
     color: red;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
-  }
+}
 
-  .input-container {
+.input-container {
     position: relative;
 }
 
@@ -53,6 +53,8 @@ body {
     top: 50%;
     right: 50px;
     transform: translateY(-50%);
-    color: red; /* Cambia el color a rojo */
+    color: red;
+    /* Cambia el color a rojo */
 }
-  /***************************************************************/
+
+/***************************************************************/

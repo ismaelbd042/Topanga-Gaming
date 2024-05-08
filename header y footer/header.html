@@ -14,6 +14,7 @@
   }
 
   body {
+    background-color: #434343;
     padding: 0px 0;
   }
 
@@ -206,7 +207,7 @@
   }
 
   .subsubmenu {
-    display: block;
+    display: none;
     flex-direction: column;
     flex-wrap: wrap;
     position: absolute;
@@ -226,7 +227,25 @@
     width: 100%;
   }
 
-  .submenu li:hover .subsubmenu {
+  #li_pruebas:hover .menu_pruebas {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  #li_objetos:hover .menu_objetos_malditos {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  #li_fantasmas:hover .menu_fantasmas {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  #li_equipamiento:hover .menu_equipamiento {
     display: block;
     opacity: 1;
     transition: opacity 0.3s ease;
@@ -328,7 +347,7 @@
     <span class="menu">
       <li id="baseDeDatos"><a href="../Base de datos/basededatos.html">Base de datos</a>
         <ul class="submenu">
-          <li><a href="">Pruebas</a>
+          <li id="li_pruebas"><a href="">Pruebas</a>
             <ul class="subsubmenu menu_pruebas">
               <li><a href="#">EMF</a></li>
               <li><a href="#">Ultravioleta</a></li>
@@ -339,7 +358,7 @@
               <li><a href="#">Spirit Box</a></li>
             </ul>
           </li>
-          <li><a href="">Objetos malditos</a>
+          <li id="li_objetos"><a href="">Objetos malditos</a>
             <ul class="subsubmenu menu_objetos_malditos">
               <li><a href="#">Pata de mono</a></li>
               <li><a href="#">Caja de música</a></li>
@@ -350,7 +369,7 @@
               <li><a href="#">Tablero de ouija</a></li>
             </ul>
           </li>
-          <li><a href="">Fantasmas</a>
+          <li id="li_fantasmas"><a href="">Fantasmas</a>
             <ul class="subsubmenu menu_fantasmas">
               <li><a href="#">Espíritu</a></li>
               <li><a href="#">Espectro</a></li>
@@ -378,7 +397,7 @@
               <li><a href="#">Thaye</a></li>
             </ul>
           </li>
-          <li><a href="">Equipamiento</a>
+          <li id="li_equipamiento"><a href="">Equipamiento</a>
             <ul class="subsubmenu menu_equipamiento">
               <li><a href="#">Proyector D.O.T.S.</a></li>
               <li><a href="#">Medidor EMF</a></li>
