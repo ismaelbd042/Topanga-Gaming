@@ -183,6 +183,84 @@
     gap: 25px;
   }
 
+  .submenu {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 56px;
+    background-color: #000;
+    border-top: solid 5px #5f1495;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .submenu li {
+    padding: 10px 0;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.29);
+  }
+
+  #baseDeDatos:hover .submenu {
+    display: flex;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .subsubmenu {
+    display: block;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    max-height: 450px;
+    left: 100%;
+    border-top: solid 5px #5f1495;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .subsubmenu li {
+    width: auto;
+  }
+
+  .subsubmenu>li>a {
+    width: 100%;
+  }
+
+  .submenu li:hover .subsubmenu {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .submenu li:hover {
+    border-right: solid 5px #5f1495;
+    /* transition: border 0.2 ease-in; */
+  }
+
+  .menu_pruebas {
+    width: 215px;
+    top: -5px;
+  }
+
+  .menu_objetos_malditos {
+    width: 215px;
+    top: 40px;
+  }
+
+  .menu_fantasmas {
+    width: 600px;
+    column-count: 3;
+    column-rule: 1px solid #ccc;
+    top: 85px;
+  }
+
+  .menu_equipamiento {
+    width: 900px;
+    column-count: 3;
+    column-rule: 1px solid #ccc;
+    top: 130px;
+  }
+
   /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
   @media (max-width: 948px) {
 
@@ -248,7 +326,84 @@
     </li>
     <input type="checkbox" id="check" />
     <span class="menu">
-      <li><a href="#">Home</a></li>
+      <li id="baseDeDatos"><a href="../Base de datos/basededatos.html">Base de datos</a>
+        <ul class="submenu">
+          <li><a href="">Pruebas</a>
+            <ul class="subsubmenu menu_pruebas">
+              <li><a href="#">EMF</a></li>
+              <li><a href="#">Ultravioleta</a></li>
+              <li><a href="#">Escritura fantasma</a></li>
+              <li><a href="#">Temperaturas heladas</a></li>
+              <li><a href="#">DOTs</a></li>
+              <li><a href="#">Orbes fantasmales</a></li>
+              <li><a href="#">Spirit Box</a></li>
+            </ul>
+          </li>
+          <li><a href="">Objetos malditos</a>
+            <ul class="subsubmenu menu_objetos_malditos">
+              <li><a href="#">Pata de mono</a></li>
+              <li><a href="#">Caja de música</a></li>
+              <li><a href="#">Espejo encantado</a></li>
+              <li><a href="#">Muñeca vudú</a></li>
+              <li><a href="#">Cartas del tarot</a></li>
+              <li><a href="#">Círculo de invocación</a></li>
+              <li><a href="#">Tablero de ouija</a></li>
+            </ul>
+          </li>
+          <li><a href="">Fantasmas</a>
+            <ul class="subsubmenu menu_fantasmas">
+              <li><a href="#">Espíritu</a></li>
+              <li><a href="#">Espectro</a></li>
+              <li><a href="#">Ente</a></li>
+              <li><a href="#">Poltergeist</a></li>
+              <li><a href="#">Banshee</a></li>
+              <li><a href="#">Jinn</a></li>
+              <li><a href="#">Pesadilla</a></li>
+              <li><a href="#">Revenant</a></li>
+              <li><a href="#">Sombra</a></li>
+              <li><a href="#">Demonio</a></li>
+              <li><a href="#">Yurei</a></li>
+              <li><a href="#">Oni</a></li>
+              <li><a href="#">Yokai</a></li>
+              <li><a href="#">Hantu</a></li>
+              <li><a href="#">Goryo</a></li>
+              <li><a href="#">Myling</a></li>
+              <li><a href="#">Onryo</a></li>
+              <li><a href="#">Gemelos</a></li>
+              <li><a href="#">Raiju</a></li>
+              <li><a href="#">Obake</a></li>
+              <li><a href="#">Mímico</a></li>
+              <li><a href="#">Moroi</a></li>
+              <li><a href="#">Deogen</a></li>
+              <li><a href="#">Thaye</a></li>
+            </ul>
+          </li>
+          <li><a href="">Equipamiento</a>
+            <ul class="subsubmenu menu_equipamiento">
+              <li><a href="#">Proyector D.O.T.S.</a></li>
+              <li><a href="#">Medidor EMF</a></li>
+              <li><a href="#">Linterna</a></li>
+              <li><a href="#">Libro de escritura fantasma</a></li>
+              <li><a href="#">Spirit Box</a></li>
+              <li><a href="#">Termómetro</a></li>
+              <li><a href="#">Linterna ultravioleta</a></li>
+              <li><a href="#">Cámara de vídeo</a></li>
+              <li><a href="#">Crucifijo</a></li>
+              <li><a href="#">Lumbre</a></li>
+              <li><a href="#">Equipamiento de cabeza</a></li>
+              <li><a href="#">Encendedor</a></li>
+              <li><a href="#">Incienso</a></li>
+              <li><a href="#">Sensor de movimiento</a></li>
+              <li><a href="#">Micrófono parabólico</a></li>
+              <li><a href="#">Cámara de fotos</a></li>
+              <li><a href="#">Sal</a></li>
+              <li><a href="#">Medicación para la cordura</a></li>
+              <li><a href="#">Sensor de sonido</a></li>
+              <li><a href="#">Trípode</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
       <li><a href="#">About</a></li>
       <li><a href="#">Search</a></li>
       <li><a href="#">Contact</a></li>
