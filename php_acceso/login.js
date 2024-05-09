@@ -19,7 +19,7 @@ function registro(formRegistro) {
         // Muestra el mensaje de error en el formulario
         const errorMessage = document.getElementById("mensaje-error-registro");
         errorMessage.textContent = "Ha ocurrido un error";
-        errorMessage.style.display = "block";
+        errorMessage.style.opacity = "1";
       }
     })
     .catch((error) => {
@@ -37,7 +37,7 @@ function comprobarInputUsuarioRegistro() {
   // If para comprobar si el usuario está vacío
   if (inputUsername.trim() === "") {
     errorMessage.textContent = "Por favor, completa todos los campos.";
-    errorMessage.style.display = "block";
+    errorMessage.style.opacity = "1";
     usernameErrorIcon.style.display = "block";
     return false;
   } else {
@@ -66,13 +66,13 @@ async function comprobarUsuarioRegistro() {
       if (data.exists) {
         // El nombre de usuario está en uso
         errorMessage.textContent = "Nombre de usuario en uso";
-        errorMessage.style.display = "block";
+        errorMessage.style.opacity = "1";
         usernameErrorIcon.style.display = "block";
         return true;
       } else {
         // El nombre de usuario no está en uso
-        errorMessage.textContent = "";
-        errorMessage.style.display = "none";
+        errorMessage.textContent = "&nbsp;";
+        errorMessage.style.opacity = "0";
         usernameErrorIcon.style.display = "none";
         return false;
       }
@@ -81,7 +81,7 @@ async function comprobarUsuarioRegistro() {
       console.error("Error al verificar el usuario:", error);
       errorMessage.textContent =
         "Error al verificar el usuario. Por favor, inténtalo de nuevo más tarde.";
-      errorMessage.style.display = "block";
+      errorMessage.style.opacity = "1";
       return true;
     });
 }
@@ -103,7 +103,7 @@ function comprobarInputEmailRegistro() {
   // If para comprobar si el email está vacío
   if (email.trim() === "") {
     errorMessage.textContent = "Por favor, completa todos los campos.";
-    errorMessage.style.display = "block";
+    errorMessage.style.opacity = "1";
     emailErrorIcon.style.display = "block";
     return false;
   }
@@ -111,7 +111,7 @@ function comprobarInputEmailRegistro() {
   if (!validateEmail(email)) {
     errorMessage.textContent =
       "Por favor, introduce un correo electrónico válido.";
-    errorMessage.style.display = "block";
+    errorMessage.style.opacity = "1";
     emailErrorIcon.style.display = "block";
     return false;
   } else {
@@ -141,13 +141,13 @@ async function comprobarEmailRegistro() {
       if (data.exists) {
         // El correo electrónico está en uso
         errorMessage.textContent = "E-mail en uso";
-        errorMessage.style.display = "block";
+        errorMessage.style.opacity = "1";
         emailErrorIcon.style.display = "block";
         return true;
       } else {
         // El correo electrónico no está en uso
-        errorMessage.textContent = "";
-        errorMessage.style.display = "none";
+        errorMessage.textContent = "&nbsp;";
+        errorMessage.style.opacity = "0";
         emailErrorIcon.style.display = "none";
         return false;
       }
@@ -156,7 +156,7 @@ async function comprobarEmailRegistro() {
       console.error("Error al verificar el correo:", error);
       errorMessage.textContent =
         "Error al verificar el correo. Por favor, inténtalo de nuevo más tarde.";
-      errorMessage.style.display = "block";
+      errorMessage.style.opacity = "1";
       return true;
     });
 }
@@ -184,18 +184,18 @@ function comprobarPasswordRegistro() {
   // If para comporbar si la contraseña esta vacia
   if (password.trim() === "") {
     errorMessage.textContent = "Por favor, completa todos los campos.";
-    errorMessage.style.display = "block";
+    errorMessage.style.opacity = "1";
     passwordErrorIcon.style.display = "block";
     return false;
   } else {
-    passwordErrorIcon.style.display = "none";
+    passwordErrorIcon.style.opacity = "0";
   }
 
   // Validar la contraseña
   if (!isPasswordStrong(password)) {
     errorMessage.textContent =
       "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula y un número.";
-    errorMessage.style.display = "block";
+    errorMessage.style.opacity = "1";
     passwordErrorIcon.style.display = "block";
     return false;
   } else {
@@ -203,7 +203,7 @@ function comprobarPasswordRegistro() {
   }
 
   // Limpiar el mensaje de error si la contraseña es válida
-  errorMessage.style.display = "none";
+  errorMessage.style.opacity = "0";
   return true;
 }
 
