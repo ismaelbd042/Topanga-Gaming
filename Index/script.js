@@ -133,7 +133,3 @@ function validadSesion() {
     })
     .catch((error) => console.error("Error:", error));
 }
-
-function cerrarSesion() {
-  // Hacer archivo php para quitar la sesion.
-}
