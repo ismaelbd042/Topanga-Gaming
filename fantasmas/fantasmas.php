@@ -82,51 +82,127 @@
             height: 40%;
             /* width: 100%; */
         }
+
+        #filtroForm {
+            margin: 50px;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        #filtroForm h1 {
+            font-family: OctoberCrow;
+            margin-top: 30px;
+        }
+
+        .divPruebasFiltro {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* Centrar horizontalmente */
+            font-size: 20px;
+            padding: 0;
+            /* Eliminar el padding para evitar espacios innecesarios */
+        }
+
+        .divPruebasFiltro label {
+            margin: 30px;
+            /* Reducir el margen */
+            display: flex;
+            text-align: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
     </style>
 </head>
 
 <body>
+
+
     <?php
     include "../database/connect.php";
+    include "../header y footer/header.html";
+    include "../header y footer/VentanaModal.html";
 
     // Obtener la conexión a la base de datos
     $conexion = getConexion();
 
-    // Consulta para obtener los datos de los fantasmas y sus pruebas asociadas
-    $sql = "SELECT f.nombre AS nombre_fantasma, f.descripcion AS descripcion_fantasma, 
-        GROUP_CONCAT(p.nombre) AS pruebas
-        FROM fantasmas f 
-        INNER JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
-        INNER JOIN pruebas p ON pf.prueba_id = p.id
-        GROUP BY f.id";
-    $result = mysqli_query($conexion, $sql);
+    // Consulta para obtener todas las pruebas disponibles
+    $sql_pruebas = "SELECT id, nombre FROM pruebas";
+    $result_pruebas = mysqli_query($conexion, $sql_pruebas);
 
-    echo '<div class="granTarjeta">';
-    if (mysqli_num_rows($result) > 0) {
-        // Generar las tarjetas HTML para cada fantasma
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="tarjeta_fantasma_general">';
-            echo '<div class="cuadrado_morado"><img src="../img/Fotos fantasmas/' . strtolower($row["nombre_fantasma"]) . '.svg"></img></div>';
-            echo '<div class="info_fantasma">';
-            echo '<span class="nombre_fantasma">' . $row["nombre_fantasma"] . '</span>';
-            echo '<div class="desc_fantasma">' . nl2br($row["descripcion_fantasma"]) . '</div>';
-            echo '<div class="pruebas_fantasmas">';
+    // Convertir las pruebas a un array PHP para usarlo en JavaScript
+    $pruebas_array = [];
+    while ($row_prueba = mysqli_fetch_assoc($result_pruebas)) {
+        $pruebas_array[] = $row_prueba;
+    }
+    ?>
 
-            // Obtener y mostrar las pruebas asociadas al fantasma
-            $pruebas = explode(",", $row["pruebas"]);
-            foreach ($pruebas as $key => $prueba) {
-                echo '<div class="pruebas prueba' . ($key + 1) . '"><img src="../img/Fotos pruebas/' . $prueba . '.svg" alt="">' . $prueba . '</div>';
+    <form id="filtroForm">
+        <h1>Busca por las pruebas encontradas</h1>
+        <div class="divPruebasFiltro">
+            <?php
+            // Mostrar las opciones en el formulario de búsqueda
+            foreach ($pruebas_array as $prueba) {
+                echo '<label><input type="checkbox" name="pruebas[]" value="' . $prueba["id"] . '"> ' . $prueba["nombre"] . '</label><br>';
+            }
+            ?>
+        </div>
+    </form>
+
+    <div class="granTarjeta" id="resultadoFantasmas">
+        <!-- Aquí se mostrarán los resultados de la búsqueda -->
+    </div>
+
+    <script>
+        // Obtener referencia al formulario
+        const form = document.getElementById('filtroForm');
+
+        // Función para enviar la solicitud AJAX y obtener los resultados
+        function obtenerResultados() {
+            // Obtener las pruebas seleccionadas del formulario
+            const formData = new FormData(form);
+            const pruebasSeleccionadas = [];
+            for (const entry of formData.entries()) {
+                pruebasSeleccionadas.push(entry[1]);
             }
 
-            echo '</div></div></div>';
+            // Convertir las pruebas seleccionadas a JSON
+            const data = {
+                pruebas: pruebasSeleccionadas
+            };
+
+            // Enviar la solicitud AJAX
+            fetch('obtener_resultados.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(result => {
+                    // Mostrar los resultados en el contenedor correspondiente
+                    document.getElementById('resultadoFantasmas').innerHTML = result;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
-    } else {
-        echo "0 resultados";
-    }
-    echo '</div>';
-    // Cerrar la conexión a la base de datos
+
+        // Escuchar cambios en el formulario y obtener los resultados automáticamente
+        form.addEventListener('change', obtenerResultados);
+
+        // Obtener resultados inicialmente al cargar la página
+        obtenerResultados();
+    </script>
+
+    <?php
     mysqli_close($conexion);
     ?>
+
 </body>
 
 </html>
