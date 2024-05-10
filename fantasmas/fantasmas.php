@@ -177,12 +177,12 @@
 
             // Enviar la solicitud AJAX
             fetch('obtener_resultados.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
                 .then(response => response.text())
                 .then(result => {
                     // Mostrar los resultados en el contenedor correspondiente

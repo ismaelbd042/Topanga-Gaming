@@ -36,10 +36,10 @@ $result = mysqli_query($conexion, $sql);
 if (mysqli_num_rows($result) > 0) {
     // Generar las tarjetas HTML para cada fantasma
     while ($row = mysqli_fetch_assoc($result)) {
-        echo '<div class="tarjeta_fantasma_general" id="' . $row["nombre_fantasma"] . '">';
+        echo '<div class="tarjeta_fantasma_general" id="' . quitarTildes($row["nombre_fantasma"]) . '">';
         echo '<div class="cuadrado_morado"><img src="../img/Fotos fantasmas/' . strtolower($row["nombre_fantasma"]) . '.svg"></div>';
         echo '<div class="info_fantasma">';
-        echo '<span class="nombre_fantasma">' . $row["nombre_fantasma"] . '</span>';
+        echo '<span class="nombre_fantasma">' . quitarTildes($row["nombre_fantasma"]) . '</span>';
         echo '<div class="desc_fantasma">' . nl2br($row["descripcion_fantasma"]) . '</div>';
         echo '<div class="pruebas_fantasmas">';
 
@@ -55,6 +55,17 @@ if (mysqli_num_rows($result) > 0) {
     echo "0 resultados";
 }
 
+function quitarTildes($cadena)
+{
+    // Arrays con las letras acentuadas y sus equivalentes sin acento
+    $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú');
+    $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+
+    // Reemplazar las letras acentuadas con las sin acento
+    $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+
+    return $cadena;
+}
+
 // Cerrar la conexión a la base de datos
 mysqli_close($conexion);
-?>
