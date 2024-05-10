@@ -165,7 +165,7 @@
             // Si no existe, crear un nuevo contenedor
             echo '<div class="container_general_equipamiento">';
             echo '<div class="container_carrousel">';
-            echo '<span id="nombre_equipamiento">' . $nombre . '</span>';
+            echo '<span id="nombre_equipamiento">' . quitarTildes($nombre) . '</span>';
             echo '<div class="container_carrousel_equipamiento">';
             $equipamiento_nombres[] = $nombre; // Agregar el nombre al array
         }
@@ -194,6 +194,17 @@
         }
     }
 
+    function quitarTildes($cadena)
+    {
+        // Arrays con las letras acentuadas y sus equivalentes sin acento
+        $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú');
+        $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+
+        // Reemplazar las letras acentuadas con las sin acento
+        $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+
+        return $cadena;
+    }
     // Liberar resultado y cerrar conexión
     mysqli_free_result($resultado);
     mysqli_close($conexion);
