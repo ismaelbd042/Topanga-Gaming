@@ -140,7 +140,6 @@
     <?php
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
-
     include "../database/connect.php";
 
     // Obtener la conexión a la base de datos
@@ -210,7 +209,7 @@
     mysqli_close($conexion);
     ?>
 
-
+    <script src="../Index/script.js"></script>
     <script>
         // Seleccionar todos los contenedores generales de equipamiento
         const containers = document.querySelectorAll('.container_carrousel');
