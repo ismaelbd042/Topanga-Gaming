@@ -17,7 +17,15 @@
     include "../database/connect.php";
     ?>
     <div class="containerIndex">
-        <!-- Aquí iría todo el código del index -->
+        <div class="containerIndex">
+            <div class="Index1">
+                <span id="Titulo_phasmo">phasmophobia</span>
+                <span id="desc_index">Eleva tu juego a otro nivel</span>
+            </div>
+            <div class="Index2">
+
+            </div>
+        </div>
     </div>
     <!-- <span onclick="playSound('https://zero-network.net/phasmophobia/static/assets/banshee_scream.mp3')">Icono de sonido</span> -->
     <!-- codigo que hace que suene un sonido -->
