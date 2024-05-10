@@ -164,7 +164,7 @@
         if (!in_array($nombre, $equipamiento_nombres)) {
             // Si no existe, crear un nuevo contenedor
             echo '<div class="container_general_equipamiento">';
-            echo '<div class="container_carrousel">';
+            echo '<div class="container_carrousel" id=' . str_replace(' ', '', $nombre) . '>';
             echo '<span id="nombre_equipamiento">' . quitarTildes($nombre) . '</span>';
             echo '<div class="container_carrousel_equipamiento">';
             $equipamiento_nombres[] = $nombre; // Agregar el nombre al array
