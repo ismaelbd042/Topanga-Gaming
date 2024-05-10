@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   mostrarVentanaModal();
   validarFormulariosAcceso();
+  validadSesion();
 });
 
 function mostrarVentanaModal() {
@@ -108,4 +109,27 @@ function validarFormulariosAcceso() {
     let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   }
+}
+
+function validadSesion() {
+  fetch("../php_acceso/verificar_sesion.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.sesion_activa) {
+        // Si hay una sesión activa, ocultar botones de inicio de sesión y mostrar el otro menú
+        document.getElementById("indexNoIniciadaSesion").style.display = "none";
+        document.getElementById("indexSiIniciadaSesion").style.display =
+          "block";
+
+        // Cambiar el texto para mostrar el nombre de usuario
+        document.getElementById("nombreSesionIniciada").textContent =
+          data.nombre_usuario;
+      } else {
+        // Si no hay sesión activa, mostrar botones de inicio de sesión y ocultar el otro menú
+        document.getElementById("indexNoIniciadaSesion").style.display =
+          "block";
+        document.getElementById("indexSiIniciadaSesion").style.display = "none";
+      }
+    })
+    .catch((error) => console.error("Error:", error));
 }

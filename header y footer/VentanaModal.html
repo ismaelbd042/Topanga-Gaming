@@ -5,7 +5,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
 
-    /* * {
+    * {
         box-sizing: border-box;
         padding: 0px;
         margin: 0px;
@@ -14,7 +14,7 @@
     body {
         background: #212121;
         padding: 0px 0;
-    } */
+    }
 
     .mainVentanaModal {
         font-family: "Jost", sans-serif;
@@ -119,7 +119,8 @@
     #ojoVerContraseña,
     #ojoVerContraseña2 {
         position: absolute;
-        top: 10%;
+        color: black;
+        top: 2px;
         left: 74%;
     }
 </style>
@@ -132,15 +133,14 @@
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Sign up</label>
             <div class="input-container">
                 <input type="text" name="usuario" class="inputVentanaModal" id="usernameRegistro"
-                    placeholder="User name" autocomplete="off"
-                    onblur=" comprobarInputUsuarioRegistro(); comprobarUsuarioRegistro()">
+                    placeholder="User name" autocomplete="off" onblur="comprobarUsuarioRegistro()">
                 <span class="error-icon username-error" style="display: none;"><i
                         class="fas fa-times-circle"></i></span>
             </div>
 
             <div class="input-container">
                 <input type="email" name="email" class="inputVentanaModal" id="emailRegistro" placeholder="Email"
-                    autocomplete="off" onblur="comprobarInputEmailRegistro(); comprobarEmailRegistro()">
+                    autocomplete="off" onblur="comprobarEmailRegistro()">
                 <span class="error-icon email-error" style="display: none;"><i class="fas fa-times-circle"></i></span>
             </div>
 
@@ -152,7 +152,7 @@
                         class="fas fa-times-circle"></i></span>
             </div>
 
-            <span class="error-message-registro" id="mensaje-error-registro"></span>
+            <span class="error-message-registro" id="mensaje-error-registro" style="display: block;">&nbsp;</span>
             <button class="buttonVentanaModal" onclick="validarFormularioRegistro()">Sign up</button>
         </form>
     </div>
