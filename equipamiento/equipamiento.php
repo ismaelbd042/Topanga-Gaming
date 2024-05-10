@@ -26,7 +26,7 @@
     }
 
     .container_carrousel {
-        width: 1000px;
+        width: 80vw;
         overflow: hidden;
         position: relative;
     }
@@ -43,7 +43,7 @@
     .container_equipamiento {
         display: flex;
         flex-direction: row;
-        width: 1000px;
+        width: 100%;
         height: 70vh;
         align-items: center;
         background-color: #ffffff;
@@ -75,14 +75,14 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        gap: 30px;
+        gap: 20px;
         align-items: center;
     }
 
     .container_equipamiento .div_nivel_equipamiento {
         justify-content: center;
         gap: 120px;
-        padding: 50px 0 0 0;
+        padding: 30px 0 0 0;
         width: 100%;
         flex: 0 0 auto;
         display: flex;
@@ -140,95 +140,95 @@
     <?php
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
+
     include "../database/connect.php";
 
     // Obtener la conexión a la base de datos
     $conexion = getConexion();
+
+    // Consulta para obtener los datos de la base de datos
+    $query = "SELECT nombre, tier, descripcion FROM equipamiento";
+    $resultado = mysqli_query($conexion, $query);
+
+    // Array para almacenar los nombres únicos de equipamiento
+    $equipamiento_nombres = array();
+
+    // Recorrer los resultados y generar la estructura HTML
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        // Obtener los datos de la fila
+        $nombre = $fila['nombre'];
+        $tier = $fila['tier'];
+        $descripcion = $fila['descripcion'];
+
+        // Verificar si ya se ha creado un contenedor para este equipamiento
+        if (!in_array($nombre, $equipamiento_nombres)) {
+            // Si no existe, crear un nuevo contenedor
+            echo '<div class="container_general_equipamiento">';
+            echo '<div class="container_carrousel">';
+            echo '<span id="nombre_equipamiento">' . $nombre . '</span>';
+            echo '<div class="container_carrousel_equipamiento">';
+            $equipamiento_nombres[] = $nombre; // Agregar el nombre al array
+        }
+
+        // Crear un nuevo contenedor de equipamiento para este tier
+        echo '<div class="container_equipamiento equipamiento' . $tier . '_carrosuel">';
+        echo '<div class="div_img_equipamiento"><img class="img_equipamiento" src="../img/Fotos equipamiento/' . strtolower(str_replace(' ', '', $nombre)) . $tier . '.svg" /></div>';
+        echo '<div class="div_info_equipamiento">';
+        echo '<div class="div_nivel_equipamiento">';
+        // Agregar imágenes de nivel según el tier
+        for ($i = 0; $i < $tier; $i++) {
+            echo '<img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" />';
+        }
+        echo '</div>';
+        echo '<p class="info_equipamiento">' . $descripcion . '</p>';
+        echo '</div>';
+        echo '</div>';
+
+        // Cerrar contenedor de equipamiento si ya se han generado todos los tiers
+        if ($tier == 3) {
+            echo '</div>'; // Cerrar container_carrousel_equipamiento
+            echo '<i class="fa-solid fa-angle-right arrow arrow-right" onclick="moveRight()"></i>';
+            echo '<i class="fa-solid fa-angle-left arrow arrow-left" onclick="moveLeft()"></i>';
+            echo '</div>'; // Cerrar container_carrousel
+            echo '</div>'; // Cerrar container_general_equipamiento
+        }
+    }
+
+    // Liberar resultado y cerrar conexión
+    mysqli_free_result($resultado);
+    mysqli_close($conexion);
     ?>
-    <div class="container_general_equipamiento">
-        <div class="container_carrousel">
-            <span id="nombre_equipamiento">Medidor EMF</span>
-            <div class="container_carrousel_equipamiento">
-                <div class="container_equipamiento equipamiento1_carrosuel">
-                    <div class="div_img_equipamiento"><img class="img_equipamiento" src="../img/Fotos equipamiento/emf1 1.svg" /></div>
-                    <div class="div_info_equipamiento">
-                        <div class="div_nivel_equipamiento"><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /></div>
-                        <p class="info_equipamiento">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo obcaecati itaque quos rem officia
-                            labore
-                            autem laborum consectetur quasi aliquam magni vero fugiat, sed maxime voluptates cum, modi a
-                            accusamus.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic obcaecati illo quis eum
-                            deleniti
-                            atque
-                            quam! Commodi officia sapiente delectus, eveniet, debitis voluptatem labore ut ipsam in
-                            reiciendis
-                            aspernatur.
-                        </p>
-                    </div>
-                </div>
-                <div class="container_equipamiento equipamiento2_carrosuel">
-                    <div class="div_img_equipamiento"><img class="img_equipamiento" src="../img/Fotos equipamiento/emf2 1.svg" /></div>
-                    <div class="div_info_equipamiento">
-                        <div class="div_nivel_equipamiento"><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /></div>
-                        <p class="info_equipamiento">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo obcaecati itaque quos rem officia
-                            labore
-                            autem laborum consectetur quasi aliquam magni vero fugiat, sed maxime voluptates cum, modi a
-                            accusamus.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic obcaecati illo quis eum
-                            deleniti
-                            atque
-                            quam! Commodi officia sapiente delectus, eveniet, debitis voluptatem labore ut ipsam in
-                            reiciendis
-                            aspernatur.
-                        </p>
-                    </div>
-                </div>
-                <div class="container_equipamiento equipamiento3_carrosuel">
-                    <div class="div_img_equipamiento"><img class="img_equipamiento" src="../img/Fotos equipamiento/emf3 1.svg" />
-                    </div>
-                    <div class="div_info_equipamiento">
-                        <div class="div_nivel_equipamiento"><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /><img class="nivel_equipamiento" src="../img/Fotos equipamiento/NivelEquipamiento.svg" /></div>
-                        <p class="info_equipamiento">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo obcaecati itaque quos rem officia
-                            labore
-                            autem laborum consectetur quasi aliquam magni vero fugiat, sed maxime voluptates cum, modi a
-                            accusamus.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic obcaecati illo quis eum
-                            deleniti
-                            atque
-                            quam! Commodi officia sapiente delectus, eveniet, debitis voluptatem labore ut ipsam in
-                            reiciendis
-                            aspernatur.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <i class="fa-solid fa-angle-right arrow arrow-right" onclick="moveRight()"></i>
-            <i class="fa-solid fa-angle-left arrow arrow-left" onclick="moveLeft()"></i>
-        </div>
-    </div>
+
 
     <script>
-        const container = document.querySelector('.container_carrousel_equipamiento');
-        const slides = document.querySelectorAll('.container_equipamiento');
-        let index = 0;
+        // Seleccionar todos los contenedores generales de equipamiento
+        const containers = document.querySelectorAll('.container_carrousel');
 
-        function moveLeft() {
-            index = (index === 0) ? slides.length - 1 : index - 1;
-            updateSlidePosition();
-        }
+        containers.forEach(container => {
+            // Para cada contenedor, seleccionar elementos específicos dentro de él
+            const carrousel = container.querySelector('.container_carrousel_equipamiento');
+            const slides = container.querySelectorAll('.container_equipamiento');
+            let index = 0;
 
-        function moveRight() {
-            index = (index === slides.length - 1) ? 0 : index + 1;
-            updateSlidePosition();
-        }
+            // Agregar eventos de clic a las flechas de navegación dentro de este contenedor
+            container.querySelector('.arrow-left').addEventListener('click', moveLeft);
+            container.querySelector('.arrow-right').addEventListener('click', moveRight);
 
-        function updateSlidePosition() {
-            const newPosition = -index * slides[0].offsetWidth;
-            container.style.transform = `translateX(${newPosition}px)`;
-        }
+            function moveLeft() {
+                index = (index === 0) ? slides.length - 1 : index - 1;
+                updateSlidePosition();
+            }
+
+            function moveRight() {
+                index = (index === slides.length - 1) ? 0 : index + 1;
+                updateSlidePosition();
+            }
+
+            function updateSlidePosition() {
+                const newPosition = -index * slides[0].offsetWidth;
+                carrousel.style.transform = `translateX(${newPosition}px)`;
+            }
+        });
     </script>
 </body>
 
