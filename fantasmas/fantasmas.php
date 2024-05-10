@@ -123,8 +123,6 @@
 <body>
     <div class="overlay"></div>
     <?php
-    include "../header y footer/header.html";
-    include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
