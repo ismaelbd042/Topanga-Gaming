@@ -14,7 +14,7 @@ function registro(formRegistro) {
     })
     .then((data) => {
       if (data.success) {
-        window.location.href = "..Indexindex.php"; // Redirecciona si el inicio de sesión fue exitoso
+        window.location.href = "../Index/index.php"; // Redirecciona si el inicio de sesión fue exitoso
       } else {
         // Muestra el mensaje de error en el formulario
         const errorMessage = document.getElementById("mensaje-error-registro");

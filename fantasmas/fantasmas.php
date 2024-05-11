@@ -41,6 +41,9 @@
 
         .cuadrado_morado img {
             height: 100%;
+            /* width: 100%; */
+            /* border: 2px solid; */
+            /* margin-left: -150px; */
         }
 
         .info_fantasma {

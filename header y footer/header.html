@@ -1,7 +1,11 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 <style>
   @import url("https://fonts.googleapis.com/css?family=Titillium+Web:400,600");
@@ -48,8 +52,10 @@
     padding: 0 1.5em;
     width: auto;
     color: #fff;
-    background: var(--Gradiente-Marca,
-        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+    background: var(
+      --Gradiente-Marca,
+      radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%)
+    );
     border: 0;
     font-size: 16px;
     border-radius: 5px;
@@ -188,7 +194,7 @@
     display: none;
     position: absolute;
     flex-direction: column;
-    top: 56px;
+    top: 55px;
     background-color: #000;
     border-top: solid 5px #5f1495;
     opacity: 0;
@@ -225,7 +231,7 @@
     width: auto;
   }
 
-  .subsubmenu>li>a {
+  .subsubmenu > li > a {
     width: 100%;
   }
 
@@ -282,9 +288,133 @@
     top: 130px;
   }
 
+  .menuHorizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    height: 50px;
+    padding: 0 1.5em;
+    width: auto;
+    color: #fff;
+    background: var(
+      --Gradiente-Marca,
+      radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%)
+    );
+    border: 0;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  .menuHorizontal ul {
+    height: 100%;
+  }
+
+  .menuHorizontal li a {
+    color: white;
+  }
+
+  .menuHorizontal:hover {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    /* color: #920047; */
+    text-align: center;
+    transition: 0.15s;
+    position: relative;
+  }
+
+  /* 
+.menuHorizontal:hover #nombreSesionIniciada {
+  color: #920047;
+} */
+
+  .menuVertical {
+    margin-top: 13px;
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 150px;
+    margin-left: -70px;
+    z-index: 90;
+    /* border-top: solid 5px #5f1495; */
+  }
+
+  .menuHorizontal:hover .menuVertical {
+    display: block;
+  }
+
+  .menuVertical li {
+    border-bottom: solid 1px rgba(255, 255, 255, 0.29);
+  }
+
+  .menuVertical li a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    transition: 0.15s ease-in-out;
+    position: relative;
+  }
+
+  .menuVertical li a {
+    display: block;
+    color: white;
+    padding: 15px 15px 15px 20px;
+    text-decoration: none;
+  }
+
+  .menuVertical a {
+    padding: 0.5em 0.8em;
+    color: rgba(255, 255, 255, 0.829);
+    position: relative;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: black;
+  }
+
+  .menuVertical a::before,
+  .menuVertical a::after {
+    content: "";
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    transition: all 0.35s ease;
+    opacity: 0;
+  }
+
+  .menuVertical a::before {
+    content: "";
+    right: 0;
+    top: 0;
+    border-top: 3px solid #e2e275;
+    border-right: 3px solid #a0a054;
+    transform: translate(-100%, 50%);
+  }
+
+  .menuVertical a:after {
+    content: "";
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid #e2e275;
+    border-left: 3px solid #a0a054;
+    transform: translate(100%, -50%);
+  }
+
+  .menuVertical a:hover:before,
+  .menuVertical a:hover:after {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  .menuVertical a:hover {
+    color: #e2e275;
+  }
+
   /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
   @media (max-width: 2000px) {
-
     /* Aqui hacer que los botones de iniciar sesion y registrarse sean solo uno */
     .iniciarSesion {
       display: none;
@@ -327,7 +457,7 @@
       color: white;
     }
 
-    #check:checked~.menu {
+    #check:checked ~ .menu {
       right: 0;
     }
 
@@ -338,18 +468,44 @@
     #divFoto {
       display: none;
     }
+
+    #li_pruebas:hover .menu_pruebas {
+      display: none;
+    }
+
+    #li_objetos:hover .menu_objetos_malditos {
+      display: none;
+    }
+
+    #li_fantasmas:hover .menu_fantasmas {
+      display: none;
+    }
+
+    #li_equipamiento:hover .menu_equipamiento {
+      display: none;
+    }
+
+    .submenu {
+      right: 25%;
+      top: 164px;
+    }
+
   }
 </style>
 <header>
   <ul class="nav">
     <li id="boton-logo">
-      <a href="../index/index.php"><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav" /></a>
+      <a href="../index/index.php"
+        ><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav"
+      /></a>
     </li>
     <input type="checkbox" id="check" />
     <span class="menu">
-      <li id="baseDeDatos"><a href="../Base de datos/basededatos.html">Base de datos</a>
+      <li id="baseDeDatos">
+        <a href="../Base de datos/basededatos.html">Base de datos</a>
         <ul class="submenu">
-          <li id="li_pruebas"><a href="../pruebas/pruebas.php">Pruebas</a>
+          <li id="li_pruebas">
+            <a href="../pruebas/pruebas.php">Pruebas</a>
             <ul class="subsubmenu menu_pruebas">
               <li><a href="#">EMF</a></li>
               <li><a href="#">Ultravioleta</a></li>
@@ -360,7 +516,10 @@
               <li><a href="#">Spirit Box</a></li>
             </ul>
           </li>
-          <li id="li_objetos"><a href="../objetos malditos/objetos malditos.php">Objetos malditos</a>
+          <li id="li_objetos">
+            <a href="../objetos malditos/objetos malditos.php"
+              >Objetos malditos</a
+            >
             <ul class="subsubmenu menu_objetos_malditos">
               <li><a href="#">Pata de mono</a></li>
               <li><a href="#">Caja de música</a></li>
@@ -371,16 +530,27 @@
               <li><a href="#">Tablero de ouija</a></li>
             </ul>
           </li>
-          <li id="li_fantasmas"><a href="../fantasmas/fantasmas.php">Fantasmas</a>
+          <li id="li_fantasmas">
+            <a href="../fantasmas/fantasmas.php">Fantasmas</a>
             <ul class="subsubmenu menu_fantasmas">
-              <li><a href="../fantasmas/fantasmas.php#Espiritu">Espíritu</a></li>
-              <li><a href="../fantasmas/fantasmas.php#Espectro">Espectro</a></li>
+              <li>
+                <a href="../fantasmas/fantasmas.php#Espiritu">Espíritu</a>
+              </li>
+              <li>
+                <a href="../fantasmas/fantasmas.php#Espectro">Espectro</a>
+              </li>
               <li><a href="../fantasmas/fantasmas.php#Ente">Ente</a></li>
-              <li><a href="../fantasmas/fantasmas.php#Poltergeist">Poltergeist</a></li>
+              <li>
+                <a href="../fantasmas/fantasmas.php#Poltergeist">Poltergeist</a>
+              </li>
               <li><a href="../fantasmas/fantasmas.php#Banshee">Banshee</a></li>
               <li><a href="../fantasmas/fantasmas.php#Jinn">Jinn</a></li>
-              <li><a href="../fantasmas/fantasmas.php#Pesadilla">Pesadilla</a></li>
-              <li><a href="../fantasmas/fantasmas.php#Revenant">Revenant</a></li>
+              <li>
+                <a href="../fantasmas/fantasmas.php#Pesadilla">Pesadilla</a>
+              </li>
+              <li>
+                <a href="../fantasmas/fantasmas.php#Revenant">Revenant</a>
+              </li>
               <li><a href="../fantasmas/fantasmas.php#Sombra">Sombra</a></li>
               <li><a href="../fantasmas/fantasmas.php#Demonio">Demonio</a></li>
               <li><a href="../fantasmas/fantasmas.php#Yurei">Yurei</a></li>
@@ -399,29 +569,100 @@
               <li><a href="../fantasmas/fantasmas.php#Thaye">Thaye</a></li>
             </ul>
           </li>
-          <li id="li_equipamiento"><a href="../equipamiento/equipamiento.php">Equipamiento</a>
+          <li id="li_equipamiento">
+            <a href="../equipamiento/equipamiento.php">Equipamiento</a>
             <ul class="subsubmenu menu_equipamiento">
-              <li><a href="../equipamiento/equipamiento.php#ProyectorD.O.T.S.">Proyector D.O.T.S.</a></li>
-              <li><a href="../equipamiento/equipamiento.php#MedidorEMF">Medidor EMF</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Linterna">Linterna</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Librodeescriturafantasma">Libro de escritura fantasma</a>
+              <li>
+                <a href="../equipamiento/equipamiento.php#ProyectorD.O.T.S."
+                  >Proyector D.O.T.S.</a
+                >
               </li>
-              <li><a href="../equipamiento/equipamiento.php#SpiritBox">Spirit Box</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Termómetro">Termómetro</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Linternaultravioleta">Linterna ultravioleta</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Cámaradevídeo">Cámara de vídeo</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Crucifijo">Crucifijo</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Lumbre">Lumbre</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Equipamientoparalacabeza">Equipamiento de cabeza</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Encendedor">Encendedor</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Incienso">Incienso</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Sensordemovimiento">Sensor de movimiento</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Micrófonoparabólico">Micrófono parabólico</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Cámaradefotos">Cámara de fotos</a></li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#MedidorEMF"
+                  >Medidor EMF</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Linterna">Linterna</a>
+              </li>
+              <li>
+                <a
+                  href="../equipamiento/equipamiento.php#Librodeescriturafantasma"
+                  >Libro de escritura fantasma</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#SpiritBox"
+                  >Spirit Box</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Termómetro"
+                  >Termómetro</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Linternaultravioleta"
+                  >Linterna ultravioleta</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Cámaradevídeo"
+                  >Cámara de vídeo</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Crucifijo"
+                  >Crucifijo</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Lumbre">Lumbre</a>
+              </li>
+              <li>
+                <a
+                  href="../equipamiento/equipamiento.php#Equipamientoparalacabeza"
+                  >Equipamiento de cabeza</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Encendedor"
+                  >Encendedor</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Incienso">Incienso</a>
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Sensordemovimiento"
+                  >Sensor de movimiento</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Micrófonoparabólico"
+                  >Micrófono parabólico</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Cámaradefotos"
+                  >Cámara de fotos</a
+                >
+              </li>
               <li><a href="../equipamiento/equipamiento.php#Sal">Sal</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Medicaciónparalacordura">Medicación para la cordura</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Sensordesonido">Sensor de sonido</a></li>
-              <li><a href="../equipamiento/equipamiento.php#Trípode">Trípode</a></li>
+              <li>
+                <a
+                  href="../equipamiento/equipamiento.php#Medicaciónparalacordura"
+                  >Medicación para la cordura</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Sensordesonido"
+                  >Sensor de sonido</a
+                >
+              </li>
+              <li>
+                <a href="../equipamiento/equipamiento.php#Trípode">Trípode</a>
+              </li>
             </ul>
           </li>
         </ul>
