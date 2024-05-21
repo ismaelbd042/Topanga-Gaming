@@ -108,6 +108,29 @@ function crearTablas($conexion)
         contrasena TEXT
     )";
     mysqli_query($conexion, $sqlUsuarios);
+
+    // Crear tabla de amigos
+    $sqlAmigos = "CREATE TABLE IF NOT EXISTS amigos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT,
+        amigo_id INT,
+        aceptada TEXT,
+        FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+        FOREIGN KEY (amigo_id) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlAmigos);
+
+    // Crear tabla de mensajes
+    $sqlMensajes = "CREATE TABLE IF NOT EXISTS mensajes (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        emisor_id INT,
+        receptor_id INT,
+        mensaje TEXT,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (emisor_id) REFERENCES usuarios(id),
+        FOREIGN KEY (receptor_id) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlMensajes);
 }
 
 function insertarDatos($conexion)
