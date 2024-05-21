@@ -15,77 +15,79 @@
 
         .granTarjeta {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .tarjeta_fantasma_general {
-            width: 90%;
-            height: 500px;
+            width: 500px;
+            height: 700px;
             background: #000;
             border-radius: 30px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
             margin: 2%;
             overflow: hidden;
         }
 
         .cuadrado_morado {
-            width: 50%;
-            height: 100%;
-            clip-path: polygon(60% 0, 100% 50%, 60% 100%, 0 100%, 0 0);
+            width: 100%;
+            height: 55%;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%,
+                    95% 88%, 88% 92%, 80% 95%, 72% 97%, 64% 99%, 55% 100%,
+                    45% 100%, 36% 99%, 28% 97%, 20% 95%, 12% 92%, 5% 88%,
+                    0% 85%);
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
             border-top-left-radius: 30px;
             border-bottom-left-radius: 30px;
+            display: flex;
+            justify-content: center;
         }
 
         .cuadrado_morado img {
             height: 100%;
-            /* width: 100%; */
-            /* border: 2px solid; */
-            /* margin-left: -150px; */
         }
 
         .info_fantasma {
-            height: 100%;
-            width: 40%;
+            height: 45%;
+            width: 80%;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            padding: 0 20px 0 10px;
+            justify-content: start;
+            align-items: center;
+            text-align: center;
             color: white;
+            gap: 10px;
         }
 
         .info_fantasma .nombre_fantasma {
             font-family: OctoberCrow;
-            font-size: 56px;
-            position: relative;
-            left: -70px;
+            font-size: 40px;
         }
 
         .info_fantasma .desc_fantasma {
-            font-size: 18px;
+            font-size: 15px;
+            text-align: left;
         }
 
         .pruebas_fantasmas {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
         .pruebas {
             display: flex;
+            width: 33%;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
             gap: 5px;
-            /* width: 100%; */
-            /* border: solid 1px; */
         }
 
         .pruebas img {
             height: 40%;
-            /* width: 100%; */
         }
 
         #filtroForm {
@@ -126,84 +128,85 @@
 <body>
     <div class="overlay"></div>
     <?php
-    include "../database/connect.php";
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
+    include "../database/connect.php";
 
     // Obtener la conexión a la base de datos
     $conexion = getConexion();
 
-    // Consulta para obtener todas las pruebas disponibles
-    $sql_pruebas = "SELECT id, nombre FROM pruebas";
-    $result_pruebas = mysqli_query($conexion, $sql_pruebas);
+    // Consulta para obtener los datos de la base de datos
+    $query = "SELECT f.id AS fantasma_id, f.nombre AS nombre_fantasma, f.descripcion AS descripcion_fantasma, 
+            p.id AS prueba_id, p.nombre AS nombre_prueba
+            FROM fantasmas f
+            INNER JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+            INNER JOIN pruebas p ON pf.prueba_id = p.id
+            ORDER BY f.id, p.id";
+    $resultado = mysqli_query($conexion, $query);
 
-    // Convertir las pruebas a un array PHP para usarlo en JavaScript
-    $pruebas_array = [];
-    while ($row_prueba = mysqli_fetch_assoc($result_pruebas)) {
-        $pruebas_array[] = $row_prueba;
-    }
-    ?>
+    // Array para almacenar los datos de los fantasmas y sus pruebas
+    $fantasmas = array();
+    echo '<div class="granTarjeta">';
+    // Recorrer los resultados y agrupar los datos por fantasma
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $fantasma_id = $fila['fantasma_id'];
+        $nombre_fantasma = $fila['nombre_fantasma'];
+        $descripcion_fantasma = $fila['descripcion_fantasma'];
+        $prueba_id = $fila['prueba_id'];
+        $nombre_prueba = $fila['nombre_prueba'];
 
-    <form id="filtroForm">
-        <h1>Busca por las pruebas encontradas</h1>
-        <div class="divPruebasFiltro">
-            <?php
-            // Mostrar las opciones en el formulario de búsqueda
-            foreach ($pruebas_array as $prueba) {
-                echo '<label><input type="checkbox" name="pruebas[]" value="' . $prueba["id"] . '"> ' . $prueba["nombre"] . '</label><br>';
-            }
-            ?>
-        </div>
-    </form>
-
-    <div class="granTarjeta" id="resultadoFantasmas">
-        <!-- Aquí se mostrarán los resultados de la búsqueda -->
-    </div>
-
-    <script>
-        // Obtener referencia al formulario
-        const form = document.getElementById('filtroForm');
-
-        // Función para enviar la solicitud AJAX y obtener los resultados
-        function obtenerResultados() {
-            // Obtener las pruebas seleccionadas del formulario
-            const formData = new FormData(form);
-            const pruebasSeleccionadas = [];
-            for (const entry of formData.entries()) {
-                pruebasSeleccionadas.push(entry[1]);
-            }
-
-            // Convertir las pruebas seleccionadas a JSON
-            const data = {
-                pruebas: pruebasSeleccionadas
-            };
-
-            // Enviar la solicitud AJAX
-            fetch('obtener_resultados.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.text())
-                .then(result => {
-                    // Mostrar los resultados en el contenedor correspondiente
-                    document.getElementById('resultadoFantasmas').innerHTML = result;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+        // Si el fantasma no existe en el array, agregarlo
+        if (!isset($fantasmas[$fantasma_id])) {
+            $fantasmas[$fantasma_id] = array(
+                'nombre' => $nombre_fantasma,
+                'descripcion' => $descripcion_fantasma,
+                'pruebas' => array()
+            );
         }
 
-        // Escuchar cambios en el formulario y obtener los resultados automáticamente
-        form.addEventListener('change', obtenerResultados);
+        // Agregar la prueba al fantasma
+        $fantasmas[$fantasma_id]['pruebas'][] = $nombre_prueba;
+    }
 
-        // Obtener resultados inicialmente al cargar la página
-        obtenerResultados();
-    </script>
+    // Generar el HTML para cada fantasma
+    foreach ($fantasmas as $fantasma) {
+        echo '<div class="tarjeta_fantasma_general" id="' . quitarTildes($fantasma['nombre']) . '">';
+        echo '    <div class="cuadrado_morado"><img src="../img/Fotos fantasmas/' . strtolower($fantasma['nombre']) . '.svg"></div>';
+        echo '    <div class="info_fantasma">';
+        echo '        <span class="nombre_fantasma">' . quitarTildes(htmlspecialchars($fantasma['nombre'])) . '</span>';
+        echo '        <div class="desc_fantasma">' . htmlspecialchars($fantasma['descripcion']) . '</div>';
+        echo '        <div class="pruebas_fantasmas">';
 
-    <?php
+        // Generar el HTML para cada prueba del fantasma
+        $prueba_index = 1;
+        foreach ($fantasma['pruebas'] as $prueba) {
+            echo '<div class="pruebas prueba' . $prueba_index . '">';
+            echo '                <img src="../img/Fotos pruebas/' . $prueba . '.svg" alt="">';
+            echo '                ' . htmlspecialchars($prueba);
+            echo '            </div>';
+            $prueba_index++;
+        }
+
+        echo '        </div>';
+        echo '    </div>';
+        echo '</div>';
+    }
+    echo '</div>';
+
+    function quitarTildes($cadena)
+    {
+        // Arrays con las letras acentuadas y sus equivalentes sin acento
+        $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú');
+        $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+
+        // Reemplazar las letras acentuadas con las sin acento
+        $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+
+        return $cadena;
+    }
+
+    // Liberar resultado y cerrar conexión
+    mysqli_free_result($resultado);
     mysqli_close($conexion);
     ?>
 

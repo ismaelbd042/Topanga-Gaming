@@ -12,18 +12,23 @@
         }
 
         .tarjeta_fantasma_general {
-            width: 1000px;
-            height: 500px;
+            width: 500px;
+            height: 600px;
             background: #000;
             border-radius: 30px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
         }
 
         .cuadrado_morado {
-            width: 60%;
-            height: 100%;
-            clip-path: polygon(60% 0, 100% 50%, 60% 100%, 0 100%, 0 0);
+            width: 100%;
+            height: 60%;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%,
+                    95% 88%, 88% 92%, 80% 95%, 72% 97%, 64% 99%, 55% 100%,
+                    45% 100%, 36% 99%, 28% 97%, 20% 95%, 12% 92%, 5% 88%,
+                    0% 85%);
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
             border: 1px solid;
         }
@@ -33,31 +38,33 @@
         }
 
         .info_fantasma {
-            height: 100%;
-            width: 40%;
+            height: 40%;
+            width: 80%;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            padding: 0 20px 0 10px;
+            justify-content: start;
+            align-items: center;
+            text-align: center;
             color: white;
+            gap: 10px;
         }
 
         .info_fantasma .nombre_fantasma {
             font-family: OctoberCrow;
-            font-size: 56px;
-            position: relative;
-            left: -70px;
+            font-size: 40px;
+
         }
 
         .info_fantasma .desc_fantasma {
-            font-size: 18px;
+            font-size: 15px;
+            text-align: left;
         }
 
         .pruebas_fantasmas {
+            width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            position: relative;
             left: -70px;
         }
 
@@ -76,7 +83,7 @@
 <body>
 
     <div class="tarjeta_fantasma_general">
-        <div class="cuadrado_morado"><img src="img/Fotos fantasmas/fantasma.svg"></img></div>
+        <div class="cuadrado_morado"><img src="img/Fotos fantasmas/fantasma.svg"></div>
         <div class="info_fantasma">
             <span class="nombre_fantasma">Poltergeist</span>
             <div class="desc_fantasma">
