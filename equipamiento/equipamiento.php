@@ -23,12 +23,14 @@
         align-items: center;
         text-align: center;
         padding-top: 2em;
+        overflow: hidden;
     }
 
     .container_carrousel {
         width: 80vw;
         overflow: hidden;
         position: relative;
+        overflow: hidden;
     }
 
     .container_carrousel_equipamiento {
@@ -38,6 +40,7 @@
         overflow: hidden;
         transition: transform 0.5s ease;
         margin-top: 1em;
+        overflow: hidden;
     }
 
     .container_equipamiento {
@@ -50,6 +53,7 @@
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid black;
+        overflow: hidden;
     }
 
     .container_equipamiento .div_img_equipamiento {
@@ -59,6 +63,8 @@
         background: radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 51) 0%, rgb(95, 20, 149) 100%);
         display: flex;
         align-items: center;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
     .container_equipamiento .img_equipamiento {
@@ -67,6 +73,8 @@
         height: auto;
         /* transform: rotate(-20deg); */
         object-fit: cover;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
     .container_equipamiento .div_info_equipamiento {
@@ -77,6 +85,7 @@
         justify-content: flex-start;
         gap: 20px;
         align-items: center;
+        overflow: hidden;
     }
 
     .container_equipamiento .div_nivel_equipamiento {
@@ -107,7 +116,7 @@
 
     .arrow {
         position: relative;
-        bottom: 1em;
+        top: 2.6em;
         transform: translateY(-50%);
         width: 50px;
         height: 50px;
@@ -121,13 +130,31 @@
 
     .arrow-left {
         color: white;
-        left: calc(-51.2% + 1em);
+        left: calc(-51.2% + 1.5em);
     }
 
     .arrow-right {
-        right: calc(-51.2% + 1em);
-        color: black;
+        right: calc(-51.2% + 1.5em);
+        color: white;
     }
+
+    .arrow_div {
+        position: absolute;
+        bottom: 0px;
+        width: 50px;
+        background-color: rgba(1, 1, 1, 0.8);
+    }
+
+    .div-arrow-right {
+        right: 0;
+        border-radius: 10px 0 0 0;
+    }
+
+    .div-arrow-left {
+        left: 0;
+        border-radius: 0 10px 0 0;
+    }
+
 
     #nombre_equipamiento {
         font-family: OctoberCrow;
@@ -186,8 +213,8 @@
         // Cerrar contenedor de equipamiento si ya se han generado todos los tiers
         if ($tier == 3) {
             echo '</div>'; // Cerrar container_carrousel_equipamiento
-            echo '<i class="fa-solid fa-angle-right arrow arrow-right" onclick="moveRight()"></i>';
-            echo '<i class="fa-solid fa-angle-left arrow arrow-left" onclick="moveLeft()"></i>';
+            echo '<div class="arrow_div div-arrow-right"><i class="fa-solid fa-angle-right arrow arrow-right" onclick="moveRight()"></i></div>';
+            echo '<div class="arrow_div div-arrow-left"><i class="fa-solid fa-angle-left arrow arrow-left" onclick="moveLeft()"></i></div>';
             echo '</div>'; // Cerrar container_carrousel
             echo '</div>'; // Cerrar container_general_equipamiento
         }
