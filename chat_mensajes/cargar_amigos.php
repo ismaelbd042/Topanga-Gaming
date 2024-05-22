@@ -6,7 +6,7 @@ session_start();
 $usuario_id = $_SESSION['id'];
 
 // Consulta SQL para obtener los amigos del usuario actual con la solicitud aceptada
-$consulta = "SELECT amigo_id FROM amigos WHERE usuario_id = ? AND aceptada = 'SI'";
+$consulta = "SELECT usuario_id, amigo_id FROM amigos WHERE ((usuario_id = ? AND aceptada = 'SI') OR (amigo_id = ? AND aceptada = 'SI'))";
 
 // Ejecutar la consulta preparada
 $stmt = $conn->prepare($consulta);
@@ -14,7 +14,7 @@ $stmt = $conn->prepare($consulta);
 // Verificar si la preparación de la consulta fue exitosa
 if ($stmt) {
     // Vincular parámetros
-    $stmt->bind_param("i", $usuario_id);
+    $stmt->bind_param("ii", $usuario_id, $usuario_id);
 
     // Ejecutar la consulta
     $stmt->execute();
@@ -30,15 +30,19 @@ if ($stmt) {
         // Recorrer los resultados y obtener los datos de usuario
         while ($fila = $resultado->fetch_assoc()) {
             $amigo_id = $fila['amigo_id'];
+            $usuario_amigo_id = $fila['usuario_id'];
 
-            // Consulta preparada para obtener los datos del usuario basado en el ID del amigo
+            // Determinar el ID del amigo correcto
+            $id_correcto = ($amigo_id == $usuario_id) ? $usuario_amigo_id : $amigo_id;
+
+            // Consulta preparada para obtener los datos del usuario basado en el ID del amigo correcto
             $consulta2 = "SELECT * FROM usuarios WHERE id = ?";
             $stmt2 = $conn->prepare($consulta2);
 
             // Verificar si la preparación de la consulta fue exitosa
             if ($stmt2) {
                 // Vincular parámetros
-                $stmt2->bind_param("i", $amigo_id);
+                $stmt2->bind_param("i", $id_correcto);
 
                 // Ejecutar la consulta
                 $stmt2->execute();
