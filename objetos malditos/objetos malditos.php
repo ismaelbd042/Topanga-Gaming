@@ -33,7 +33,7 @@
 
         .cuadrado_morado {
             margin-top: 6.3%;
-            width: 40%;
+            width: 34%;
             height: 70%; 
             transform: rotate(45deg); 
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
@@ -62,11 +62,11 @@
 
         .info_objeto {
             height: 100%;
-            width: 40%;
+            width: 30%;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            gap: 22%;
+            gap: 10%;
             padding: 10px 20px 0px 0px;
             color: white;
             border: 1px solid;
@@ -93,17 +93,24 @@
             transform: rotate(315deg); 
         }
 
-        .info_objeto .desc_objeto {
-            font-size: 17px;
-            border: 1px solid;
-            z-index: 10;
+
+        /* .btn-registro {
+            height: 50px;
+            padding: 0 1.5em;
+            width: auto;
+            color: #fff;
+            background: var(--Gradiente-Marca,
+            radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+            border: 0;
+            font-size: 16px;
+            border-radius: 10px;
         }
 
-        .info_objeto .desc_objeto2 {
-            font-size: 17px;
-            border: 1px solid;
-            z-index: 10;
-        }
+        .btn-registro:hover {
+            cursor: pointer;
+        } */
+
+        /* Ventana Modal */
 
 
     </style>
@@ -114,6 +121,8 @@
     include "../database/connect.php";
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
+    include "VentanaModalObjetos.html";
+    include "VentanaModalObjetos2.html";
 
     // Obtener la conexión a la base de datos
     $conexion = getConexion();
@@ -141,8 +150,8 @@
             echo '<img src="../img/Fotos Objetos/' . strtolower($row["nombre"]) . '.svg" class="imagen_objeto_magico"></img>';
             echo '</div>';
             echo '<div class="info_objeto">';
-            echo '<div class="desc_objeto">' . $row["efecto"] . '</div>';
-            // echo '<div class="desc_objeto2">' . $row["preguntas"] . '</div>';
+            echo '<div class="boton-modal"><label for="btn-modal">Efecto</label></div>';
+            echo '<div class="boton-modal2"><label for="btn-modal2">Preguntas</label></div>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
