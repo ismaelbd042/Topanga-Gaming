@@ -8,11 +8,13 @@ $busqueda = $conn->real_escape_string($busqueda);
 
 $sql = "SELECT id, nombre_usuario, correo 
         FROM usuarios 
-        WHERE nombre_usuario LIKE '%$busqueda%' AND 
-              id NOT IN (SELECT amigo_id 
-                         FROM amigos 
-                         WHERE usuario_id = {$_SESSION['id']} AND 
-                               aceptada = 'NO' OR aceptada = 'SI')";
+        WHERE nombre_usuario LIKE '%$busqueda%' 
+          AND id NOT IN (
+              SELECT amigo_id 
+              FROM amigos 
+              WHERE usuario_id = {$_SESSION['id']}
+          )
+          AND id != {$_SESSION['id']}";
 
 $resultado = $conn->query($sql);
 
