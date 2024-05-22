@@ -12,7 +12,11 @@ $sql = "SELECT id, nombre_usuario, correo
           AND id NOT IN (
               SELECT amigo_id 
               FROM amigos 
-              WHERE usuario_id = {$_SESSION['id']}
+              WHERE usuario_id = {$_SESSION['id']} AND aceptada = 'SI'
+              UNION
+              SELECT usuario_id 
+              FROM amigos 
+              WHERE amigo_id = {$_SESSION['id']} AND aceptada = 'SI'
           )
           AND id != {$_SESSION['id']}";
 
