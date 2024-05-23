@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Index/style.css">
     <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
     <title>Topanga Gaming</title>
     <style>
@@ -20,100 +19,127 @@
         }
 
         .tarjeta_objeto_general {
-            width: 1200px;
-            height: 500px;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
             background: #000;
             border-radius: 30px;
             display: flex;
-            justify-content: space-around; 
-            gap: 9.5%;
+            flex-direction: column;
+            justify-content: space-around;
             margin: 3%;
-            /* align-items: center;   */
+            gap: 20px;
+            padding: 20px;
         }
 
         .cuadrado_morado {
-            margin-top: 6.3%;
-            width: 34%;
-            height: 70%; 
-            transform: rotate(45deg); 
+            /* width: 100%;
+            height: 100%; */
+            /* padding-top: 50%; */
+            position: relative;
+            transform: rotate(45deg);
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
-            /* border: 1px solid white; */
         }
 
+        .imagen_objeto_magico {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(315deg);
+        }
 
         .div_nombre_foto {
-            height: 100%;
-            width: 28%;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            gap: 22%;
-            padding: 0 20px 0 40px;
+            align-items: center;
             color: white;
-            /* border: 1px solid; */
+            text-align: center;
+        }
+
+        .nombre_objeto {
+            font-family: OctoberCrow;
+            color: white;
+            font-size: 36px;
+            margin: 10px 0;
         }
 
         .imagen_pequeña_objeto_magico {
             border: 1px solid;
-            height: 25%;
-            width: 100%;
-            margin-left: 3%;
+            width: 50%;
         }
 
         .info_objeto {
-            height: 100%;
-            width: 30%;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            gap: 10%;
-            padding: 10px 20px 0px 0px;
+            align-items: center;
             color: white;
-            border: 1px solid;
+            gap: 20px;
         }
 
-        .nombre_objeto {
-            /* margin-top: 2%; */
-            margin-left: 3%;
-            font-family: OctoberCrow;
-            height: 30%;
-            width: 150%;
-            color: white;
-            font-size: 56px;
-            z-index: 10;
-            /* position: relative; */
-            /* left: 10%;  */
-            /* border: 1px solid; */
-        }
-
-        .imagen_objeto_magico {
-            /* border: 1px solid white; */
-            height: 100%;
-            width: 100%;
-            transform: rotate(315deg); 
-        }
-
-
-        /* .btn-registro {
-            height: 50px;
-            padding: 0 1.5em;
-            width: auto;
+        .boton-modal label,
+        .boton-modal2 label {
+            padding: 10px 20px;
             color: #fff;
-            background: var(--Gradiente-Marca,
-            radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+            background: radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%);
             border: 0;
             font-size: 16px;
             border-radius: 10px;
+            cursor: pointer;
+            transition: all 300ms ease;
+            text-align: center;
         }
 
-        .btn-registro:hover {
-            cursor: pointer;
-        } */
+        .boton-modal label:hover,
+        .boton-modal2 label:hover {
+            background-color: #8a56af;
+        }
 
-        /* Ventana Modal */
+        @media (min-width: 876px) {
+            .tarjeta_objeto_general {
+                flex-direction: row;
+                height: 500px;
+                gap: 9.5%;
+                padding: 20px;
+            }
 
+            /* .cuadrado_morado {
+                width: 34%;
+                height: 70%;
+                margin-top: 6.3%;
+            } */
 
+            .div_nombre_foto {
+                width: 28%;
+                justify-content: space-around;
+                gap: 22%;
+                padding: 0 20px 0 40px;
+            }
+
+            .nombre_objeto {
+                font-size: 56px;
+                height: 30%;
+                width: 150%;
+            }
+
+            .imagen_pequeña_objeto_magico {
+                height: 25%;
+                width: 100%;
+                margin-left: 3%;
+            }
+
+            .info_objeto {
+                width: 30%;
+                justify-content: space-around;
+                gap: 10%;
+                padding: 10px 20px 0px 0px;
+            }
+        }
     </style>
+</head>
 
 <body>
     <div class="overlay"></div>
@@ -140,18 +166,20 @@
     if (mysqli_num_rows($result) > 0) {
         // Iterar sobre los resultados y mostrar cada tarjeta de objeto
         while ($row = mysqli_fetch_assoc($result)) {
+            $nombreSinTildes = quitarTildesyN($row["nombre"]);
+            $nombreLower = strtolower($row["nombre"]);
             echo '<div class="granTarjeta">';
             echo '<div class="tarjeta_objeto_general">';
             echo '<div class="div_nombre_foto">';
-            echo '<div class="nombre_objeto">' . quitarTildesyN($row["nombre"]) . '</div>';
-            echo '<img src="../img/Fotos Objetos/' . strtolower($row["nombre"]) . '3.svg" class="imagen_pequeña_objeto_magico"></img>';
+            echo '<div class="nombre_objeto">' . $nombreSinTildes . '</div>';
+            echo '<img src="../img/Fotos Objetos/' . $nombreLower . '3.svg" class="imagen_pequeña_objeto_magico"></img>';
             echo '</div>';
             echo '<div class="cuadrado_morado">';
-            echo '<img src="../img/Fotos Objetos/' . strtolower($row["nombre"]) . '.svg" class="imagen_objeto_magico"></img>';
+            echo '<img src="../img/Fotos Objetos/' . $nombreLower . '.svg" class="imagen_objeto_magico"></img>';
             echo '</div>';
             echo '<div class="info_objeto">';
-            echo '<div class="boton-modal"><label for="btn-modal">Efecto</label></div>';
-            echo '<div class="boton-modal2"><label for="btn-modal2">Preguntas</label></div>';
+            echo '<div class="boton-modal"><label class="efecto-btn" data-efecto="' . $row["efecto"] . '" for="btn-modal">Efecto</label></div>';
+            echo '<div class="boton-modal2"><label class="preguntas-btn" data-preguntas="' . $row["preguntas"] . '" for="btn-modal2">Preguntas</label></div>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
@@ -162,27 +190,20 @@
 
     function quitarTildesyN($cadena)
     {
-    // Arrays con las letras acentuadas y sus equivalentes sin acento
-    $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'ñ');
-    $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'N', 'n');
+        // Arrays con las letras acentuadas y sus equivalentes sin acento
+        $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'ñ');
+        $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U', 'N', 'n');
 
-    // Reemplazar las letras acentuadas con las sin acento
-    $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+        // Reemplazar las letras acentuadas con las sin acento
+        $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
 
-    return $cadena;
+        return $cadena;
     }
 
     // Cerrar la conexión
     mysqli_close($conexion);
     ?>
-
-    
-
-</body>
-
-</html>
     <script src="../Index/script.js"></script>
-
 </body>
 
 </html>
