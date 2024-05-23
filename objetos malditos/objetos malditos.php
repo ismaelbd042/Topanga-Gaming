@@ -33,9 +33,10 @@
         }
 
         .cuadrado_morado {
-            /* width: 100%;
-            height: 100%; */
-            /* padding-top: 50%; */
+            width: 37%;
+            height: 75%;
+            margin-top: 5%;
+            /* padding-top: 100%; */
             position: relative;
             transform: rotate(45deg);
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
@@ -105,12 +106,6 @@
                 gap: 9.5%;
                 padding: 20px;
             }
-
-            /* .cuadrado_morado {
-                width: 34%;
-                height: 70%;
-                margin-top: 6.3%;
-            } */
 
             .div_nombre_foto {
                 width: 28%;
