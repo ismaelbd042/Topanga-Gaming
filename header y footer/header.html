@@ -626,7 +626,7 @@
       <li><a id="enlace_chat" href="">Chat</a></li>
       <li><a href="#">Video area</a></li>
       <li><a href="../guess_ghost/guess_ghost.php">averigua el fantasma</a></li>
-      <li><a href="#">About Us</a></li>
+      <li><a href="../about_us/about_us.php">About Us</a></li>
       <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
     </span>
 
@@ -653,25 +653,3 @@
     </div>
   </ul>
 </header>
-<!-- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetch("../php_acceso/verificar_sesion.php")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.sesion_activa) {
-          document.getElementById("enlace_chat").href = '../chat_mensajes/chat.php';
-        } else {
-          document.getElementById("enlace_chat").href = '';
-          document.getElementById("enlace_chat").addEventListener("click", function (event) {
-            event.preventDefault();
-            console.log("1");
-            mostrarLogin();
-            console.log("2");
-          });
-        }
-      })
-      .catch((error) => {
-        console.error('Error al verificar la sesión:', error);
-      });
-  });
-</script> -->
