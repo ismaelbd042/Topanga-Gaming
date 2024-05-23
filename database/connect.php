@@ -137,13 +137,13 @@ function insertarDatos($conexion)
 {
     //Insertar datos en tabla pruebas
     $insertarPruebas = "INSERT INTO pruebas (nombre, extra) VALUES 
-        ('Medidor EMF 5', 'Nivel máximo de lecturas de EMF'),
-        ('Orbes Espectrales', 'Apariciones visuales de orbes'),
-        ('Temperaturas Heladas', 'Temperaturas muy bajas cerca'),
-        ('Escritura Fantasmal', 'Escritura en el libro de actividad'),
+        ('Medidor EMF 5', 'Nivel máximo de lecturas de EMF, hay alta actividad paranormal en la zona en la que se encuentra'),
+        ('Orbes Espectrales', 'Apariciones visuales de orbes espectrales con la cámara en visión nocturna'),
+        ('Temperaturas Heladas', 'Temperaturas bajo cero medidas con el termometro, o aparición de vaho'),
+        ('Escritura Fantasmal', 'Escritura en el libro de escritura fantasmal, textos o dibujos'),
         ('Spirit Box', 'Respuestas a preguntas a través del dispositivo de caja de voz (Spirit Box)'),
-        ('Proyector D.O.T.S.', 'Silueta del fantasma vista a través del proyector'),
-        ('Ultravioleta', 'Impresiones de las manos visibles en superficies');
+        ('Proyector D.O.T.S.', 'Silueta del fantasma vista a través del proyector D.O.T.S, dura breves segundos'),
+        ('Ultravioleta', 'Impresiones de las manos visibles en superficies como puertas, ventanas o interruptores');
     ";
     mysqli_query($conexion, $insertarPruebas);
 
