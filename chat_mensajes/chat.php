@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Chat</title>
     <style>
         .body {
@@ -56,9 +57,60 @@
             border: solid 1px;
         }
 
-        #buscarUsuario {
-            width: 50%;
+        .divBuscarUsuario {
+            width: 100%;
+            /* border: solid 1px; */
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 3px;
         }
+
+        #buscarUsuario {
+            width: 70%;
+            padding: 10px;
+            margin: 10px 0;
+            height: 25px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #buscarUsuario:focus {
+            border-color: #66afe9;
+            outline: none;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+
+        #buscarUsuario::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        #botonBuscar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            font-size: 16px;
+            height: 25px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #botonBuscar i {
+            margin-right: 8px;
+            /* Espacio entre el icono y el texto */
+        }
+
+        #botonBuscar:hover {
+            background-color: darkgrey;
+        }
+
 
         .chatMensajes {
             width: 70%;
@@ -188,13 +240,18 @@
         <div class="sidebar">
 
             <div class="divBusqueda">
+
                 <!-- Sección para buscar usuarios -->
                 <h2>Busca un amigo para agregar</h2>
-                <input type="text" id="buscarUsuario" name="busqueda" placeholder="Buscar usuario">
-                <button id="botonBuscar">Buscar</button>
-
+                <div class="divBuscarUsuario">
+                    <input type="text" id="buscarUsuario" name="busqueda" placeholder="Buscar usuario">
+                    <button id="botonBuscar">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
                 <!-- Sección para mostrar resultados -->
                 <div id="resultadosBusqueda"></div>
+
             </div>
             <div class="divAmigos">
                 <!-- Div para mostrar amigos -->
@@ -246,10 +303,31 @@
                                 var idAmigo = usuario.id;
 
                                 var botonAmigo = document.createElement('button');
-                                botonAmigo.textContent = 'Añadir amigo';
+
+                                // Crea un elemento de imagen
+                                var imagen = document.createElement('img');
+                                imagen.src = '../img/Icons/añadirAmigo.png'; // Ruta a la imagen
+                                imagen.alt = 'Añadir amigo'; // Texto alternativo para la imagen
+                                imagen.style.width = '24px'; // Ajusta el tamaño de la imagen según sea necesario
+                                imagen.style.height = '24px';
+                                imagen.style.cursor = 'pointer';
+
+                                // Estilo para el contenedor principal
+                                div.style.display = 'flex';
+                                div.style.alignItems = 'center';
+                                div.style.width = '100%';
+                                div.style.boxSizing = 'border-box';
+
+                                // Añade la imagen al botón
+                                botonAmigo.appendChild(imagen);
                                 botonAmigo.onclick = function () {
                                     agregarAmigo(idAmigo);
                                 };
+
+                                // Estilo para el botón
+                                botonAmigo.style.border = 'none';
+                                botonAmigo.style.background = 'transparent';
+                                botonAmigo.style.padding = '0';
 
                                 div.appendChild(botonAmigo);
                                 resultadosDiv.appendChild(div);
