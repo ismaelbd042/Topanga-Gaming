@@ -9,7 +9,7 @@
     <title>Topanga Gaming</title>
     <style>
         .menu_lateral {
-            position: fixed;
+            position: sticky;
             height: fit-content;
             width: 250px;
             background-color: #494a60;
@@ -27,7 +27,11 @@
         }
 
         .container_guess_ghost {
-            height: 2000px;
+            height: calc(100vh - 70px);
+            width: 100%;
+            /* border: solid 1px white; */
+            position: absolute;
+            top: 70px;
         }
 
         .herramientas_guess_ghost {
@@ -151,7 +155,6 @@
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
     ?>
-
     <div class="menu_lateral">
         <div class="herramientas_guess_ghost">
             <div class="titulo_pruebas">Pruebas</div>
@@ -246,7 +249,7 @@
                 <div class="row_pruebas">
                     <button id="con_vision">
                         <div class="checkbox"><span class="icon"></span></div>
-                        <div class="label">Con visión rápido</div>
+                        <div class="label">Más rápido al verte</div>
                     </button>
                 </div>
             </div>
