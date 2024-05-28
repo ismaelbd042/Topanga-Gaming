@@ -29,7 +29,7 @@
         .container_guess_ghost {
             height: calc(100vh - 70px);
             width: 100%;
-            /* border: solid 1px white; */
+            border: solid 1px white;
             position: absolute;
             top: 70px;
         }
