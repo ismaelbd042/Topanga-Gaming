@@ -42,12 +42,12 @@
         }
 
         .flecha_esconder_menu {
-            width: 20px;
+            width: 40px;
             height: 100.3%;
             background-color: #494a60;
             position: absolute;
             top: -1px;
-            right: -20px;
+            right: -40px;
             border: solid 1px black;
             border-left: 0;
             border-radius: 0 10px 10px 0;
@@ -67,6 +67,7 @@
             justify-content: center;
             gap: 5%;
             z-index: 0;
+            padding: 20px 0 20px 0;
         }
 
         .herramientas_guess_ghost {
@@ -296,12 +297,26 @@
             height: 95%;
             background: #262537;
             overflow: scroll;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             border-radius: 5px;
+            cursor: default;
         }
+
+        .div_evidencias_fantasma::-webkit-scrollbar {
+            display: block;
+            width: 4px;
+        }
+
+        .div_evidencias_fantasma::-webkit-scrollbar-thumb {
+            background-color: #888;
+            /* Color del thumb (el "botón" de la barra de desplazamiento) */
+            border-radius: 5px;
+        }
+
 
         .div_iconos {
             /* border: 1px solid; */
@@ -311,6 +326,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
+        }
+
+        .div_iconos i {
+            width: 1px;
+            color: #262537;
+            position: relative;
+            left: 10px;
         }
 
         .texto_evidence {
@@ -386,9 +408,9 @@
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
     ?>
-    <div class="menu_lateral" id="menuLateral">
+    <div class="menu_lateral menu_oculto" id="menuLateral">
         <div class="flecha_esconder_menu" onclick="toggleMenu()">
-            <i class="fa-solid fa-angle-left" id="flechaIcono"></i>
+            <i class="fa-solid fa-angle-right" id="flechaIcono"></i>
         </div>
         <div class="herramientas_guess_ghost">
             <div class="titulo_pruebas">Pruebas</div>
@@ -548,7 +570,7 @@
         foreach ($fantasmas as $nombre => $datos) : ?>
             <div class="tarjeta_fantasma_general">
                 <div class="div_izq">
-                    <div class="div_nombre_fantasma"><?php echo $nombre; ?></div>
+                    <div class="div_nombre_fantasma"><?php echo quitarTildes($nombre); ?></div>
                     <div class="div_pruebas_fantasma">
                         <?php foreach ($datos['pruebas'] as $prueba) : ?>
                             <div class="div_prueba">
@@ -576,13 +598,24 @@
                         <div class="texto_info"><?php echo nl2br($datos['extra']); ?></div>
                     </div>
                     <div class="div_iconos">
-                        <img src="../img/Icons/tick.svg" alt="">
-                        <img src="../img/Icons/Cross.svg" alt="">
+                        <i class="fa-solid fa-check fa-2xl"></i>
+                        <i class="fa-solid fa-xmark fa-2xl"></i>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
-        <?php $conexion->close(); ?>
+        <?php $conexion->close();
+        function quitarTildes($cadena)
+        {
+            // Arrays con las letras acentuadas y sus equivalentes sin acento
+            $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú');
+            $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+
+            // Reemplazar las letras acentuadas con las sin acento
+            $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+
+            return $cadena;
+        } ?>
     </div>
 
     <script src="../Index/script.js"></script>
