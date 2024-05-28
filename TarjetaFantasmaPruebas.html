@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: OctoberCrow;
+            src: url(fonts/October\ Crow.ttf);
+        }
+
+        .tarjeta_fantasma_general {
+            width: 700px;
+            height: 220px;
+            background: #313247;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row;
+            align-items: center;
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+
+        .div_izq {
+            width: 47%;
+            height: 90%;
+            /* border: 1px solid; */
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .div_der {
+            width: 47%;
+            height: 90%;
+            /* border: 1px solid; */
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .div_nombre_fantasma {
+            /* text-align: center; */
+            /* border: 1px solid; */
+            width: 100%;
+            height: 22%;
+            align-self: center;
+
+            font-family: OctoberCrow;
+            color: white;
+            font-size: 40px;
+        }
+
+        .div_pruebas_fantasma {
+            /* text-align: center; */
+            /* border: 1px solid; */
+            width: 100%;
+            height: 39%;
+            /* color: white; */
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .div_prueba {
+            /* border: 1px solid; */
+            width: 30%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 2%;
+        }
+
+        .div_info_fantasma {
+            /* text-align: center; */
+            /* border: 1px solid; */
+            width: 100%;
+            height: 23%;
+            border-radius: 5px;
+            background: #262537;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-self: center;
+        }
+
+        .div_cerebro {
+            /* border: 1px solid; */
+            width: 35%;
+            height: 95%;
+
+            display: flex;
+            flex-direction: row;
+            align-items: left;
+            align-self: center;
+        }
+
+        .div_pisadas {
+            /* border: 1px solid; */
+            width: 55%;
+            height: 95%;
+
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row;
+            align-items: left;
+            align-self: center;
+        }
+
+        .div_evidencias_fantasma {
+            /* border: 1px solid; */
+            width: 85%;
+            height: 95%;
+            background: #262537;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .div_iconos {
+            /* border: 1px solid; */
+            width: 13%;
+            height: 95%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .texto_evidence {
+            /* border: 1px solid; */
+            width: 95%;
+            height: 10%;
+
+            color: #A2A2AD;
+            text-align: right;
+            font-size: 16px;
+            align-self: center;
+        }
+
+        .texto_tells {
+            /* border: 1px solid; */
+            width: 95%;
+            height: 10%;
+
+            color: #A2A2AD;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .texto_info {
+            /* border: 1px solid; */
+            width: 95%;
+            height: 70%;
+
+            color: white;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .iconoC {
+            width: 30%;
+        }
+
+        .iconoP {
+            width: 20%;
+        }
+
+        .iconoA {
+            width: 10%;
+        }
+
+        .div_numeros {
+            font-size: 20px;
+            color: #A2A2AD;
+            /* border: 1px solid; */
+            align-self: center;
+        }
+
+        .div_iconos_pruebas {
+            width: 35%;
+            /* border: 1px solid; */
+        }
+
+        .div_texto_pruebas {
+            width: 100%;
+            height: 20%;
+            /* border: 1px solid; */
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tarjeta_fantasma_general">
+        <div class="div_izq">
+            <div class="div_nombre_fantasma">Spirit</div>
+            <div class="div_pruebas_fantasma">
+                <div class="div_prueba">
+                    <img src="img/Fotos pruebas/Escritura Fantasmal.svg" alt="" class="div_iconos_pruebas">
+                    <div class="div_texto_pruebas">Escritura Fantasmal</div>
+                </div>
+                <div class="div_prueba">
+                    <img src="img/Fotos pruebas/Spirit Box.svg" alt="" class="div_iconos_pruebas">
+                    <div class="div_texto_pruebas">Spirit Box</div>
+                </div>
+                <div class="div_prueba">
+                    <img src="img/Fotos pruebas/Ultravioleta.svg" alt="" class="div_iconos_pruebas">
+                    <div class="div_texto_pruebas">Ultravioleta</div>
+                </div>
+            </div>
+            <div class="div_info_fantasma">
+                <div class="div_cerebro">
+                    <img src="img/Icons/cerebro.svg" alt="" class="iconoC">
+                    <div class="div_numeros">50%</div>
+                </div>
+                <div class="div_pisadas">
+                    <img src="img/Icons/pisadas.svg" alt="" class="iconoP">
+                    <div class="div_numeros">1.7 m/s</div>
+                    <img src="img/Icons/altavoz.svg" alt="" class="iconoA">
+                </div>
+            </div>
+        </div>
+        <div class="div_der">
+            <div class="div_evidencias_fantasma">
+                <div class="texto_evidence">0 Evidence Test >></div>
+                <div class="texto_tells">Tells--------------------------------------------</div>
+                <div class="texto_info">-Will wait 180s after being incresed before attempting to hunt again, instead of
+                    the standard 90s.</div>
+            </div>
+            <div class="div_iconos">
+                <img src="img/Icons/tick.svg" alt="">
+                <img src="img/Icons/Cross.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
