@@ -11,7 +11,7 @@
     <style>
         .menu_lateral {
             position: sticky;
-            height: fit-content;
+            height: 100vh;
             width: 250px;
             background-color: #494a60;
             border: solid 1px black;
@@ -42,12 +42,12 @@
         }
 
         .flecha_esconder_menu {
-            width: 20px;
+            width: 40px;
             height: 100.3%;
             background-color: #494a60;
             position: absolute;
             top: -1px;
-            right: -20px;
+            right: -40px;
             border: solid 1px black;
             border-left: 0;
             border-radius: 0 10px 10px 0;
@@ -67,12 +67,14 @@
             justify-content: center;
             gap: 5%;
             z-index: 0;
+            padding: 20px 0 20px 0;
         }
 
         .herramientas_guess_ghost {
+            /* height: 100%; */
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 1vh;
         }
 
         .titulo_pruebas {
@@ -84,10 +86,11 @@
             border-radius: 5px;
             display: flex;
             flex-direction: column;
+            margin-bottom: 3%;
         }
 
         .row_pruebas {
-            height: 2.2em;
+            height: 25px;
             display: flex;
             flex-wrap: nowrap;
             align-content: center;
@@ -182,7 +185,8 @@
         }
 
         .tarjeta_fantasma_general {
-            width: 700px;
+            min-width: 40%;
+            max-width: 625px;
             height: 220px;
             background: #313247;
             border-radius: 20px;
@@ -296,12 +300,26 @@
             height: 95%;
             background: #262537;
             overflow: scroll;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             border-radius: 5px;
+            cursor: default;
         }
+
+        .div_evidencias_fantasma::-webkit-scrollbar {
+            display: block;
+            width: 4px;
+        }
+
+        .div_evidencias_fantasma::-webkit-scrollbar-thumb {
+            background-color: #888;
+            /* Color del thumb (el "botón" de la barra de desplazamiento) */
+            border-radius: 5px;
+        }
+
 
         .div_iconos {
             /* border: 1px solid; */
@@ -311,6 +329,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
+        }
+
+        .div_iconos i {
+            width: 1px;
+            color: #262537;
+            position: relative;
+            left: 10px;
         }
 
         .texto_evidence {
@@ -376,6 +401,11 @@
             color: white;
             font-size: 14px;
         }
+
+        .checkbox .checked {
+            position: relative;
+            top: -7px;
+        }
     </style>
 </head>
 
@@ -386,9 +416,9 @@
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
     ?>
-    <div class="menu_lateral" id="menuLateral">
+    <div class="menu_lateral menu_oculto" id="menuLateral">
         <div class="flecha_esconder_menu" onclick="toggleMenu()">
-            <i class="fa-solid fa-angle-left" id="flechaIcono"></i>
+            <i class="fa-solid fa-angle-right" id="flechaIcono"></i>
         </div>
         <div class="herramientas_guess_ghost">
             <div class="titulo_pruebas">Pruebas</div>
@@ -548,7 +578,7 @@
         foreach ($fantasmas as $nombre => $datos) : ?>
             <div class="tarjeta_fantasma_general">
                 <div class="div_izq">
-                    <div class="div_nombre_fantasma"><?php echo $nombre; ?></div>
+                    <div class="div_nombre_fantasma"><?php echo quitarTildes($nombre); ?></div>
                     <div class="div_pruebas_fantasma">
                         <?php foreach ($datos['pruebas'] as $prueba) : ?>
                             <div class="div_prueba">
@@ -572,17 +602,28 @@
                 <div class="div_der">
                     <div class="div_evidencias_fantasma">
                         <div class="texto_evidence">0 Evidence Test >></div>
-                        <div class="texto_tells">Tells--------------------------------------------</div>
+                        <div class="texto_tells">Tells---------------------------------------</div>
                         <div class="texto_info"><?php echo nl2br($datos['extra']); ?></div>
                     </div>
                     <div class="div_iconos">
-                        <img src="../img/Icons/tick.svg" alt="">
-                        <img src="../img/Icons/Cross.svg" alt="">
+                        <i class="fa-solid fa-check fa-2xl"></i>
+                        <i class="fa-solid fa-xmark fa-2xl"></i>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
-        <?php $conexion->close(); ?>
+        <?php $conexion->close();
+        function quitarTildes($cadena)
+        {
+            // Arrays con las letras acentuadas y sus equivalentes sin acento
+            $letras_acentuadas = array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú');
+            $letras_sin_acento = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+
+            // Reemplazar las letras acentuadas con las sin acento
+            $cadena = str_replace($letras_acentuadas, $letras_sin_acento, $cadena);
+
+            return $cadena;
+        } ?>
     </div>
 
     <script src="../Index/script.js"></script>
@@ -611,6 +652,76 @@
                 flechaIcono.classList.add("fa-angle-left");
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const pruebaButtons = document.querySelectorAll('.row_pruebas button');
+            const resetButton = document.getElementById('reset');
+            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+            const pruebasSeleccionadas = new Set();
+
+            // Map de id de botón a nombre de prueba
+            const pruebaNombreMap = {
+                'emf5': 'Medidor EMF 5',
+                'ultravioleta': 'Ultravioleta',
+                'escritura': 'Escritura Fantasmal',
+                'heladas': 'Temperaturas Heladas',
+                'dots': 'Proyector D.O.T.S.',
+                'orbes': 'Orbes Espectrales',
+                'spirit': 'Spirit Box',
+                'lento': '<1.7 m/s',
+                'normal': '1.7 m/s',
+                'rapido': '>1.7 m/s',
+                'con_vision': 'Más rápido al verte',
+                'tarde': 'Tarde (<40%)',
+                'normal_cordura': 'Normal (>40%)',
+                'pronto': 'Pronto (>50%)',
+                'muy_pronto': 'Muy pronto (>75%)'
+            };
+
+            pruebaButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const prueba = pruebaNombreMap[button.id];
+                    const isActive = button.classList.toggle('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+
+                    if (isActive) {
+                        pruebasSeleccionadas.add(prueba);
+                        checkbox.innerHTML = '&#10006;'; // Código HTML para la "x"
+                        checkbox.classList.add('checked');
+                    } else {
+                        pruebasSeleccionadas.delete(prueba);
+                        checkbox.innerHTML = ''; // Eliminar la "x"
+                        checkbox.classList.remove('checked');
+                    }
+
+                    filtrarFantasmas();
+                });
+            });
+
+            resetButton.addEventListener('click', () => {
+                pruebasSeleccionadas.clear();
+                pruebaButtons.forEach(button => {
+                    button.classList.remove('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+                    checkbox.classList.remove('checked'); // Ensure all checkboxes are unchecked
+                });
+                mostrarTodosFantasmas();
+            });
+
+            function filtrarFantasmas() {
+                fantasmaCards.forEach(card => {
+                    const pruebasFantasma = Array.from(card.querySelectorAll('.div_pruebas_fantasma .div_prueba')).map(pruebaDiv => pruebaDiv.querySelector('.div_texto_pruebas').textContent.trim());
+                    const match = Array.from(pruebasSeleccionadas).every(prueba => pruebasFantasma.includes(prueba));
+                    card.style.display = match ? '' : 'none';
+                });
+            }
+
+            function mostrarTodosFantasmas() {
+                fantasmaCards.forEach(card => {
+                    card.style.display = '';
+                });
+            }
+        });
     </script>
 </body>
 
