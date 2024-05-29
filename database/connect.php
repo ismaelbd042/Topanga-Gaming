@@ -249,7 +249,7 @@ function insertarDatos($conexion)
         (3,23),
         (6,23),
         (2,24),
-        (3,24),
+        (4,24),
         (6,24);
     ";
     mysqli_query($conexion, $insertarPruebasFantasmas);
