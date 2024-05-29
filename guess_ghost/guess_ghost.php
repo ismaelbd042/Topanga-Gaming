@@ -432,7 +432,7 @@
                 <option value="-1">Custom (?)</option>
             </select>
             <div class="pruebas">
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="emf5">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -440,7 +440,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="ultravioleta">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -448,7 +448,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="escritura">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -456,7 +456,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="heladas">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -464,7 +464,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="dots">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -472,7 +472,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="orbes">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -480,7 +480,7 @@
                     </button>
                     <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="spirit">
                         <div class="checkbox"><span class="icon"></span></div>
@@ -491,26 +491,26 @@
             </div>
             <div class="titulo_pruebas">Velocidad</div>
             <div class="pruebas">
-                <div class="row_pruebas">
+                <div class="row_pruebas row_velocidad">
                     <button id="lento">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Lento</div>
                     </button>
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_velocidad">
                     <button id="normal">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Normal</div>
                     </button>
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_velocidad">
                     <button id="rapido">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Rápido</div>
                     </button>
                 </div>
                 <hr>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_velocidad">
                     <button id="con_vision">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Más rápido al verte</div>
@@ -519,28 +519,28 @@
             </div>
             <div class="titulo_pruebas">Cordura de cacería</div>
             <div class="pruebas">
-                <div class="row_pruebas">
+                <div class="row_pruebas row_cordura">
                     <button id="tarde">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Tarde <span class="num_cordura">(&lt;40%)</span>
                         </div>
                     </button>
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_cordura">
                     <button id="normal_cordura">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Normal <span class="num_cordura">(&gt;40%)</span>
                         </div>
                     </button>
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_cordura">
                     <button id="pronto">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Pronto <span class="num_cordura">(&gt;50%)</span>
                         </div>
                     </button>
                 </div>
-                <div class="row_pruebas">
+                <div class="row_pruebas row_cordura">
                     <button id="muy_pronto">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Muy pronto <span class="num_cordura">(&gt;75%)</span>
@@ -654,7 +654,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const pruebaButtons = document.querySelectorAll('.row_pruebas button');
+            const pruebaButtons = document.querySelectorAll('.row_prueba button');
             const resetButton = document.getElementById('reset');
             const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
             const pruebasSeleccionadas = new Set();
@@ -668,14 +668,10 @@
                 'dots': 'Proyector D.O.T.S.',
                 'orbes': 'Orbes Espectrales',
                 'spirit': 'Spirit Box',
-                'lento': '<1.7 m/s',
-                'normal': '1.7 m/s',
-                'rapido': '>1.7 m/s',
-                'con_vision': 'Más rápido al verte',
-                'tarde': 'Tarde (<40%)',
-                'normal_cordura': 'Normal (>40%)',
-                'pronto': 'Pronto (>50%)',
-                'muy_pronto': 'Muy pronto (>75%)'
+                'tarde': '40%',
+                'normal_cordura': '50%',
+                'pronto': '60%',
+                'muy_pronto': '75%'
             };
 
             pruebaButtons.forEach(button => {
@@ -686,11 +682,11 @@
 
                     if (isActive) {
                         pruebasSeleccionadas.add(prueba);
-                        checkbox.innerHTML = '&#10006;'; // Código HTML para la "x"
+                        checkbox.innerHTML = '&#10006;';
                         checkbox.classList.add('checked');
                     } else {
                         pruebasSeleccionadas.delete(prueba);
-                        checkbox.innerHTML = ''; // Eliminar la "x"
+                        checkbox.innerHTML = '';
                         checkbox.classList.remove('checked');
                     }
 
@@ -703,7 +699,7 @@
                 pruebaButtons.forEach(button => {
                     button.classList.remove('active');
                     const checkbox = button.querySelector('.checkbox .icon');
-                    checkbox.classList.remove('checked'); // Ensure all checkboxes are unchecked
+                    checkbox.classList.remove('checked');
                 });
                 mostrarTodosFantasmas();
             });
@@ -713,6 +709,147 @@
                     const pruebasFantasma = Array.from(card.querySelectorAll('.div_pruebas_fantasma .div_prueba')).map(pruebaDiv => pruebaDiv.querySelector('.div_texto_pruebas').textContent.trim());
                     const match = Array.from(pruebasSeleccionadas).every(prueba => pruebasFantasma.includes(prueba));
                     card.style.display = match ? '' : 'none';
+                });
+            }
+
+            function mostrarTodosFantasmas() {
+                fantasmaCards.forEach(card => {
+                    card.style.display = '';
+                });
+
+                pruebaButtons.forEach(button => {
+                    const checkbox = button.querySelector('.checkbox .icon');
+                    checkbox.innerHTML = '';
+                    checkbox.classList.remove('checked');
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const corduraButtons = document.querySelectorAll('.row_cordura button');
+            const resetButton = document.getElementById('reset');
+            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+            let corduraSeleccionada = 'normal_cordura';
+
+            // Rangos de cordura
+            const corduraRanges = {
+                'tarde': [0, 41],
+                'normal_cordura': [41, 51],
+                'pronto': [51, 76],
+                'muy_pronto': [76, 101]
+            };
+
+            corduraButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Desmarcar todos los botones
+                    corduraButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        const checkbox = btn.querySelector('.checkbox .icon');
+                        checkbox.innerHTML = '';
+                        checkbox.classList.remove('checked');
+                    });
+
+                    // Marcar el botón seleccionado
+                    button.classList.add('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+                    checkbox.innerHTML = '&#10006;';
+                    checkbox.classList.add('checked');
+
+                    corduraSeleccionada = button.id;
+                    filtrarFantasmas();
+                });
+            });
+
+            resetButton.addEventListener('click', () => {
+                corduraSeleccionada = 'normal_cordura';
+                // Desmarcar todos los botones
+                corduraButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    const checkbox = btn.querySelector('.checkbox .icon');
+                    checkbox.innerHTML = '';
+                    checkbox.classList.remove('checked');
+                });
+                mostrarTodosFantasmas();
+            });
+
+            function filtrarFantasmas() {
+                fantasmaCards.forEach(card => {
+                    const corduraFantasma = parseInt(card.querySelector('.div_cerebro .div_numeros').textContent.trim());
+                    const [min, max] = corduraRanges[corduraSeleccionada];
+                    const matchCordura = corduraFantasma >= min && corduraFantasma < max;
+                    card.style.display = matchCordura ? '' : 'none';
+                });
+            }
+
+            function mostrarTodosFantasmas() {
+                fantasmaCards.forEach(card => {
+                    card.style.display = '';
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const velocidadButtons = document.querySelectorAll('.row_velocidad button');
+            const resetButton = document.getElementById('reset');
+            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+            let velocidadSeleccionada = 'normal';
+
+            // Rangos de velocidad
+            const velocidadRanges = {
+                'lento': [0, 1.7],
+                'normal': [1.7, 1.71],
+                'rapido': [1.71, 5],
+                'con_vision': [5, Infinity] // Suponiendo que "Más rápido al verte" no tiene límite superior
+            };
+
+            velocidadButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Desmarcar todos los botones
+                    velocidadButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        const checkbox = btn.querySelector('.checkbox .icon');
+                        checkbox.innerHTML = '';
+                        checkbox.classList.remove('checked');
+                    });
+
+                    // Marcar el botón seleccionado
+                    button.classList.add('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+                    checkbox.innerHTML = '&#10006;';
+                    checkbox.classList.add('checked');
+
+                    velocidadSeleccionada = button.id;
+                    filtrarFantasmas();
+                });
+            });
+
+            resetButton.addEventListener('click', () => {
+                velocidadSeleccionada = 'normal';
+                // Desmarcar todos los botones
+                velocidadButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    const checkbox = btn.querySelector('.checkbox .icon');
+                    checkbox.innerHTML = '';
+                    checkbox.classList.remove('checked');
+                });
+                mostrarTodosFantasmas();
+            });
+
+            function filtrarFantasmas() {
+                fantasmaCards.forEach(card => {
+                    const velocidadFantasmaText = card.querySelector('.div_pisadas .div_numeros').textContent.trim();
+                    // Extraer el rango de velocidades
+                    const velocidadRange = velocidadFantasmaText.match(/\d+\.\d+/g);
+                    // Convertir el rango de velocidad a números
+                    const minVelocidadFantasma = parseFloat(velocidadRange[0]);
+                    const maxVelocidadFantasma = parseFloat(velocidadRange[1]);
+                    // Verificar si el rango de velocidad se superpone con el rango de cada botón
+                    const overlappingRanges = Object.entries(velocidadRanges).filter(([_, range]) => {
+                        const [min, max] = range;
+                        return minVelocidadFantasma < max && maxVelocidadFantasma > min;
+                    }).map(([buttonId, _]) => buttonId);
+                    // Mostrar el fantasma si su rango se superpone con el rango del botón seleccionado
+                    card.style.display = overlappingRanges.includes(velocidadSeleccionada) ? '' : 'none';
                 });
             }
 
