@@ -398,6 +398,11 @@
             color: white;
             font-size: 14px;
         }
+
+        .checkbox .checked {
+            position: relative;
+            top: -7px;
+        }
     </style>
 </head>
 
@@ -644,6 +649,76 @@
                 flechaIcono.classList.add("fa-angle-left");
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const pruebaButtons = document.querySelectorAll('.row_pruebas button');
+            const resetButton = document.getElementById('reset');
+            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+            const pruebasSeleccionadas = new Set();
+
+            // Map de id de botón a nombre de prueba
+            const pruebaNombreMap = {
+                'emf5': 'Medidor EMF 5',
+                'ultravioleta': 'Ultravioleta',
+                'escritura': 'Escritura Fantasmal',
+                'heladas': 'Temperaturas Heladas',
+                'dots': 'Proyector D.O.T.S.',
+                'orbes': 'Orbes Espectrales',
+                'spirit': 'Spirit Box',
+                'lento': '<1.7 m/s',
+                'normal': '1.7 m/s',
+                'rapido': '>1.7 m/s',
+                'con_vision': 'Más rápido al verte',
+                'tarde': 'Tarde (<40%)',
+                'normal_cordura': 'Normal (>40%)',
+                'pronto': 'Pronto (>50%)',
+                'muy_pronto': 'Muy pronto (>75%)'
+            };
+
+            pruebaButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const prueba = pruebaNombreMap[button.id];
+                    const isActive = button.classList.toggle('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+
+                    if (isActive) {
+                        pruebasSeleccionadas.add(prueba);
+                        checkbox.innerHTML = '&#10006;'; // Código HTML para la "x"
+                        checkbox.classList.add('checked');
+                    } else {
+                        pruebasSeleccionadas.delete(prueba);
+                        checkbox.innerHTML = ''; // Eliminar la "x"
+                        checkbox.classList.remove('checked');
+                    }
+
+                    filtrarFantasmas();
+                });
+            });
+
+            resetButton.addEventListener('click', () => {
+                pruebasSeleccionadas.clear();
+                pruebaButtons.forEach(button => {
+                    button.classList.remove('active');
+                    const checkbox = button.querySelector('.checkbox .icon');
+                    checkbox.classList.remove('checked'); // Ensure all checkboxes are unchecked
+                });
+                mostrarTodosFantasmas();
+            });
+
+            function filtrarFantasmas() {
+                fantasmaCards.forEach(card => {
+                    const pruebasFantasma = Array.from(card.querySelectorAll('.div_pruebas_fantasma .div_prueba')).map(pruebaDiv => pruebaDiv.querySelector('.div_texto_pruebas').textContent.trim());
+                    const match = Array.from(pruebasSeleccionadas).every(prueba => pruebasFantasma.includes(prueba));
+                    card.style.display = match ? '' : 'none';
+                });
+            }
+
+            function mostrarTodosFantasmas() {
+                fantasmaCards.forEach(card => {
+                    card.style.display = '';
+                });
+            }
+        });
     </script>
 </body>
 
