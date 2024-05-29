@@ -11,7 +11,7 @@
     <style>
         .menu_lateral {
             position: sticky;
-            height: fit-content;
+            height: 100vh;
             width: 250px;
             background-color: #494a60;
             border: solid 1px black;
@@ -70,9 +70,10 @@
         }
 
         .herramientas_guess_ghost {
+            /* height: 100%; */
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 1vh;
         }
 
         .titulo_pruebas {
@@ -84,10 +85,11 @@
             border-radius: 5px;
             display: flex;
             flex-direction: column;
+            margin-bottom: 3%;
         }
 
         .row_pruebas {
-            height: 2.2em;
+            height: 25px;
             display: flex;
             flex-wrap: nowrap;
             align-content: center;
@@ -182,7 +184,8 @@
         }
 
         .tarjeta_fantasma_general {
-            width: 700px;
+            min-width: 40%;
+            max-width: 625px;
             height: 220px;
             background: #313247;
             border-radius: 20px;
@@ -572,7 +575,7 @@
                 <div class="div_der">
                     <div class="div_evidencias_fantasma">
                         <div class="texto_evidence">0 Evidence Test >></div>
-                        <div class="texto_tells">Tells--------------------------------------------</div>
+                        <div class="texto_tells">Tells---------------------------------------</div>
                         <div class="texto_info"><?php echo nl2br($datos['extra']); ?></div>
                     </div>
                     <div class="div_iconos">
