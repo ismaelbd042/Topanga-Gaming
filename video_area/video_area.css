@@ -1,0 +1,159 @@
+.divHeaderYFooter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #222;
+    z-index: 1000; /* Asegúrate de que el header esté por encima de otros elementos */
+}
+
+.mainVentanaModal {
+    margin-top: 280px;
+}
+
+.sidebarVideos {
+    position: fixed; /* Habilitar posición fija */
+    left: 0;
+    top: 70px; /* Inicia debajo del header */
+    width: 200px;
+    height: calc(100vh - 70px); /* Asegura que ocupe el espacio restante de la ventana */
+    background-color: #111;
+    color: white;
+    /* padding-top: 20px; */ /* Este padding es opcional según tus necesidades */
+}
+
+.sidebarVideos ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebarVideos ul li {
+    text-align: left;
+}
+
+.sidebarVideos ul li a {
+    height: 50px;
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.sidebarVideos ul li img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.sidebarVideos ul li a:hover {
+    background-color: #575757;
+}
+
+.divPrincipalVideos {
+    display: flex;
+    margin-left: 200px; /* Asegura que el contenido principal no quede debajo de la sidebar */
+}
+
+.main-contentVideos {
+    width: 100%; /* Ajusta el ancho según el espacio que ocupa la sidebar */
+    height: 1500px;
+    border: solid 1px;
+    margin-top: 70px; /* Asegura que el contenido principal esté alineado con el header */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/*************Zona Videos*******************/
+
+.search-containerVideo {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 40%;
+}
+
+#searchInputVideo {
+    padding: 8px;
+    border: 2px solid #5F1495;
+    padding: 8px 8px 8px 30px; /* Espacio para la lupa */
+    border-radius: 20px;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.divWrapVideos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7%;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.video-item {
+    max-width: 420px;
+    min-width: 20%;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.video-item video {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.play-icon {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(100, 98, 98, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.play-icon::after {
+    content: "\25B6"; /* Unicode for play symbol */
+    font-size: 2em;
+    color: white;
+    margin-left: 7%;
+}
+
+.video-item:hover .play-icon {
+    opacity: 1;
+}
+
+.video-item:hover video {
+    filter: grayscale(100%);
+}

@@ -131,6 +131,15 @@ function crearTablas($conexion)
         FOREIGN KEY (receptor_id) REFERENCES usuarios(id)
     )";
     mysqli_query($conexion, $sqlMensajes);
+
+    $sqlVideos = "CREATE TABLE IF NOT EXISTS videos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombreVideo VARCHAR(255) NOT NULL,
+        idAutor INT NOT NULL,
+        video LONGBLOB NOT NULL,
+        FOREIGN KEY (idAutor) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlVideos);
 }
 
 function insertarDatos($conexion)
@@ -351,4 +360,10 @@ function insertarDatos($conexion)
         ('1', '1@admin.com', '$contraseña1');
     ";
     mysqli_query($conexion, $insertarUsuarios);
+
+    $insertarVideos = "INSERT INTO videos (nombreVideo, idAutor, video) VALUES 
+    ('Trailer de Xbox de phasmophobia', 1, '../video_area/videosMP4/video1.mp4'),
+    ('Vas a flipar con este juegazo', 1, '../video_area/videosMP4/video2.mp4')
+    ";
+    mysqli_query($conexion, $insertarVideos);
 }

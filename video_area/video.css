@@ -1,0 +1,11 @@
+.divVideoComentarios {
+    margin: 30px;
+}
+
+.divVideoAbierto {
+    width: 100%;
+}
+
+.divVideoAbierto video {
+    width: 50%;
+}
