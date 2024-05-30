@@ -175,7 +175,8 @@
             echo '</div>';
             echo '<div class="info_objeto">';
             echo '<div class="boton-modal"><label class="efecto-btn" data-efecto="' . $row["efecto"] . '" for="btn-modal">Efecto</label></div>';
-            echo '<div class="boton-modal2"><label class="preguntas-btn" data-preguntas="' . $row["preguntas"] . '" for="btn-modal2">Preguntas</label></div>';
+            if ($row["preguntas"])
+                echo '<div class="boton-modal2"><label class="preguntas-btn" data-preguntas="' . $row["preguntas"] . '" for="btn-modal2">Preguntas</label></div>';
             echo '</div>';
             echo '</div>';
             echo '</div>';

@@ -406,6 +406,18 @@
             position: relative;
             top: -7px;
         }
+
+        button.marked .checkbox .icon::before {
+            content: '\2713';
+            position: relative;
+            top: -6px;
+        }
+
+        button:not(.marked) .checkbox .icon::before {
+            content: '\00D7';
+            position: relative;
+            top: -4px;
+        }
     </style>
 </head>
 
@@ -557,26 +569,29 @@
         // Obtener la conexión a la base de datos
         $conexion = getConexion();
 
-        $sql = "SELECT f.nombre AS fantasma, f.cordura, f.velocidad, f.descripcion, f.extra, p.nombre AS prueba
-        FROM fantasmas f
-        JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
-        JOIN pruebas p ON p.id = pf.prueba_id
-        ORDER BY f.id";
+        $sql = "SELECT f.id AS id_fantasma, f.nombre AS fantasma, f.cordura, f.velocidad, f.descripcion, f.extra, p.nombre AS prueba
+            FROM fantasmas f
+            JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+            JOIN pruebas p ON p.id = pf.prueba_id
+            ORDER BY f.id";
         $result = $conexion->query($sql);
 
         $fantasmas = [];
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $fantasmas[$row['fantasma']]['cordura'] = $row['cordura'];
-                $fantasmas[$row['fantasma']]['velocidad'] = $row['velocidad'];
-                $fantasmas[$row['fantasma']]['descripcion'] = $row['descripcion'];
-                $fantasmas[$row['fantasma']]['extra'] = $row['extra'];
-                $fantasmas[$row['fantasma']]['pruebas'][] = $row['prueba'];
+                $nombre_fantasma = $row['fantasma'];
+                $fantasmas[$nombre_fantasma]['id'] = $row['id_fantasma'];
+                $fantasmas[$nombre_fantasma]['cordura'] = $row['cordura'];
+                $fantasmas[$nombre_fantasma]['velocidad'] = $row['velocidad'];
+                $fantasmas[$nombre_fantasma]['descripcion'] = $row['descripcion'];
+                $fantasmas[$nombre_fantasma]['extra'] = $row['extra'];
+                $fantasmas[$nombre_fantasma]['pruebas'][] = $row['prueba'];
             }
         }
 
         foreach ($fantasmas as $nombre => $datos) : ?>
             <div class="tarjeta_fantasma_general">
+                <span style='display: none;'><?php echo $datos['id']; ?></span>
                 <div class="div_izq">
                     <div class="div_nombre_fantasma"><?php echo quitarTildes($nombre); ?></div>
                     <div class="div_pruebas_fantasma">
@@ -653,212 +668,253 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const pruebaButtons = document.querySelectorAll('.row_prueba button');
-            const resetButton = document.getElementById('reset');
-            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
-            const pruebasSeleccionadas = new Set();
+        document.addEventListener("DOMContentLoaded", function() {
+            var pruebasMarcadas = [];
 
-            // Map de id de botón a nombre de prueba
-            const pruebaNombreMap = {
-                'emf5': 'Medidor EMF 5',
-                'ultravioleta': 'Ultravioleta',
-                'escritura': 'Escritura Fantasmal',
-                'heladas': 'Temperaturas Heladas',
-                'dots': 'Proyector D.O.T.S.',
-                'orbes': 'Orbes Espectrales',
-                'spirit': 'Spirit Box',
-                'tarde': '40%',
-                'normal_cordura': '50%',
-                'pronto': '60%',
-                'muy_pronto': '75%'
-            };
+            var botonesPruebas = document.querySelectorAll('.row_pruebas button');
 
-            pruebaButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const prueba = pruebaNombreMap[button.id];
-                    const isActive = button.classList.toggle('active');
-                    const checkbox = button.querySelector('.checkbox .icon');
+            botonesPruebas.forEach(function(boton) {
+                boton.addEventListener('click', function() {
 
-                    if (isActive) {
-                        pruebasSeleccionadas.add(prueba);
-                        checkbox.innerHTML = '&#10006;';
-                        checkbox.classList.add('checked');
+                    var idPrueba = boton.id;
+
+                    var marcado = pruebasMarcadas.includes(idPrueba);
+
+                    if (marcado) {
+                        var index = pruebasMarcadas.indexOf(idPrueba);
+                        pruebasMarcadas.splice(index, 1);
+                        boton.classList.remove('marked');
                     } else {
-                        pruebasSeleccionadas.delete(prueba);
-                        checkbox.innerHTML = '';
-                        checkbox.classList.remove('checked');
+                        pruebasMarcadas.push(idPrueba);
+                        boton.classList.add('marked');
                     }
 
-                    filtrarFantasmas();
+                    console.log(pruebasMarcadas);
+                    // Enviar la información al servidor
+                    fetch('averiguar.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(pruebasMarcadas)
+                        })
+                        .then(response => response.text()) // Convertir la respuesta a texto
+                        .then(data => console.log(data))
+                        .catch(error => console.error('Error:', error)); // Manejar errores si los hay
                 });
             });
-
-            resetButton.addEventListener('click', () => {
-                pruebasSeleccionadas.clear();
-                pruebaButtons.forEach(button => {
-                    button.classList.remove('active');
-                    const checkbox = button.querySelector('.checkbox .icon');
-                    checkbox.classList.remove('checked');
-                });
-                mostrarTodosFantasmas();
-            });
-
-            function filtrarFantasmas() {
-                fantasmaCards.forEach(card => {
-                    const pruebasFantasma = Array.from(card.querySelectorAll('.div_pruebas_fantasma .div_prueba')).map(pruebaDiv => pruebaDiv.querySelector('.div_texto_pruebas').textContent.trim());
-                    const match = Array.from(pruebasSeleccionadas).every(prueba => pruebasFantasma.includes(prueba));
-                    card.style.display = match ? '' : 'none';
-                });
-            }
-
-            function mostrarTodosFantasmas() {
-                fantasmaCards.forEach(card => {
-                    card.style.display = '';
-                });
-
-                pruebaButtons.forEach(button => {
-                    const checkbox = button.querySelector('.checkbox .icon');
-                    checkbox.innerHTML = '';
-                    checkbox.classList.remove('checked');
-                });
-            }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const corduraButtons = document.querySelectorAll('.row_cordura button');
-            const resetButton = document.getElementById('reset');
-            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
-            let corduraSeleccionada = 'normal_cordura';
 
-            // Rangos de cordura
-            const corduraRanges = {
-                'tarde': [0, 41],
-                'normal_cordura': [41, 51],
-                'pronto': [51, 76],
-                'muy_pronto': [76, 101]
-            };
+        // const checkbox = button.querySelector('.checkbox .icon');
+        // checkbox.innerHTML = '&#10006;';
+        // checkbox.classList.add('checked');
+        // checkbox.innerHTML = '';
+        // checkbox.classList.remove('checked');
 
-            corduraButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Desmarcar todos los botones
-                    corduraButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        const checkbox = btn.querySelector('.checkbox .icon');
-                        checkbox.innerHTML = '';
-                        checkbox.classList.remove('checked');
-                    });
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const pruebaButtons = document.querySelectorAll('.row_prueba button');
+        //     const resetButton = document.getElementById('reset');
+        //     const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+        //     const pruebasSeleccionadas = new Set();
 
-                    // Marcar el botón seleccionado
-                    button.classList.add('active');
-                    const checkbox = button.querySelector('.checkbox .icon');
-                    checkbox.innerHTML = '&#10006;';
-                    checkbox.classList.add('checked');
+        //     // Map de id de botón a nombre de prueba
+        //     const pruebaNombreMap = {
+        //         'emf5': 'Medidor EMF 5',
+        //         'ultravioleta': 'Ultravioleta',
+        //         'escritura': 'Escritura Fantasmal',
+        //         'heladas': 'Temperaturas Heladas',
+        //         'dots': 'Proyector D.O.T.S.',
+        //         'orbes': 'Orbes Espectrales',
+        //         'spirit': 'Spirit Box',
+        //         'tarde': '40%',
+        //         'normal_cordura': '50%',
+        //         'pronto': '60%',
+        //         'muy_pronto': '75%'
+        //     };
 
-                    corduraSeleccionada = button.id;
-                    filtrarFantasmas();
-                });
-            });
+        //     pruebaButtons.forEach(button => {
+        //         button.addEventListener('click', () => {
+        //             const prueba = pruebaNombreMap[button.id];
+        //             const isActive = button.classList.toggle('active');
 
-            resetButton.addEventListener('click', () => {
-                corduraSeleccionada = 'normal_cordura';
-                // Desmarcar todos los botones
-                corduraButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    const checkbox = btn.querySelector('.checkbox .icon');
-                    checkbox.innerHTML = '';
-                    checkbox.classList.remove('checked');
-                });
-                mostrarTodosFantasmas();
-            });
+        //             if (isActive) {
+        //                 pruebasSeleccionadas.add(prueba);
 
-            function filtrarFantasmas() {
-                fantasmaCards.forEach(card => {
-                    const corduraFantasma = parseInt(card.querySelector('.div_cerebro .div_numeros').textContent.trim());
-                    const [min, max] = corduraRanges[corduraSeleccionada];
-                    const matchCordura = corduraFantasma >= min && corduraFantasma < max;
-                    card.style.display = matchCordura ? '' : 'none';
-                });
-            }
+        //             } else {
+        //                 pruebasSeleccionadas.delete(prueba);
 
-            function mostrarTodosFantasmas() {
-                fantasmaCards.forEach(card => {
-                    card.style.display = '';
-                });
-            }
-        });
+        //             }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const velocidadButtons = document.querySelectorAll('.row_velocidad button');
-            const resetButton = document.getElementById('reset');
-            const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
-            let velocidadSeleccionada = 'normal';
+        //             filtrarFantasmas();
+        //         });
+        //     });
 
-            // Rangos de velocidad
-            const velocidadRanges = {
-                'lento': [0, 1.7],
-                'normal': [1.7, 1.71],
-                'rapido': [1.71, 5],
-                'con_vision': [5, Infinity] // Suponiendo que "Más rápido al verte" no tiene límite superior
-            };
+        //     resetButton.addEventListener('click', () => {
+        //         pruebasSeleccionadas.clear();
+        //         pruebaButtons.forEach(button => {
+        //             button.classList.remove('active');
+        //             const checkbox = button.querySelector('.checkbox .icon');
+        //             checkbox.classList.remove('checked');
+        //         });
+        //         mostrarTodosFantasmas();
+        //     });
 
-            velocidadButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Desmarcar todos los botones
-                    velocidadButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        const checkbox = btn.querySelector('.checkbox .icon');
-                        checkbox.innerHTML = '';
-                        checkbox.classList.remove('checked');
-                    });
+        //     function filtrarFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             const pruebasFantasma = Array.from(card.querySelectorAll('.div_pruebas_fantasma .div_prueba')).map(pruebaDiv => pruebaDiv.querySelector('.div_texto_pruebas').textContent.trim());
+        //             const match = Array.from(pruebasSeleccionadas).every(prueba => pruebasFantasma.includes(prueba));
+        //             card.style.display = match ? '' : 'none';
+        //         });
+        //     }
 
-                    // Marcar el botón seleccionado
-                    button.classList.add('active');
-                    const checkbox = button.querySelector('.checkbox .icon');
-                    checkbox.innerHTML = '&#10006;';
-                    checkbox.classList.add('checked');
+        //     function mostrarTodosFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             card.style.display = '';
+        //         });
 
-                    velocidadSeleccionada = button.id;
-                    filtrarFantasmas();
-                });
-            });
+        //         pruebaButtons.forEach(button => {
+        //             const checkbox = button.querySelector('.checkbox .icon');
+        //             checkbox.innerHTML = '';
+        //             checkbox.classList.remove('checked');
+        //         });
+        //     }
+        // });
 
-            resetButton.addEventListener('click', () => {
-                velocidadSeleccionada = 'normal';
-                // Desmarcar todos los botones
-                velocidadButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    const checkbox = btn.querySelector('.checkbox .icon');
-                    checkbox.innerHTML = '';
-                    checkbox.classList.remove('checked');
-                });
-                mostrarTodosFantasmas();
-            });
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const corduraButtons = document.querySelectorAll('.row_cordura button');
+        //     const resetButton = document.getElementById('reset');
+        //     const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+        //     let corduraSeleccionada = 'normal_cordura';
 
-            function filtrarFantasmas() {
-                fantasmaCards.forEach(card => {
-                    const velocidadFantasmaText = card.querySelector('.div_pisadas .div_numeros').textContent.trim();
-                    // Extraer el rango de velocidades
-                    const velocidadRange = velocidadFantasmaText.match(/\d+\.\d+/g);
-                    // Convertir el rango de velocidad a números
-                    const minVelocidadFantasma = parseFloat(velocidadRange[0]);
-                    const maxVelocidadFantasma = parseFloat(velocidadRange[1]);
-                    // Verificar si el rango de velocidad se superpone con el rango de cada botón
-                    const overlappingRanges = Object.entries(velocidadRanges).filter(([_, range]) => {
-                        const [min, max] = range;
-                        return minVelocidadFantasma < max && maxVelocidadFantasma > min;
-                    }).map(([buttonId, _]) => buttonId);
-                    // Mostrar el fantasma si su rango se superpone con el rango del botón seleccionado
-                    card.style.display = overlappingRanges.includes(velocidadSeleccionada) ? '' : 'none';
-                });
-            }
+        //     // Rangos de cordura
+        //     const corduraRanges = {
+        //         'tarde': [0, 41],
+        //         'normal_cordura': [41, 51],
+        //         'pronto': [51, 76],
+        //         'muy_pronto': [76, 101]
+        //     };
 
-            function mostrarTodosFantasmas() {
-                fantasmaCards.forEach(card => {
-                    card.style.display = '';
-                });
-            }
-        });
+        //     corduraButtons.forEach(button => {
+        //         button.addEventListener('click', () => {
+        //             // Desmarcar todos los botones
+        //             corduraButtons.forEach(btn => {
+        //                 btn.classList.remove('active');
+        //                 const checkbox = btn.querySelector('.checkbox .icon');
+        //                 checkbox.innerHTML = '';
+        //                 checkbox.classList.remove('checked');
+        //             });
+
+        //             // Marcar el botón seleccionado
+        //             button.classList.add('active');
+        //             const checkbox = button.querySelector('.checkbox .icon');
+        //             checkbox.innerHTML = '&#10006;';
+        //             checkbox.classList.add('checked');
+
+        //             corduraSeleccionada = button.id;
+        //             filtrarFantasmas();
+        //         });
+        //     });
+
+        //     resetButton.addEventListener('click', () => {
+        //         corduraSeleccionada = 'normal_cordura';
+        //         // Desmarcar todos los botones
+        //         corduraButtons.forEach(btn => {
+        //             btn.classList.remove('active');
+        //             const checkbox = btn.querySelector('.checkbox .icon');
+        //             checkbox.innerHTML = '';
+        //             checkbox.classList.remove('checked');
+        //         });
+        //         mostrarTodosFantasmas();
+        //     });
+
+        //     function filtrarFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             const corduraFantasma = parseInt(card.querySelector('.div_cerebro .div_numeros').textContent.trim());
+        //             const [min, max] = corduraRanges[corduraSeleccionada];
+        //             const matchCordura = corduraFantasma >= min && corduraFantasma < max;
+        //             card.style.display = matchCordura ? '' : 'none';
+        //         });
+        //     }
+
+        //     function mostrarTodosFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             card.style.display = '';
+        //         });
+        //     }
+        // });
+
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const velocidadButtons = document.querySelectorAll('.row_velocidad button');
+        //     const resetButton = document.getElementById('reset');
+        //     const fantasmaCards = document.querySelectorAll('.tarjeta_fantasma_general');
+        //     let velocidadSeleccionada = 'normal';
+
+        //     // Rangos de velocidad
+        //     const velocidadRanges = {
+        //         'lento': [0, 1.7],
+        //         'normal': [1.7, 1.71],
+        //         'rapido': [1.71, 5],
+        //         'con_vision': [5, Infinity] // Suponiendo que "Más rápido al verte" no tiene límite superior
+        //     };
+
+        //     velocidadButtons.forEach(button => {
+        //         button.addEventListener('click', () => {
+        //             // Desmarcar todos los botones
+        //             velocidadButtons.forEach(btn => {
+        //                 btn.classList.remove('active');
+        //                 const checkbox = btn.querySelector('.checkbox .icon');
+        //                 checkbox.innerHTML = '';
+        //                 checkbox.classList.remove('checked');
+        //             });
+
+        //             // Marcar el botón seleccionado
+        //             button.classList.add('active');
+        //             const checkbox = button.querySelector('.checkbox .icon');
+        //             checkbox.innerHTML = '&#10006;';
+        //             checkbox.classList.add('checked');
+
+        //             velocidadSeleccionada = button.id;
+        //             filtrarFantasmas();
+        //         });
+        //     });
+
+        //     resetButton.addEventListener('click', () => {
+        //         velocidadSeleccionada = 'normal';
+        //         // Desmarcar todos los botones
+        //         velocidadButtons.forEach(btn => {
+        //             btn.classList.remove('active');
+        //             const checkbox = btn.querySelector('.checkbox .icon');
+        //             checkbox.innerHTML = '';
+        //             checkbox.classList.remove('checked');
+        //         });
+        //         mostrarTodosFantasmas();
+        //     });
+
+        //     function filtrarFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             const velocidadFantasmaText = card.querySelector('.div_pisadas .div_numeros').textContent.trim();
+        //             // Extraer el rango de velocidades
+        //             const velocidadRange = velocidadFantasmaText.match(/\d+\.\d+/g);
+        //             // Convertir el rango de velocidad a números
+        //             const minVelocidadFantasma = parseFloat(velocidadRange[0]);
+        //             const maxVelocidadFantasma = parseFloat(velocidadRange[1]);
+        //             // Verificar si el rango de velocidad se superpone con el rango de cada botón
+        //             const overlappingRanges = Object.entries(velocidadRanges).filter(([_, range]) => {
+        //                 const [min, max] = range;
+        //                 return minVelocidadFantasma < max && maxVelocidadFantasma > min;
+        //             }).map(([buttonId, _]) => buttonId);
+        //             // Mostrar el fantasma si su rango se superpone con el rango del botón seleccionado
+        //             card.style.display = overlappingRanges.includes(velocidadSeleccionada) ? '' : 'none';
+        //         });
+        //     }
+
+        //     function mostrarTodosFantasmas() {
+        //         fantasmaCards.forEach(card => {
+        //             card.style.display = '';
+        //         });
+        //     }
+        // });
     </script>
 </body>
 
