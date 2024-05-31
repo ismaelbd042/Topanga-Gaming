@@ -671,11 +671,25 @@
         document.addEventListener("DOMContentLoaded", function() {
             var pruebasMarcadas = [];
 
+            // Mapeo de IDs de botones a nombres de pruebas en la base de datos
+            const idToPrueba = {
+                emf5: "Medidor EMF 5",
+                ultravioleta: "Ultravioleta",
+                escritura: "Escritura Fantasmal",
+                heladas: "Temperaturas Heladas",
+                dots: "Proyector D.O.T.S.",
+                orbes: "Orbes Espectrales",
+                spirit: "Spirit Box",
+                lento: "<1.7",
+                normal: "1.7",
+                rapido: ">1.7",
+                con_vision: "visión",
+            };
+
             var botonesPruebas = document.querySelectorAll('.row_pruebas button');
 
             botonesPruebas.forEach(function(boton) {
                 boton.addEventListener('click', function() {
-
                     var idPrueba = boton.id;
 
                     var marcado = pruebasMarcadas.includes(idPrueba);
@@ -689,20 +703,50 @@
                         boton.classList.add('marked');
                     }
 
-                    console.log(pruebasMarcadas);
+                    // Mapear los IDs a los nombres de las pruebas antes de enviar
+                    var nombresPruebas = pruebasMarcadas.map(id => idToPrueba[id]);
+
+                    console.log(nombresPruebas);
                     // Enviar la información al servidor
                     fetch('averiguar.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(pruebasMarcadas)
+                            body: JSON.stringify(nombresPruebas)
                         })
                         .then(response => response.text()) // Convertir la respuesta a texto
-                        .then(data => console.log(data))
-                        .catch(error => console.error('Error:', error)); // Manejar errores si los hay
+                        .then(data => mostrarFantasmas(data))
+                    // .catch(error => console.error('Error:', error)); // Manejar errores si los hay
                 });
             });
+
+            function mostrarFantasmas(data) {
+                console.log('Respuesta del servidor:', data);
+                var tarjetas = document.querySelectorAll('.tarjeta_fantasma_general');
+                if (JSON.parse(data).error) {
+                    tarjetas.forEach(function(tarjeta) {
+                        tarjeta.style.display = '';
+                    });
+                } else {
+                    const dataArray = JSON.parse(data).map(Number);
+                    console.log(dataArray)
+
+                    if (data.error) {
+                        console.error('Error del servidor:', data.error);
+                    } else {
+                        tarjetas.forEach(function(tarjeta) {
+                            var idFantasma = parseInt(tarjeta.querySelector('span').textContent, 10);
+
+                            if (dataArray.includes(idFantasma)) {
+                                tarjeta.style.display = '';
+                            } else {
+                                tarjeta.style.display = 'none';
+                            }
+                        });
+                    }
+                }
+            }
         });
 
 
