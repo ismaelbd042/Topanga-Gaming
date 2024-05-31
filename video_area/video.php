@@ -189,6 +189,8 @@
                     .click(function () {
                         quitarMeGusta(video_id);
                     });
+                $(".tooltiptext")
+                    .html("No me gusta")
             },
             error: function (response) {
                 console.log("Error al dar Me Gusta: " + response);
@@ -209,6 +211,8 @@
                     .click(function () {
                         darMeGusta(video_id);
                     });
+                $(".tooltiptext")
+                    .html("Me gusta")
             },
             error: function (response) {
                 console.log("Error al quitar Me Gusta: " + response);
