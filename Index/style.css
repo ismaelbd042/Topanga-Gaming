@@ -105,3 +105,20 @@ body {
     align-items: center;
     gap: 1.5em;
 }
+
+.corchoMapas {
+    display: block;
+    height: 700px;
+    width: 800px;
+    background-image: url(../img/Fotos\mapas/corcho.jpg);
+}
+
+.imgsMapas {
+    width: 50px;
+    height: 50px;
+}
+
+.imgsMapas img {
+    width: 50px;
+    height: 50px;
+}
