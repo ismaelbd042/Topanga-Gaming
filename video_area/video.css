@@ -6,6 +6,91 @@
     width: 100%;
 }
 
-.divVideoAbierto video {
+.divVideoAbierto {
     width: 50%;
+}
+
+.divVideoAbierto video {
+    width: 100%;
+}
+
+.divVideoAbierto p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.imgCampanaSuscripcion {
+    width: 23px;
+}
+
+.subscribeButton {
+    background: var(--Gradiente-Marca,
+        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño del texto */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 5px;
+}
+
+.subscribeButton:hover {
+    background: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+}
+
+.divAbajoVideo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border: solid 1px; */
+    padding-right: 15px;
+}
+
+.imgCorazon {
+    width: 33px;
+    height: 36px;
+    /* margin-right: 15px; */
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: -75%; /* Posiciona el tooltip encima del elemento */
+    left: 40%;
+    margin-left: -46px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -34%; /* Parte inferior del tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent; /* Triángulo */
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

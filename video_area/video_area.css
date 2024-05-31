@@ -26,6 +26,7 @@
 .sidebarVideos ul {
     list-style-type: none;
     padding: 0;
+    cursor: pointer;
 }
 
 .sidebarVideos ul li {
@@ -53,6 +54,10 @@
     background-color: #575757;
 }
 
+.selected {
+    background-color: #575757; /* Cambia este color por el que desees */
+}
+
 .divPrincipalVideos {
     display: flex;
     margin-left: 200px; /* Asegura que el contenido principal no quede debajo de la sidebar */
@@ -60,8 +65,8 @@
 
 .main-contentVideos {
     width: 100%; /* Ajusta el ancho según el espacio que ocupa la sidebar */
-    height: 1500px;
-    border: solid 1px;
+    height: auto;
+    /* border: solid 1px; */
     margin-top: 70px; /* Asegura que el contenido principal esté alineado con el header */
     display: flex;
     align-items: center;
@@ -77,6 +82,7 @@
     align-items: center;
     margin-bottom: 20px;
     width: 40%;
+    justify-content: center;
 }
 
 #searchInputVideo {
@@ -92,7 +98,8 @@
 .search-wrapper {
     position: relative;
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
+    min-width: 260px;
 }
 
 .search-icon {
@@ -156,4 +163,15 @@
 
 .video-item:hover video {
     filter: grayscale(100%);
+}
+
+.divNoHayVideos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imgNoVideos {
+    width: 100%;
+    /* display: flex; */
 }
