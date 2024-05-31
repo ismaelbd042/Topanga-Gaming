@@ -140,6 +140,24 @@ function crearTablas($conexion)
         FOREIGN KEY (idAutor) REFERENCES usuarios(id)
     )";
     mysqli_query($conexion, $sqlVideos);
+
+    $sqlMeGusta = "CREATE TABLE IF NOT EXISTS meGusta (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        idVideo INT NOT NULL,
+        idUsuario INT NOT NULL,
+        FOREIGN KEY (idVideo) REFERENCES videos(id),
+        FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlMeGusta);
+
+    $sqlSuscripciones= "CREATE TABLE IF NOT EXISTS suscripciones (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        idStreamer INT NOT NULL,
+        idUsuario INT NOT NULL,
+        FOREIGN KEY (idStreamer) REFERENCES usuarios(id),
+        FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlSuscripciones);
 }
 
 function insertarDatos($conexion)
@@ -355,15 +373,27 @@ function insertarDatos($conexion)
     mysqli_query($conexion, $insertarMapas);
 
     $contraseña1 = password_hash('1', PASSWORD_DEFAULT);
+    $contraseña2 = password_hash('2', PASSWORD_DEFAULT);
     //Insertar datos en tabla usuarios
     $insertarUsuarios = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES
-        ('1', '1@admin.com', '$contraseña1');
+        ('1', '1@admin.com', '$contraseña1'),
+        ('2', '2@admin.com', '$contraseña2');
     ";
     mysqli_query($conexion, $insertarUsuarios);
 
     $insertarVideos = "INSERT INTO videos (nombreVideo, idAutor, video) VALUES 
     ('Trailer de Xbox de phasmophobia', 1, '../video_area/videosMP4/video1.mp4'),
-    ('Vas a flipar con este juegazo', 1, '../video_area/videosMP4/video2.mp4')
+    ('Vas a flipar con este juegazo', 2, '../video_area/videosMP4/video2.mp4')
     ";
     mysqli_query($conexion, $insertarVideos);
+
+    $insertarMeGusta = "INSERT INTO meGusta (idVideo, idUsuario) VALUES 
+    (2, 1)
+    ";
+    mysqli_query($conexion, $insertarMeGusta);
+
+    $insertarSuscripciones = "INSERT INTO suscripciones (idStreamer, idUsuario) VALUES 
+    (2, 1)
+    ";
+    mysqli_query($conexion, $insertarSuscripciones);
 }

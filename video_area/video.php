@@ -13,6 +13,8 @@
 <body>
     <div class="overlay"></div>
     <?php
+    session_start(); // Iniciar sesión si no se ha iniciado aún
+    
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
@@ -25,7 +27,10 @@
         $video_id = $_GET['id'];
 
         // Preparar la consulta para seleccionar el video de la base de datos
-        $sql = "SELECT nombreVideo, video FROM videos WHERE id = ?";
+        $sql = "SELECT videos.nombreVideo, videos.video, usuarios.nombre_usuario, usuarios.id AS idAutor
+            FROM videos
+            JOIN usuarios ON videos.idAutor = usuarios.id
+            WHERE videos.id = ?";
 
         // Preparar la declaración
         $stmt = $conn->prepare($sql);
@@ -43,6 +48,30 @@
         if ($result->num_rows == 1) {
             // Obtener los datos del video
             $video = $result->fetch_assoc();
+
+            // Verificar si el usuario está suscrito al autor del video
+            if (isset($_SESSION['id'])) {
+                $idUsuario = $_SESSION['id'];
+                $idAutor = $video['idAutor'];
+                $sql_subscripcion = "SELECT * FROM suscripciones WHERE idUsuario = ? AND idStreamer = ?";
+                $stmt_subscripcion = $conn->prepare($sql_subscripcion);
+                $stmt_subscripcion->bind_param("ii", $idUsuario, $idAutor);
+                $stmt_subscripcion->execute();
+                $result_subscripcion = $stmt_subscripcion->get_result();
+
+                $sql_meGusta = "SELECT * FROM megusta WHERE idUsuario = ? AND idVideo = ?";
+                $stmt_megusta = $conn->prepare($sql_meGusta);
+                $stmt_megusta->bind_param("ii", $idUsuario, $video_id);
+                $stmt_megusta->execute();
+                $result_megusta = $stmt_megusta->get_result();
+
+                // Si existe una fila de suscripción, el usuario está suscrito al autor
+                $suscripcion_activa = ($result_subscripcion->num_rows == 1);
+                $megusta_activa = ($result_megusta->num_rows == 1);
+            } else {
+                $suscripcion_activa = false;
+                $megusta_activa = false;
+            }
         } else {
             // Si no se encuentra el video, redirigir a otra página o mostrar un mensaje de error
             header('Location: index.php'); // Redirigir a la página principal
@@ -59,16 +88,137 @@
     $conn->close();
     ?>
     <div class="divVideoComentarios">
-        <h1><?php echo $video['nombreVideo']; ?></h1>
         <div class="divVideoAbierto">
+            <h1><?php echo $video['nombreVideo']; ?></h1>
             <video controls>
                 <source src="<?php echo $video['video']; ?>" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-        </div>
-        <!-- Aquí puedes incluir la sección de comentarios u otros detalles del video -->
+            <div class="divAbajoVideo">
+    <p>@<?php echo $video['nombre_usuario']; ?>
+        <?php if ($suscripcion_activa): ?>
+            <button class="subscribeButton" id="cancelarSuscripcion">
+                <img src="../img/Icons/suscribirseCancelar.png" alt="Campana Suscripción" class="imgCampanaSuscripcion">
+                Cancelar suscripción
+            </button>
+        <?php else: ?>
+            <button class="subscribeButton" id="aceptarSuscripcion">
+                <img src="../img/Icons/suscribirse.png" alt="Campana Suscripción" class="imgCampanaSuscripcion">
+                Suscribirse
+            </button>
+        <?php endif; ?>
+    </p>
+    <div class="tooltip">
+        <?php if ($megusta_activa): ?>
+            <img src="../img/Icons/corazonRelleno.png" alt="Corazon de me gusta" class="imgCorazon" id="nolikeButton">
+            <span class="tooltiptext">No me gusta</span>
+        <?php else: ?>
+            <img src="../img/Icons/corazon.png" alt="Corazon de me gusta" class="imgCorazon" id="likeButton">
+            <span class="tooltiptext">Me gusta</span>
+        <?php endif; ?>
     </div>
-    <script src="../Index/script.js"></script>
+</div>
+
+<script src="../Index/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Suscripción
+        $("#aceptarSuscripcion").click(function () {
+            suscribirse(<?php echo $video['idAutor']; ?>);
+        });
+
+        $("#cancelarSuscripcion").click(function () {
+            cancelarSuscripcion(<?php echo $video['idAutor']; ?>);
+        });
+
+        // Me gusta
+        $("#nolikeButton").click(function () {
+            quitarMeGusta(<?php echo $video_id; ?>);
+        });
+
+        $("#likeButton").click(function () {
+            darMeGusta(<?php echo $video_id; ?>);
+        });
+    });
+
+    function suscribirse(idAutor) {
+        $.ajax({
+            type: "POST",
+            url: "suscribirse.php",
+            data: { idAutor: idAutor },
+            success: function (response) {
+                $("#aceptarSuscripcion")
+                    .html('<img src="../img/Icons/suscribirseCancelar.png" alt="Campana Suscripción" class="imgCampanaSuscripcion"> Cancelar suscripción')
+                    .attr("id", "cancelarSuscripcion")
+                    .unbind("click")
+                    .click(function () {
+                        cancelarSuscripcion(idAutor);
+                    });
+            }
+        });
+    }
+
+    function cancelarSuscripcion(idAutor) {
+        $.ajax({
+            type: "POST",
+            url: "cancelar_suscripcion.php",
+            data: { idAutor: idAutor },
+            success: function (response) {
+                $("#cancelarSuscripcion")
+                    .html('<img src="../img/Icons/suscribirse.png" alt="Campana Suscripción" class="imgCampanaSuscripcion"> Suscribirse')
+                    .attr("id", "aceptarSuscripcion")
+                    .unbind("click")
+                    .click(function () {
+                        suscribirse(idAutor);
+                    });
+            }
+        });
+    }
+
+    function darMeGusta(video_id) {
+        $.ajax({
+            type: "POST",
+            url: "dar_megusta.php",
+            data: { video_id: video_id },
+            success: function (response) {
+                $("#likeButton")
+                    .attr("src", "../img/Icons/corazonRelleno.png")
+                    .attr("id", "nolikeButton")
+                    .unbind("click")
+                    .click(function () {
+                        quitarMeGusta(video_id);
+                    });
+            },
+            error: function (response) {
+                console.log("Error al dar Me Gusta: " + response);
+            }
+        });
+    }
+
+    function quitarMeGusta(video_id) {
+        $.ajax({
+            type: "POST",
+            url: "quitar_megusta.php",
+            data: { video_id: video_id },
+            success: function (response) {
+                $("#nolikeButton")
+                    .attr("src", "../img/Icons/corazon.png")
+                    .attr("id", "likeButton")
+                    .unbind("click")
+                    .click(function () {
+                        darMeGusta(video_id);
+                    });
+            },
+            error: function (response) {
+                console.log("Error al quitar Me Gusta: " + response);
+            }
+        });
+    }
+</script>
+
+
+
 </body>
 
 </html>
