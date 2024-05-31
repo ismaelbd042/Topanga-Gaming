@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,44 +8,55 @@
     <title>Ventana Modal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
         /*:::Boton-Modal:::*/
         .boton-modal label {
-            padding: 70px; /* Ajusta el padding para hacerlo más proporcionado */
+            padding: 70px;
+            /* Ajusta el padding para hacerlo más proporcionado */
             margin-top: 3%;
-            height: 70px; /* Ajusta la altura */
-            padding: 0 4em; /* Ajusta el padding horizontal */
+            height: 70px;
+            /* Ajusta la altura */
+            padding: 0 4em;
+            /* Ajusta el padding horizontal */
             width: 80%;
             color: #fff;
             background: radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%);
             border: 0;
-            font-size: 20px; /* Ajusta el tamaño de la fuente */
+            font-size: 20px;
+            /* Ajusta el tamaño de la fuente */
             border-radius: 10px;
             cursor: pointer;
             transition: all 300ms ease;
         }
+
         .boton-modal label:hover {
             background-color: #8a56af;
         }
+
         /*:::Fin Boton-Modal:::*/
 
         /*:::Ventana Modal:::*/
         #btn-modal {
             display: none;
         }
+
         .container-modal {
             width: 100%;
             height: 100vh;
             position: fixed;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             background-color: rgba(144, 148, 150, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 100;
         }
-        #btn-modal:checked ~ .container-modal {
+
+        #btn-modal:checked~.container-modal {
             display: flex;
         }
+
         .content-modal {
             width: 100%;
             color: black;
@@ -53,20 +65,24 @@
             background-color: #fff;
             border-radius: 4px;
         }
+
         .content-modal h2 {
             margin-bottom: 15px;
         }
+
         .content-modal p {
             padding: 15px 0px;
             border-top: 1px solid #dbdbdb;
             border-bottom: 1px solid #dbdbdb;
         }
+
         .content-modal .btn-cerrar {
             width: 100%;
             margin-top: 15px;
             display: flex;
             justify-content: flex-end;
         }
+
         .content-modal .btn-cerrar label {
             padding: 7px 10px;
             background: radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%);
@@ -75,21 +91,26 @@
             cursor: pointer;
             transition: all 300ms ease;
         }
+
         .cerrar-modal {
             width: 100%;
             height: 100vh;
             position: absolute;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             z-index: -1;
         }
+
         @media screen and (max-width: 800px) {
             .content-modal {
                 width: 90%;
             }
         }
+
         /*:::Fin Ventana Modal:::*/
     </style>
 </head>
+
 <body>
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
@@ -107,10 +128,12 @@
             document.querySelectorAll('.efecto-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const efecto = button.getAttribute('data-efecto');
-                    document.getElementById('modal-efecto-texto').textContent = efecto;
+                    const formattedEfecto = efecto.replace(/\n/g, '<br>');
+                    document.getElementById('modal-efecto-texto').innerHTML = formattedEfecto;
                 });
             });
         });
     </script>
 </body>
+
 </html>

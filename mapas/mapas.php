@@ -23,7 +23,7 @@
         .div_foto_nombreMapa {
             width: 100%;
             height: 600px;
-            border-top: 1px solid;
+            /* border-top: 1px solid; */
             background-size: cover;
             background-repeat: no-repeat;
             display: flex;
@@ -183,7 +183,7 @@
             </div>
             <div class="div_ubicacion_objetos">
                 <div class="div_general_ubicacionesObjetos">
-                    <div class="div_titulo_ubicacionObjetos">Ubicación de los Objetos en el Mapa</div>
+                    <div class="div_titulo_ubicacionObjetos">Ubicacion de los Objetos en el Mapa</div>
                     <div class="div_objeto_maldito">
                         <img src="<?php echo $mapa['img']; ?>" alt="Plano del Mapa" class="imagen_plano_objetos">
                     </div>
