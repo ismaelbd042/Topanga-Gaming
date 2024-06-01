@@ -158,6 +158,16 @@ function crearTablas($conexion)
         FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
     )";
     mysqli_query($conexion, $sqlSuscripciones);
+
+    $sqlComentarios = "CREATE TABLE IF NOT EXISTS comentarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        idVideo INT NOT NULL,
+        idUsuario INT NOT NULL,
+        comment TEXT NOT NULL,
+        FOREIGN KEY (idVideo) REFERENCES videos(id),
+        FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
+    )";
+    mysqli_query($conexion, $sqlComentarios);
 }
 
 function insertarDatos($conexion)
@@ -396,4 +406,9 @@ function insertarDatos($conexion)
     (2, 1)
     ";
     mysqli_query($conexion, $insertarSuscripciones);
+
+    $insertarComentarios = "INSERT INTO comentarios (idVideo, idUsuario, comment) VALUES 
+    (1, 2, 'Este video es el mejor que he visto!!!')
+    ";
+    mysqli_query($conexion, $insertarComentarios);
 }

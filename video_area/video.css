@@ -1,5 +1,6 @@
 .divVideoComentarios {
     margin: 30px;
+    display: flex;
 }
 
 .divVideoAbierto {
@@ -12,6 +13,7 @@
 
 .divVideoAbierto video {
     width: 100%;
+    border-radius: 10px;
 }
 
 .divVideoAbierto p {
@@ -93,4 +95,47 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+/****************Comentarios********************/
+
+.divComentarios {
+    width: 50%;
+    position: relative;
+    padding-bottom: 60px; /* Espacio para el formulario */
+    padding: 10px;
+    background-color: white;
+    color: black;
+}
+
+.divComentarios h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.divEnviarComentario {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#comentarioForm {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+}
+
+#comentarioForm textarea {
+    width: 80%;
+    height: 30px;
+    resize: none;
+}
+
+#comentarioForm button {
+    width: 18%;
+    height: 30px;
 }
