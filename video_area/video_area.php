@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             JOIN usuarios ON videos.idAutor = usuarios.id 
             WHERE videos.idAutor = $idAutor
             ORDER BY videos.id DESC";
+        $isCanalSidebar = true;
     } elseif ($selectedItem == 'suscripcionesSidebar') {
         // Realizar la consulta SQL correspondiente para el elemento "Suscripciones"
         $idAutor = $_SESSION['id'];
@@ -62,11 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<p>@ ' . $row['nombre_usuario'] . '</p>';
             echo '</div>';
         }
+
     } else {
-        echo'<div class="divNoHayVideos">';
+        echo '<div class="divNoHayVideos">';
         echo '<img src="../img/Icons/noVideos.png" alt="No hay videos icono" class="imgNoVideos">';
         echo '<p id="noVideosMessage">Lo sentimos, no hay videos en esta sección.</p>';
-        echo'</div>';
+        echo '</div>';
     }
 
     exit; // Finalizar la ejecución del script después de mostrar el resultado
@@ -148,6 +150,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ?>
             </div>
             <p id="noVideosMessage" style="display: none;">No se encontraron resultados.</p>
+            <div class="upload-video-container">
+                <button class="upload-video-button" onclick="location.href='upload_video.php'">Subir Video</button>
+            </div>
         </div>
 
         <script>

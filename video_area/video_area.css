@@ -175,3 +175,25 @@
     width: 100%;
     /* display: flex; */
 }
+
+.upload-video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacio arriba del botón para separarlo de los videos */
+    margin-bottom: 40px; /* Espacio abajo del botón */
+    width: 100%; /* Asegura que el contenedor del botón ocupe el ancho completo */
+}
+
+.upload-video-button {
+    padding: 10px 20px;
+    background-color: #5F1495; /* Color de fondo del botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-video-button:hover {
+    background-color: #4a0e70; /* Color de fondo del botón al pasar el mouse */
+}
