@@ -162,13 +162,14 @@
             <label for="chkVentanaModal" aria-hidden="true" class="labelVentanaModal">Login</label>
 
             <div class="input-container">
-                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off">
+                <input type="email" name="email" class="inputVentanaModal" placeholder="Email" autocomplete="off"
+                    required>
                 <span class="error-icon email-error2" style="display: none;"><i class="fas fa-times-circle"></i></span>
             </div>
 
             <div class="input-container">
                 <input type="password" name="pswd" class="inputVentanaModal" placeholder="Password" id="passwordInput"
-                    autocomplete="off">
+                    autocomplete="off" required>
                 <i class="fas fa-eye" id="ojoVerContraseña" onclick="mostrarContraseña()"></i>
                 <span class="error-icon password-error2" style="display: none;"><i
                         class="fas fa-times-circle"></i></span>
@@ -181,4 +182,29 @@
 </div>
 
 <script>
+    document.getElementById('login').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+        const formData = new FormData(this);
+        const mensajeErrorLogin = document.getElementById('mensaje-error-login');
+
+        fetch(this.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '../Index/index.php'; // Redirigir si el inicio de sesión es exitoso
+                } else {
+                    mensajeErrorLogin.textContent = data.error; // Mostrar mensaje de error
+                    mensajeErrorLogin.style.display = 'block'; // Asegurarse de que el mensaje sea visible
+                }
+            })
+            .catch(error => {
+                mensajeErrorLogin.textContent = 'Error en el servidor. Por favor, inténtelo de nuevo más tarde.';
+                mensajeErrorLogin.style.display = 'block'; // Asegurarse de que el mensaje sea visible
+            });
+    });
+
 </script>

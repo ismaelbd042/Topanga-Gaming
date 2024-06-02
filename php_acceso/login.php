@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica si la solicitud es de ti
             $respuesta['success'] = true; // Establece el éxito de la autenticación en verdadero
             $id_usuario = $row['id']; // Obtiene el ID del usuario
             $_SESSION['id'] = $id_usuario; // Establece el ID del usuario en la sesión
+            $_SESSION['nombre_usuario'] = $row['nombre_usuario']; // Guarda el nombre del usuario en la sesión
         } else {
             $respuesta['error'] = 'Contraseña incorrecta.'; // Establece un mensaje de error si la contraseña es incorrecta
         }
@@ -40,11 +41,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Verifica si la solicitud es de ti
     // Cerrar la conexión
     mysqli_stmt_close($stmt); // Cierra la consulta preparada
     mysqli_close($conn); // Cierra la conexión a la base de datos
-
-    // Redireccionar solo si el inicio de sesión fue exitoso
-    if ($respuesta['success']) {
-        $_SESSION['nombre_usuario'] = $row['nombre_usuario'];
-        header("location: ../Index/index.php"); // Redirecciona al usuario a la página de inicio
-        exit();
-    }
 }
