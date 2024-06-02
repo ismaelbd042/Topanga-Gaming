@@ -92,27 +92,6 @@
             align-items: center;
         }
 
-        .div_textos_foto_cuadro {
-            width: 90%;
-            height: 70%;
-            gap: 4%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            align-self: center;
-        }
-
-        .imagen_cuadroLuz {
-            height: 90%;
-        }
-
-        .informacion_cuadroLuz {
-            border: 1px solid;
-            width: 35%;
-            height: 50%;
-            font-size: 20px;
-        }
 
         .div_objeto_maldito {
             width: 90%;
@@ -149,7 +128,7 @@
     }
 
     // Obtener el nombre del mapa desde la URL
-    $nombreMapa = isset($_GET['mapa']) ? $_GET['mapa'] : '13_Willow_Street';
+    $nombreMapa = isset($_GET['mapa']) ? $_GET['mapa'] : '6_Tanglewood_Drive';
     $nombreMapaLimpio = str_replace('_', ' ', $nombreMapa);
 
     // Consultar los datos del mapa específico
@@ -168,17 +147,9 @@
             <div class="div_informacion_mapa">
                 <div class="cuadro_informacion">Información Acerca del Mapa</div>
                 <div class="cuadro_informacion2">
-                    Este mapa tenebroso detalla el inquietante Bosque de las Sombras, un lugar envuelto en misterio y peligros desconocidos.
-                    A lo largo del mapa, se despliega una extensión sombría dominada por la naturaleza salvaje y el abandono de antiguas civilizaciones.
-                    <br><br>
-                    Tamaño: <?php echo $mapa['tamaño']; ?><br>
-                    Plantas: <?php echo $mapa['plantas']; ?><br>
-                    Habitaciones: <?php echo $mapa['habitaciones']; ?><br>
-                    Salidas: <?php echo $mapa['salidas']; ?><br>
-                    Grifos: <?php echo $mapa['grifos']; ?><br>
-                    Cámaras: <?php echo $mapa['camaras']; ?><br>
-                    Escondites: <?php echo $mapa['escondites']; ?><br>
-                    Nivel de Desbloqueo: <?php echo $mapa['nivel_desbloqueo']; ?>
+                    Este mapa es <?php echo $mapa['tamaño']; ?>, tiene <?php echo $mapa['plantas']; ?> plantas, tambien tiene <?php echo $mapa['habitaciones']; ?> habitaciones(los numero entre guiones representan las habitaciones por cada planta desde la planta de arriba hasta la planta baja),
+                    por otra parte tiene <?php echo $mapa['salidas']; ?> salidas, tambien <?php echo $mapa['grifos']; ?> grifos, <?php echo $mapa['camaras']; ?> camaras, <?php echo $mapa['escondites']; ?>
+                    escondites y este mapa se desbloquea en el nivel <?php echo $mapa['nivel_desbloqueo']; ?> de experiencia.
                 </div>
             </div>
             <div class="div_ubicacion_objetos">
