@@ -146,7 +146,7 @@
         echo '    <div class="nombre_prueba">'. quitarTildes(htmlspecialchars($prueba['nombre'])) . '</div>';
         echo '    <div class="cuadrado_foto"><img src="../img/Fotos Pruebas Juego/' . strtolower($prueba['nombre']) . '.svg"></div>';
         echo '    <div class="extra_prueba">' . htmlspecialchars($prueba['extra']) . '</div>';
-        echo '    <div class="cuadrado_video"><video src="../img/VideosPruebas/' . strtolower($prueba['nombre']) . '1.mp4" autoplay loop></video></div>';
+        echo '    <div class="cuadrado_video"><video src="../img/VideosPruebas/' . strtolower($prueba['nombre']) . '1.mp4" autoplay loop muted></video></div>';
         echo '</div>';
     }
     echo '</div>';
