@@ -168,6 +168,14 @@ function crearTablas($conexion)
         FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
     )";
     mysqli_query($conexion, $sqlComentarios);
+
+    $sqlContacto = "CREATE TABLE IF NOT EXISTS contacto (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(20),
+        correo  VARCHAR(255),
+        mensaje TEXT NOT NULL
+    )";
+    mysqli_query($conexion, $sqlContacto);
 }
 
 function insertarDatos($conexion)
