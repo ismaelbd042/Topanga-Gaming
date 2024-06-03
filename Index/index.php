@@ -25,18 +25,58 @@
         <div class="Index2">
             <div class="tituloMapa">Investiga los Mapas</div>
             <div class="corchoMapas">
-                <div class="imgsMapas" id="Ridgeview"><img src="../img/Fotos mapas/10_Ridgeview_Court.svg" alt=""></div>
-                <div class="imgsMapas" id="Willow"><img src="../img/Fotos mapas/13_Willow_Street.svg" alt=""></div>
-                <div class="imgsMapas" id="Edgefield"><img src="../img/Fotos mapas/42_Edgefield_Road.svg" alt=""></div>
-                <div class="imgsMapas" id="Tanglewood"><img src="../img/Fotos mapas/6_Tanglewood_Drive.svg" alt=""></div>
-                <div class="imgsMapas" id="Bleasdale"><img src="../img/Fotos mapas/Bleasdale_Farmhouse.svg" alt=""></div>
-                <div class="imgsMapas" id="BrownStone"><img src="../img/Fotos mapas/Brownstone_High_School.svg" alt=""></div>
-                <div class="imgsMapas" id="Woodwind"><img src="../img/Fotos mapas/Camp_Woodwind.svg" alt=""></div>
-                <div class="imgsMapas" id="Farmhouse"><img src="../img/Fotos mapas/Grafton_Farmhouse.svg" alt=""></div>
-                <div class="imgsMapas" id="Lodge"><img src="../img/Fotos mapas/Maple_Lodge_Campsite.svg" alt=""></div>
-                <div class="imgsMapas" id="Prison"><img src="../img/Fotos mapas/Prison.svg" alt=""></div>
-                <div class="imgsMapas" id="Meadows"><img src="../img/Fotos mapas/Sunny_Meadows_Mental_Institution.svg" alt=""></div>
-                <div class="imgsMapas" id="MeadowsRestricted"><img src="../img/Fotos mapas/Sunny_Meadows_Mental_Institution_(Restricted).svg" alt=""></div>
+                <div class="tarjeta_mapa_corcho" id="Ridgeview">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/10_Ridgeview_Court.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">10 Ridgeview Court</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Willow">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/13_Willow_Street.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">13 Willow Street</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Edgefield">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/42_Edgefield_Road.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">42 Edgefield Road</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Tanglewood">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/6_Tanglewood_Drive.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">6 Tanglewood drive</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Bleasdale">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Bleasdale_Farmhouse.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Bleasdale Farmhouse</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="BrownStone">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Brownstone_High_School.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Brownstone High School</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Woodwind">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Camp_Woodwind.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Camp Woodwind</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Farmhouse">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Grafton_Farmhouse.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Grafton Farmhouse</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Lodge">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Maple_Lodge_Campsite.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Maple Lodge Campsite</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Prison">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Prison.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Prision</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Meadows">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Sunny_Meadows_Mental_Institution.svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Sunny Meadows</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="MeadowsRestricted">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Sunny_Meadows_Mental_Institution_(Restricted).svg" alt=""></div>
+                    <span class="nombre_mapa_corcho">Sunny Meadows Restricted</span>
+                </div>
+                <div class="tarjeta_mapa_corcho" id="Azar">
+                    <div class="imgsMapas"><img src="../img/Fotos mapas/Azar.png" alt=""></div>
+                    <span class="nombre_mapa_corcho">Al azar</span>
+                </div>
             </div>
         </div>
 

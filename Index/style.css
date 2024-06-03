@@ -106,19 +106,140 @@ body {
     gap: 1.5em;
 }
 
+.tituloMapa {
+    font-family: 'kanit', sans-serif;
+    font-size: 36px;
+}
+
+.nombre_mapa_corcho {
+    color: black;
+}
+
+.tarjeta_mapa_corcho {
+    width: 120px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid black;
+    padding-bottom: 3px;
+    padding-top: 10px;
+}
+
 .corchoMapas {
     display: block;
-    height: 700px;
-    width: 800px;
-    background-image: url(../img/Fotos\mapas/corcho.jpg);
+    height: 80%;
+    width: 80%;
+    position: relative;
+    background: url(../img/Fotos\ mapas/corcho.webp);
 }
 
 .imgsMapas {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    /* border: solid black 1px; */
 }
 
 .imgsMapas img {
-    width: 50px;
-    height: 50px;
+    height: 100%;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#Tanglewood {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    rotate: -10deg;
+}
+
+#Edgefield {
+    position: absolute;
+    top: 10%;
+    left: 27%;
+    rotate: 10deg;
+}
+
+#Ridgeview {
+    position: absolute;
+    top: 8%;
+    left: 45%;
+}
+
+#Farmhouse {
+    position: absolute;
+    top: 12%;
+    left: 63%;
+    rotate: -10deg;
+}
+
+#Willow {
+    position: absolute;
+    top: 20%;
+    left: 83%;
+    rotate: 10deg;
+}
+
+#BrownStone {
+    position: absolute;
+    top: 55%;
+    left: 10%;
+    rotate: 12deg;
+}
+
+#Bleasdale {
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    rotate: -12deg;
+}
+
+#Meadows {
+    position: absolute;
+    top: 63%;
+    left: 40%;
+    rotate: -3deg;
+    z-index: 1;
+}
+
+#MeadowsRestricted {
+    position: absolute;
+    top: 70%;
+    left: 48%;
+    rotate: 5deg;
+}
+
+#Prison {
+    position: absolute;
+    top: 60%;
+    left: 63%;
+    rotate: 3deg;
+}
+
+#Woodwind {
+    position: absolute;
+    top: 65%;
+    left: 85%;
+    rotate: 8deg;
+}
+
+#Lodge {
+    position: absolute;
+    top: 55%;
+    left: 80%;
+    rotate: 4deg;
+}
+
+#Azar {
+    position: absolute;
+    top: 36%;
+    left: 45%;
 }
