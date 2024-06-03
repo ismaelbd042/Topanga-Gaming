@@ -434,7 +434,7 @@
         </div>
         <div class="herramientas_guess_ghost">
             <div class="titulo_pruebas">Pruebas</div>
-            <select name="num_pruebas" id="num_pruebas">
+            <!-- <select name="num_pruebas" id="num_pruebas">
                 <option value="3A">Amateur (3)</option>
                 <option value="3I">Intermediate (3)</option>
                 <option value="3">Professional (3)</option>
@@ -442,7 +442,7 @@
                 <option value="1">Insanity (1)</option>
                 <option value="0">Apocalypse III (0)</option>
                 <option value="-1">Custom (?)</option>
-            </select>
+            </select> -->
             <div class="pruebas">
                 <div class="row_pruebas row_prueba">
                     <img class="blur_pata_mono" style="display: none;" src="" alt="">
@@ -680,10 +680,14 @@
                 dots: "Proyector D.O.T.S.",
                 orbes: "Orbes Espectrales",
                 spirit: "Spirit Box",
-                lento: "<1.7",
-                normal: "1.7",
-                rapido: ">1.7",
-                con_vision: "visión",
+                lento: "lento",
+                normal: "normal",
+                rapido: "rapido",
+                con_vision: "vision",
+                tarde: "<=40",
+                normal_cordura: "BETWEEN 41 AND 50",
+                pronto: "BETWEEN 51 AND 74",
+                muy_pronto: ">=75"
             };
 
             var botonesPruebas = document.querySelectorAll('.row_pruebas button');
@@ -706,14 +710,21 @@
                     // Mapear los IDs a los nombres de las pruebas antes de enviar
                     var nombresPruebas = pruebasMarcadas.map(id => idToPrueba[id]);
 
-                    console.log(nombresPruebas);
+                    // Separar los nombres en categorías correspondientes
+                    var dataToSend = {
+                        pruebas: nombresPruebas.filter(nombre => ["Medidor EMF 5", "Ultravioleta", "Escritura Fantasmal", "Temperaturas Heladas", "Proyector D.O.T.S.", "Orbes Espectrales", "Spirit Box"].includes(nombre)),
+                        cordura: nombresPruebas.filter(nombre => ["<=40", "BETWEEN 41 AND 50", "BETWEEN 51 AND 74", ">=75"].includes(nombre)),
+                        velocidad: nombresPruebas.filter(nombre => ["lento", "normal", "rapido", "vision"].includes(nombre))
+                    };
+
+                    console.log(dataToSend);
                     // Enviar la información al servidor
                     fetch('averiguar.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(nombresPruebas)
+                            body: JSON.stringify(dataToSend)
                         })
                         .then(response => response.text()) // Convertir la respuesta a texto
                         .then(data => mostrarFantasmas(data))
@@ -748,6 +759,7 @@
                 }
             }
         });
+
 
 
         // const checkbox = button.querySelector('.checkbox .icon');
