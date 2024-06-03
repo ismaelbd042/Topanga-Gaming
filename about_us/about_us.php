@@ -18,17 +18,13 @@
             padding-top: 2%;
         }
 
-        /* .container_about_us * {
-            color: white;
-        } */
-
         .container_sobre_nosotros {
             width: 90%;
             display: flex;
             flex-direction: row;
-            height: 42vh;
+            height: auto;
             align-content: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
         }
 
@@ -36,18 +32,15 @@
             width: 90%;
             display: flex;
             flex-direction: row;
-            height: 40vh;
+            height: auto;
             align-content: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
         }
 
-        .texto_sobre_nosotros {
+        .texto_sobre_nosotros, .texto_contacto {
             width: 50%;
-        }
-
-        .texto_contacto {
-            width: 50%;
+            box-sizing: border-box;
         }
 
         .fotos_sobre_nosotros {
@@ -55,6 +48,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
+            box-sizing: border-box;
         }
 
         .formulario_contacto {
@@ -62,20 +56,14 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            box-sizing: border-box;
         }
 
-        .titulo_sobre_nosotros,
-        .titulo_contacto {
+        .titulo_sobre_nosotros, .titulo_contacto {
             font-size: 33px;
         }
 
-        .desc_sobre_nosotros {
-            width: 85%;
-            font-size: 16px;
-            padding-top: 2%;
-        }
-
-        .desc_contacto {
+        .desc_sobre_nosotros, .desc_contacto {
             width: 85%;
             font-size: 16px;
             padding-top: 2%;
@@ -87,7 +75,7 @@
             align-content: center;
             align-items: center;
             justify-content: center;
-        } 
+        }
 
         .img_nosotros {
             display: flex;
@@ -104,13 +92,25 @@
         }
 
         .formilario_width {
-            width: 49%;
+            width: 48%;
             padding: 10px;
             margin-top: 5px;
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            margin-left: 1%;
         }
+
+        .formilario_width3 {
+            width: 48%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-left: 9%;
+        }
+
         .formilario_width2 {
             width: 100%;
             padding: 10px;
@@ -135,10 +135,10 @@
         }
 
         .email_formulario {
-            margin-left: 42%;
             font-size: 13px;
             color: white;
         }
+
         .tamano_letra_formulario {
             font-size: 13px;
             color: white;
@@ -147,6 +147,56 @@
         hr {
             width: 90%;
             border: 1px solid white;
+        }
+
+        @media (max-width: 768px) {
+            .container_sobre_nosotros, .container_contacto {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .texto_sobre_nosotros, .texto_contacto, .fotos_sobre_nosotros, .formulario_contacto {
+                width: 100%;
+            }
+
+            .fotos_sobre_nosotros {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: 5%
+            }
+
+            .formulario_contacto div {
+                display: flex;
+                flex-direction: column; /* Colocar los campos uno debajo del otro */
+                align-items: center;
+                width: 100%;
+            }
+
+            .formulario_row {
+                width: 100%; /* Asegurar que el ancho sea del 100% */
+            }
+
+            .formilario_width, .formilario_width2, .formilario_width3 {
+                width: 100%; /* Ajustar el ancho al 100% */
+                margin-left: 0;
+            }
+
+            .email_formulario, .tamano_letra_formulario {
+                margin-left: 0; /* Eliminar el margen izquierdo */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .titulo_sobre_nosotros, .titulo_contacto {
+                font-size: 28px;
+            }
+
+            .desc_sobre_nosotros, .desc_contacto {
+                font-size: 14px;
+            }
+
+            .fotos_sobre_nosotros {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -173,12 +223,12 @@
                     <span>CEO</span>
                 </div>
                 <div class="info_sobre_nosotros">
-                    <div class="img_nosotros"><img src="../img/Fondo Index.png" alt=""></div>
+                    <div class="img_nosotros"><img src="../img/Fotos Nosotros/ismael.png" alt=""></div>
                     <span>Ismael Bodas</span>
                     <span>CEO</span>
                 </div>
                 <div class="info_sobre_nosotros">
-                    <div class="img_nosotros"><img src="../img/Fondo Index.png" alt=""></div>
+                    <div class="img_nosotros"><img src="../img/Fotos Nosotros/alvaroFoto.png" alt=""></div>
                     <span>Álvaro Serrano</span>
                     <span>CEO</span>
                 </div>
@@ -191,27 +241,27 @@
                 <div class="desc_contacto">Tienes algunas preguntas/cuestiones o quieres trabajar con nosotros? Rellene el formulario que aparece a continuación y nos pondremos en contacto con usted lo antes posible.</div>
             </div>
             <div class="formulario_contacto">
-                <form id="contactForm">
-                    <div>
-                        <label for="nombre" class="tamano_letra_formulario">Nombre:</label>
-                        <label for="correo" class="email_formulario">Correo Electrónico:</label>
-                    </div>
-                    <div>
-                        <input type="text" id="nombre" name="nombre" class="formilario_width" required>
-                        <input type="email" id="correo" name="correo" class="formilario_width" required>
-                    </div>
-                    <div>
-                        <label for="mensaje" class="tamano_letra_formulario">Mensaje:</label>
-                    </div>
-                    <div>
-                        <textarea id="mensaje" name="mensaje" rows="5" class="formilario_width2" required></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" class="boton_formulario">Enviar</button>
-                    </div>
-                </form>
-                <div id="responseMessage" style="color: white; margin-top: 10px;"></div>
-            </div>
+    <form id="contactForm">
+        <div class="formulario_row">
+            <label for="nombre" class="tamano_letra_formulario">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="formilario_width3" required>
+        </div>
+        <div class="formulario_row">
+            <label for="correo" class="email_formulario">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" class="formilario_width" required>
+        </div>
+        <div>
+            <label for="mensaje" class="tamano_letra_formulario">Mensaje:</label>
+        </div>
+        <div>
+            <textarea id="mensaje" name="mensaje" rows="5" class="formilario_width2" required></textarea>
+        </div>
+        <div>
+            <button type="submit" class="boton_formulario">Enviar</button>
+        </div>
+    </form>
+    <div id="responseMessage" style="color: white; margin-top: 10px;"></div>
+</div>
         </div>
     </div>
     <script>
@@ -239,4 +289,4 @@
     <script src="../Index/script.js"></script>
 </body>
 
-</html>
+</html
