@@ -5,46 +5,115 @@ $conexion = getConexion();
 // Obtener los datos enviados desde el cliente
 $data = json_decode(file_get_contents('php://input'), true);
 
-// Verificar si $data no está vacío antes de construir la consulta
-if (is_array($data) && count($data) > 0) {
+// Arrays separados
+$pruebas = isset($data['pruebas']) ? $data['pruebas'] : [];
+$cordura = isset($data['cordura']) ? $data['cordura'] : [];
+$velocidad = isset($data['velocidad']) ? $data['velocidad'] : [];
 
-    // Construir la consulta para buscar los fantasmas
-    $sql = "SELECT pf.fantasma_id AS id_fantasma
-            FROM pruebas_fantasmas pf
-            JOIN pruebas p ON p.id = pf.prueba_id
+// Verificar la combinación de datos presentes
+$combination = (!empty($pruebas) ? '1' : '0') . (!empty($cordura) ? '1' : '0') . (!empty($velocidad) ? '1' : '0');
+
+// Inicializar consulta SQL y parámetros
+$sql = "";
+
+// Construir la consulta SQL con un switch basado en la combinación de datos
+switch ($combination) {
+    case '100': // Solo pruebas
+        $sql = "SELECT f.id AS id_fantasma
+                FROM fantasmas f
+                JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+                JOIN pruebas p ON pf.prueba_id = p.id
+                WHERE p.nombre IN (";
+        $pruebaNombres = array_map(function ($prueba) {
+            return "'" . $prueba . "'";
+        }, $pruebas);
+        $sql .= implode(",", $pruebaNombres) . ")
+                GROUP BY f.id
+                HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
+        break;
+    case '010': // Solo cordura
+        $sql = "SELECT f.id AS id_fantasma
+                FROM fantasmas f
+                WHERE f.cordura " . implode(' OR ', $cordura);
+        break;
+    case '001': // Solo velocidad
+        $sql =
+            "SELECT f.id AS id_fantasma
+                FROM fantasmas f
+                WHERE f.velocidad_desc LIKE '%" . implode("%' AND f.cordura LIKE '%", $velocidad) . "%'";
+        break;
+    case '110': // Pruebas y cordura
+        $sql = "SELECT f.id AS id_fantasma
+            FROM fantasmas f
+            JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+            JOIN pruebas p ON pf.prueba_id = p.id
             WHERE p.nombre IN (";
+        $pruebaNombres = array_map(function ($prueba) {
+            return "'" . $prueba . "'";
+        }, $pruebas);
+        $sql .= implode(",", $pruebaNombres) . ")
+            AND (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
+            GROUP BY f.id
+            HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
+        break;
+    case '101': // Pruebas y velocidad
+        $sql = "SELECT f.id AS id_fantasma
+            FROM fantasmas f
+            JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+            JOIN pruebas p ON pf.prueba_id = p.id
+            WHERE p.nombre IN (";
+        $pruebaNombres = array_map(function ($prueba) {
+            return "'" . $prueba . "'";
+        }, $pruebas);
+        $sql .= implode(",", $pruebaNombres) . ")
+            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')";
+        break;
 
-    // Construir la lista de nombres de prueba para la consulta SQL
-    $pruebas = array_map(function ($prueba) {
-        return "'" . $prueba . "'";
-    }, $data);
+    case '011': // Cordura y velocidad
+        $sql = "SELECT f.id AS id_fantasma
+            FROM fantasmas f
+            WHERE (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
+            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')";
+        break;
 
-    $sql .= implode(",", $pruebas) . ")
-    GROUP BY pf.fantasma_id
-    HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
-
-    $resultado = $conexion->query($sql);
-
-    $ids_fantasmas = array();
-
-    if ($resultado) {
-        // Procesar el resultado si es necesario
-        while ($fila = $resultado->fetch_assoc()) {
-            // Guardar los IDs de los fantasmas encontrados en un array
-            $ids_fantasmas[] = $fila['id_fantasma'];
-        }
-    } else {
-        // Manejar el error si la consulta falla
-        echo json_encode(array("error" => $conexion->error));
+    case '111': // Pruebas, cordura y velocidad
+        $sql = "SELECT f.id AS id_fantasma
+            FROM fantasmas f
+            JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
+            JOIN pruebas p ON pf.prueba_id = p.id
+            WHERE p.nombre IN (";
+        $pruebaNombres = array_map(function ($prueba) {
+            return "'" . $prueba . "'";
+        }, $pruebas);
+        $sql .= implode(",", $pruebaNombres) . ")
+            AND (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
+            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')
+            GROUP BY f.id
+            HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
+        break;
+    default:
+        echo json_encode(array("error" => "No se han proporcionado nombres de prueba, cordura o velocidad."));
         exit;
-    }
-
-    // Cerrar la conexión a la base de datos
-    $conexion->close();
-
-    // Devolver los IDs de los fantasmas como un array JSON
-    echo json_encode($ids_fantasmas);
-} else {
-    // Manejar el caso cuando $data está vacío
-    echo json_encode(array("error" => "No se han proporcionado nombres de prueba."));
 }
+
+$resultado = $conexion->query($sql);
+
+$ids_fantasmas = array();
+
+if ($resultado) {
+    // Procesar el resultado si es necesario
+    while ($fila = $resultado->fetch_assoc()) {
+        // Guardar los IDs de los fantasmas encontrados en un array
+        $ids_fantasmas[] = $fila['id_fantasma'];
+    }
+} else {
+    // Manejar el error si la consulta falla
+    echo json_encode(array("error" => $conexion->error));
+    exit;
+}
+
+// Cerrar la conexión a la base de datos
+$conexion->close();
+
+// Devolver los IDs de los fantasmas como un array JSON
+echo json_encode($ids_fantasmas);
