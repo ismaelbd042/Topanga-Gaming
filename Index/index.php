@@ -22,7 +22,7 @@
             <span id="Titulo_phasmo">phasmophobia</span>
             <span id="desc_index">Eleva tu juego a otro nivel</span>
         </div>
-        <div class="Index2">
+        <div class="Index2" id="Index2">
             <div class="tituloMapa">Investiga los Mapas</div>
             <div class="corchoMapas">
                 <div class="tarjeta_mapa_corcho" id="Ridgeview" data-mapa="10_Ridgeview_Court">
@@ -83,7 +83,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tarjetasMapa = document.querySelectorAll(".tarjeta_mapa_corcho");
-    
+
             tarjetasMapa.forEach(tarjeta => {
                 tarjeta.addEventListener("click", function() {
                     const nombreMapa = this.getAttribute("data-mapa");
