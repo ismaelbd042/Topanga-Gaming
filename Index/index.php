@@ -22,6 +22,12 @@
             <span id="Titulo_phasmo">phasmophobia</span>
             <span id="desc_index">Eleva tu juego a otro nivel</span>
         </div>
+        <div class="indexPruebas">
+
+        </div>
+        <div class="indexObjetos">
+
+        </div>
         <div class="Index2" id="Index2">
             <div class="tituloMapa">Investiga los Mapas</div>
             <div class="corchoMapas">
@@ -78,6 +84,15 @@
                     <span class="nombre_mapa_corcho">Al azar</span>
                 </div>
             </div>
+        </div>
+        <div class="indexFantasmas">
+
+        </div>
+        <div class="indexEquipamiento">
+
+        </div>
+        <div class="noticiasIndex">
+
         </div>
     </div>
     <script>
