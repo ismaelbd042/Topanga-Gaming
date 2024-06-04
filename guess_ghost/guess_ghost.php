@@ -807,6 +807,28 @@
                     }
                 });
             });
+
+            document.getElementById("reset").addEventListener("click", function() {
+                // Reset the styles of all ghost cards
+                var tarjetas = document.querySelectorAll('.tarjeta_fantasma_general');
+                tarjetas.forEach(function(tarjeta) {
+                    tarjeta.style.display = ''; // Show all cards
+                    tarjeta.classList.remove('verde', 'roja'); // Remove tick and equis colors
+
+                    // Reset buttons (remove white class from tick and equis)
+                    tarjeta.querySelector('.fa-check').classList.remove('blanco');
+                    tarjeta.querySelector('.fa-xmark').classList.remove('blanco');
+                });
+
+                // Reset any selected checkboxes in the pruebas section
+                var botonesPruebas = document.querySelectorAll('.row_pruebas button');
+                botonesPruebas.forEach(function(boton) {
+                    boton.classList.remove('marked');
+                });
+
+                // Clear the pruebasMarcadas array (if used in your logic)
+                pruebasMarcadas = []; // Assuming you have an array to store selected pruebas
+            });
         });
     </script>
 </body>
