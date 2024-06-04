@@ -27,7 +27,7 @@
 
         .upload-video-form-container label {
             margin-bottom: 10px;
-            color: #5F1495;
+            color: white;
         }
 
         .upload-video-form-container input[type="text"],
@@ -60,6 +60,14 @@
             text-align: center;
             color: #5F1495;
         }
+
+        .container_subir_video {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 
 </head>
@@ -68,7 +76,7 @@
     <div class="overlay"></div>
     <?php
     session_start(); // Iniciar sesión si no se ha iniciado aún
-    
+
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
@@ -80,7 +88,7 @@
         // Obtener los datos del formulario
         $nombreVideo = $_POST['nombreVideo'];
         $idAutor = $_SESSION['id']; // Asume que el ID del usuario está almacenado en la sesión
-    
+
         // Manejar la subida del archivo
         $target_dir = "videosMP4/"; // Use the absolute path
         $target_file = $target_dir . basename($_FILES["videoFile"]["name"]);
@@ -136,17 +144,18 @@
     }
     ?>
 
+    <div class="container_subir_video">
+        <div class="upload-video-form-container">
+            <form action="upload_video.php" method="post" enctype="multipart/form-data">
+                <label for="nombreVideo">Nombre del Video:</label>
+                <input type="text" name="nombreVideo" id="nombreVideo" required>
 
-    <div class="upload-video-form-container">
-        <form action="upload_video.php" method="post" enctype="multipart/form-data">
-            <label for="nombreVideo">Nombre del Video:</label>
-            <input type="text" name="nombreVideo" id="nombreVideo" required>
+                <label for="videoFile">Selecciona el Video:</label>
+                <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
 
-            <label for="videoFile">Selecciona el Video:</label>
-            <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
-
-            <input type="submit" value="Subir Video" name="submit">
-        </form>
+                <input type="submit" value="Subir Video" name="submit">
+            </form>
+        </div>
     </div>
 </body>
 <script src="../Index/script.js"></script>

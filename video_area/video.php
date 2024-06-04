@@ -91,7 +91,9 @@
     }
 
     // Obtener comentarios del video específico
-    $sqlComentarios = "SELECT * FROM comentarios WHERE idVideo = ?";
+    $sqlComentarios = "SELECT c.comment, c.idUsuario, u.nombre_usuario FROM comentarios c
+                        INNER JOIN usuarios u ON c.idUsuario = u.id
+                        WHERE c.idVideo = ? ORDER BY c.id";
     $stmt = $conn->prepare($sqlComentarios);
     $stmt->bind_param("i", $idVideo);
     $stmt->execute();
@@ -144,19 +146,21 @@
             <h2>Comentarios del vídeo</h2>
             <div class="divEnviarComentario">
                 <?php if (!empty($comentarios)) : ?>
-                    <?php foreach ($comentarios as $comentario) : ?>
-                        <div class="comentario">
-                            <p><?php echo htmlspecialchars($comentario['idUsuario']); ?>:
-                                <?php echo htmlspecialchars($comentario['comment']); ?>
-                            </p>
-                        </div>
-                    <?php endforeach; ?>
+                    <?php
+                    foreach ($comentarios as $comentario) :
+                        echo '<div class="comentario">';
+                        echo '<p>' . htmlspecialchars($comentario['nombre_usuario']) . ': ' .
+                            htmlspecialchars($comentario['comment']) . '</p>';
+                        echo '</div>';
+                    endforeach;
+                    ?>
                 <?php else : ?>
                     <p id="noComentarios">¡Sé el primero en comentar!</p>
                 <?php endif; ?>
             </div>
             <form id="comentarioForm">
-                <input type="hidden" id="idUsuario" value="1"><!-- ID del usuario que está comentando -->
+                <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['id'] ?>">
+                <input type="hidden" id="nombreUsuario" value="<?php echo $_SESSION['nombre_usuario'] ?>">
                 <textarea id="comment" required></textarea>
                 <button type="submit">Enviar comentario</button>
             </form>
@@ -278,6 +282,7 @@
 
                 var idVideo = <?php echo $idVideo; ?>;
                 var idUsuario = $('#idUsuario').val();
+                var nombreUsuario = $('#nombreUsuario').val();
                 var comment = $('#comment').val();
 
                 $.ajax({
@@ -295,7 +300,7 @@
                             noComentariosMsg.remove(); // Eliminar el mensaje
                         }
                         // Agregar el nuevo comentario a la lista de comentarios
-                        $('.divEnviarComentario').append('<div class="comentario"><p>' + idUsuario + ': ' + comment + '</p></div>');
+                        $('.divEnviarComentario').append('<div class="comentario"><p>' + nombreUsuario + ': ' + comment + '</p></div>');
                         // Limpiar el formulario
                         $('#comentarioForm')[0].reset();
                     }
