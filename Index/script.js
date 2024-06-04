@@ -142,9 +142,18 @@ function comprobarSesion() {
       if (data.sesion_activa) {
         document.getElementById("enlace_chat").href =
           "../chat_mensajes/chat.php";
+        document.getElementById("enlace_videos").href =
+          "../video_area/video_area.php";
       } else {
         document
           .getElementById("enlace_chat")
+          .addEventListener("click", function (event) {
+            event.preventDefault();
+            mostrarVentanaModal();
+            mostrarLogin();
+          });
+        document
+          .getElementById("enlace_videos")
           .addEventListener("click", function (event) {
             event.preventDefault();
             mostrarVentanaModal();

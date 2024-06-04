@@ -107,7 +107,8 @@
         }
 
         .imagen_plano_objetos {
-            width: 43%;
+            max-height: 580px;
+            max-width: 100%;
         }
     </style>
 </head>
