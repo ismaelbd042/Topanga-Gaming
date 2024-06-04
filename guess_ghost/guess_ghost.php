@@ -454,60 +454,46 @@
             <div class="titulo_pruebas">Pruebas</div>
             <div class="pruebas">
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="emf5">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">EMF 5</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="ultravioleta">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Ultravioleta</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="escritura">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Escritura</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="heladas">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Heladas</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="dots">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">DOTs</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="orbes">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Orbes</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
                 <div class="row_pruebas row_prueba">
-                    <img class="blur_pata_mono" style="display: none;" src="" alt="">
                     <button id="spirit">
                         <div class="checkbox"><span class="icon"></span></div>
                         <div class="label">Spirit Box</div>
                     </button>
-                    <img class="pata_mono" src="../img/Icons/paw-icon.png" alt="">
                 </div>
             </div>
             <div class="titulo_pruebas">Velocidad</div>
