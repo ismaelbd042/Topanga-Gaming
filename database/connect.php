@@ -389,7 +389,7 @@ function insertarDatos($conexion)
     $MapleLodgeCampsite = "../img/Planos mapas/Maple_Lodge_Campsite_-_Floorplan.webp";
     $Prison = "../img/Planos mapas/Prison_-_Floorplan.webp";
     $BrownstoneHighSchool = "../img/Planos mapas/Brownstone_High_School_-_Floorplan.webp";
-    $SunnyMeadowsMentalInstitution = "../img/Sunny_Meadows_Mental_Institution_-_Full_Map_Floorplan.webp";
+    $SunnyMeadowsMentalInstitution = "../img/Planos mapas/Sunny_Meadows_Mental_Institution_-_Full_Map_Floorplan.webp";
 
     //Insertar datos en tabla mapas
     $insertarMapas = "INSERT INTO mapas (nombre, img, tamaño, plantas, habitaciones, salidas, grifos, camaras, escondites, nivel_desbloqueo) VALUES
