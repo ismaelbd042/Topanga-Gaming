@@ -139,7 +139,7 @@
     // Verificar si se obtuvieron resultados
     if ($result && mysqli_num_rows($result) > 0) {
         $mapa = mysqli_fetch_assoc($result);
-        $imagen_fondo = '../img/Fotos mapas/' . $nombreMapa . '.svg';
+        $imagen_fondo = '../img/Fotos mapas/' . $nombreMapa . '.png';
     ?>
         <div class="container_general_mapas">
             <div class="div_foto_nombreMapa" style="background: url('<?php echo $imagen_fondo; ?>'); background-size: cover;">

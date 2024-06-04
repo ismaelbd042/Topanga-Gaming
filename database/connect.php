@@ -408,12 +408,14 @@ function insertarDatos($conexion)
     ";
     mysqli_query($conexion, $insertarMapas);
 
-    $contraseña1 = password_hash('1', PASSWORD_DEFAULT);
-    $contraseña2 = password_hash('2', PASSWORD_DEFAULT);
+    $contraseña1 = password_hash('Alberto12', PASSWORD_DEFAULT);
+    $contraseña2 = password_hash('HugoGarcia00', PASSWORD_DEFAULT);
+    $contraseña3 = password_hash('JavierLopez91', PASSWORD_DEFAULT);
     //Insertar datos en tabla usuarios
     $insertarUsuarios = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES
-        ('1', '1@admin.com', '$contraseña1'),
-        ('2', '2@admin.com', '$contraseña2');
+        ('Alberto Jiménez', 'alberto.jimenez@gmail.com', '$contraseña1'),
+        ('Hugo García', 'hugo.garcia@gmail.com', '$contraseña2'),
+        ('Javier López', 'javier.lopez@gmail.com', '$contraseña3');
     ";
     mysqli_query($conexion, $insertarUsuarios);
 
