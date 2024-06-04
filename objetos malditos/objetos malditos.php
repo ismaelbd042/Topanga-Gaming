@@ -84,15 +84,16 @@
 
         .boton-modal label,
         .boton-modal2 label {
-            padding: 10px 20px;
+            padding: 20px 40px; /* Ajuste de tamaño del botón */
             color: #fff;
             background: radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%);
             border: 0;
-            font-size: 16px;
+            font-size: 24px; /* Ajuste de tamaño del texto */
             border-radius: 10px;
             cursor: pointer;
             transition: all 300ms ease;
             text-align: center;
+            height: 100px;
         }
 
         .boton-modal label:hover,
