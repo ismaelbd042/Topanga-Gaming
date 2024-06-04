@@ -107,7 +107,7 @@
         }
 
         .imagen_plano_objetos {
-            width: 45%;
+            width: 43%;
         }
     </style>
 </head>
