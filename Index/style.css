@@ -244,10 +244,16 @@ body {
     left: 45%;
 }
 
-.indexPruebas {}
+/* .indexPruebas {}
 
 .indexObjetos {}
 
 .indexFantasmas {}
 
-.indexEquipamiento {}
+.indexEquipamiento {} */
+
+@media (max-width: 514px) {
+    #Titulo_phasmo {
+        font-size: 90px;
+    }
+}
