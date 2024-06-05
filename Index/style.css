@@ -64,7 +64,6 @@ body {
     right: 50px;
     transform: translateY(-50%);
     color: red;
-    /* Cambia el color a rojo */
 }
 
 /***************************************************************/
@@ -128,6 +127,7 @@ body {
     border: 1px solid black;
     padding-bottom: 3px;
     padding-top: 10px;
+    position: absolute;
 }
 
 .corchoMapas {
@@ -143,7 +143,6 @@ body {
     height: 100px;
     overflow: hidden;
     position: relative;
-    /* border: solid black 1px; */
 }
 
 .imgsMapas img {
@@ -155,55 +154,47 @@ body {
 }
 
 #Tanglewood {
-    position: absolute;
     top: 20%;
     left: 10%;
     rotate: -10deg;
 }
 
 #Edgefield {
-    position: absolute;
     top: 10%;
     left: 27%;
     rotate: 10deg;
 }
 
 #Ridgeview {
-    position: absolute;
     top: 8%;
     left: 45%;
 }
 
 #Farmhouse {
-    position: absolute;
     top: 12%;
     left: 63%;
     rotate: -10deg;
 }
 
 #Willow {
-    position: absolute;
     top: 20%;
     left: 83%;
     rotate: 10deg;
 }
 
 #BrownStone {
-    position: absolute;
     top: 55%;
     left: 10%;
     rotate: 12deg;
 }
 
 #Bleasdale {
-    position: absolute;
     top: 60%;
     left: 25%;
     rotate: -12deg;
 }
 
 #Meadows {
-    position: absolute;
     top: 63%;
     left: 40%;
     rotate: -3deg;
@@ -211,35 +202,30 @@ body {
 }
 
 #MeadowsRestricted {
-    position: absolute;
     top: 70%;
     left: 48%;
     rotate: 5deg;
 }
 
 #Prison {
-    position: absolute;
     top: 60%;
     left: 63%;
     rotate: 3deg;
 }
 
 #Woodwind {
-    position: absolute;
     top: 65%;
     left: 85%;
     rotate: 8deg;
 }
 
 #Lodge {
-    position: absolute;
     top: 55%;
     left: 80%;
     rotate: 4deg;
 }
 
 #Azar {
-    position: absolute;
     top: 36%;
     left: 45%;
 }
@@ -288,14 +274,57 @@ body {
     font-size: 22px;
 }
 
+@media (max-width: 500px) {
+    #Titulo_phasmo {
+        font-size: 70px;
+    }
+
+    #desc_index {
+        font-size: 25px;
+    }
+}
+
 @media (max-width: 600px) {
     #Titulo_phasmo {
         font-size: 90px;
+    }
+
+    #desc_index {
+        font-size: 30px;
     }
 }
 
 @media (max-width: 1250px) {
     .descServicios {
         text-align: center;
+    }
+
+    .corchoMapas {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 10%;
+        justify-content: center;
+        align-items: center;
+        padding-top: 40px;
+        height: auto;
+        row-gap: 50px;
+        padding-bottom: 40px;
+    }
+
+    .tarjeta_mapa_corcho {
+        position: unset;
+    }
+
+    .Index2 {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5em;
     }
 }
