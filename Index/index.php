@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
     <title>Topanga Gaming</title>
@@ -25,7 +26,20 @@
         <div class="indexServicios">
             <span class="tituloServicios">Nuestros servicios</span>
             <span class="descServicios">Descubre las potentes características que hacen que nuestras soluciones se destaquen frente a la competencia.</span>
-            <div class="tiposServicios"></div>
+            <div class="tiposServicios">
+                <div class="servicios">
+                    <div class="miniTituloServicios"><i class="fa-regular fa-comment-dots"></i> Chat en línea</div>
+                    <div class="miniDescServicios">Chatea en linea con tus compañeros y mantén una comunicación con el fin de adivinar el fantasma misterioso.</div>
+                </div>
+                <div class="servicios">
+                    <div class="miniTituloServicios"><i class="fa-solid fa-video"></i> Contenido audiovisual</div>
+                    <div class="miniDescServicios">Visualiza o comparte contenido on-line y sorprendete con trucos nuevos e increibles.</div>
+                </div>
+                <div class="servicios">
+                    <div class="miniTituloServicios"><i class="fa-solid fa-ghost"></i> Averigüa el fantasma</div>
+                    <div class="miniDescServicios">Descarta pruebas, recibe pistas ocultas y descubre el fantasma correcto.</div>
+                </div>
+            </div>
         </div>
         <div class="Index2" id="Index2">
             <div class="tituloMapa">Investiga los Mapas</div>
@@ -122,14 +136,6 @@
             return availableMaps[randomIndex];
         }
     </script>
-
-
-
-
-
-
-    <!-- <span onclick="playSound('https://zero-network.net/phasmophobia/static/assets/banshee_scream.mp3')">Icono de sonido</span> -->
-    <!-- codigo que hace que suene un sonido -->
     <script src="script.js"></script>
 </body>
 
