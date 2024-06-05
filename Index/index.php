@@ -22,11 +22,10 @@
             <span id="Titulo_phasmo">phasmophobia</span>
             <span id="desc_index">Eleva tu juego a otro nivel</span>
         </div>
-        <div class="indexPruebas">
-
-        </div>
-        <div class="indexObjetos">
-
+        <div class="indexServicios">
+            <span class="tituloServicios">Nuestros servicios</span>
+            <span class="descServicios">Descubre las potentes características que hacen que nuestras soluciones se destaquen frente a la competencia.</span>
+            <div class="tiposServicios"></div>
         </div>
         <div class="Index2" id="Index2">
             <div class="tituloMapa">Investiga los Mapas</div>
@@ -84,15 +83,6 @@
                     <span class="nombre_mapa_corcho">Al azar</span>
                 </div>
             </div>
-        </div>
-        <div class="indexFantasmas">
-
-        </div>
-        <div class="indexEquipamiento">
-
-        </div>
-        <div class="noticiasIndex">
-
         </div>
     </div>
     <script>
