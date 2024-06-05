@@ -160,6 +160,24 @@
         font-family: OctoberCrow;
         font-size: 50px;
     }
+       /* Media query for smaller screens */
+       @media (max-width: 768px) {
+            .container_equipamiento {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .container_equipamiento .div_img_equipamiento,
+            .container_equipamiento .div_info_equipamiento {
+                width: 100%;
+                height: auto;
+            }
+
+            .container_equipamiento .img_equipamiento {
+                width: 70%;
+                height: auto;
+            }
+        }
 </style>
 
 <body>
