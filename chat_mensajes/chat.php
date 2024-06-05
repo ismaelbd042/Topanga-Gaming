@@ -202,29 +202,34 @@
         /* Estilo para mensajes de otros usuarios */
         .other-message {
             background-color: #5f1495;
-            /* Morado muy claro */
             color: white;
-            /* Texto negro */
             padding: 10px;
             border-radius: 10px;
             margin: 5px 0;
             word-wrap: break-word;
-            /* Agregada para evitar que el mensaje se salga de la pantalla */
         }
 
         /* Estilo para la fecha del mensaje */
         .message-date {
             font-size: 10px;
-            /* Tamaño de fuente pequeño */
             color: #888888;
-            /* Color de texto gris */
-            /* position: absolute; */
-            /* Posicionamiento absoluto */
             bottom: 0;
-            /* Colocar en la parte inferior */
             right: 0;
-            /* Colocar a la derecha */
             text-align: right;
+        }
+
+        @media (max-width: 940px) {
+            .container {
+                flex-direction: column-reverse;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .chatMensajes {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -282,7 +287,7 @@
 
 
     <script>
-        document.getElementById('botonBuscar').addEventListener('click', function () {
+        document.getElementById('botonBuscar').addEventListener('click', function() {
             var busqueda = document.getElementById('buscarUsuario').value;
             if (busqueda) {
                 fetch('buscar_usuario.php?busqueda=' + encodeURIComponent(busqueda))
@@ -320,7 +325,7 @@
 
                                 // Añade la imagen al botón
                                 botonAmigo.appendChild(imagen);
-                                botonAmigo.onclick = function () {
+                                botonAmigo.onclick = function() {
                                     agregarAmigo(idAmigo);
                                 };
 
@@ -345,21 +350,23 @@
 
         function agregarAmigo(idAmigo) {
             fetch('agregar_amigo.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ idAmigo: idAmigo })
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idAmigo: idAmigo
+                    })
+                })
                 .then(response => {
-                    console.log('Response:', response);  // Registro de la respuesta
+                    console.log('Response:', response); // Registro de la respuesta
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Data:', data);  // Registro de los datos
+                    console.log('Data:', data); // Registro de los datos
                     if (data.exito) {
                         document.getElementById('usuario-' + idAmigo).remove();
                         alert('Solicitud de amistad enviada');
@@ -626,12 +633,14 @@
                         function aceptarSolicitud(id) {
                             // Aquí puedes hacer una solicitud AJAX para aceptar la solicitud
                             fetch('aceptar_solicitud.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ id: id })
-                            })
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        id: id
+                                    })
+                                })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -655,12 +664,14 @@
                         function cancelarSolicitud(id) {
                             // Hacer una solicitud AJAX para cancelar la solicitud
                             fetch('rechazar_solicitud.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ id: id })
-                            })
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        id: id
+                                    })
+                                })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -686,11 +697,11 @@
                 })
         }
 
-        window.onload = function () {
+        window.onload = function() {
             // Hacer una solicitud AJAX para obtener el usuario_id
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'get_session_id.php', true);
-            xhr.onload = function () {
+            xhr.onload = function() {
                 if (xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
                     var usuario_id = response.usuario_id;
@@ -703,7 +714,6 @@
             };
             xhr.send();
         };
-
     </script>
 
 
