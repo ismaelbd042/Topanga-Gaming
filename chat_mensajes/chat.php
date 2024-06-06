@@ -31,15 +31,15 @@
         }
 
         .divBusqueda {
-            max-height: 33%;
+            height: auto;
         }
 
         .divAmigos {
-            max-height: 33%;
+            height: auto;
         }
 
         .divSolicitudes {
-            max-height: 33%;
+            height: auto;
         }
 
         #amigos {
@@ -220,9 +220,56 @@
             text-align: right;
         }
 
+        #mensajeAgregado {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        #mensajeAgregado.exito {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        #mensajeAgregado.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        #nombreAmigo {
+            display: flex;
+            align-items: center;
+            /* Alinea verticalmente los elementos */
+        }
+
+        #volverAtrasBtn {
+            margin-right: 10px;
+            /* Margen a la derecha para separar el botón del texto */
+            background-color: white;
+            /* Fondo transparente */
+            border: none;
+            /* Sin borde */
+            cursor: pointer;
+            /* Cambia el cursor al pasar sobre el botón */
+        }
+
+        #volverAtrasBtn {
+            background: black;
+        }
+
+        #flecha_atras {
+            margin-top: 5px;
+            width: 30px;
+            /* background: black; */
+        }
+
         @media (max-width: 940px) {
+
             .container {
-                flex-direction: column-reverse;
+                flex-direction: column;
             }
 
             .sidebar {
@@ -231,7 +278,9 @@
 
             .chatMensajes {
                 width: 100%;
+                display: none;
             }
+
         }
     </style>
 </head>
@@ -250,6 +299,7 @@
 
                 <!-- Sección para buscar usuarios -->
                 <h2>Busca un amigo para agregar</h2>
+                <div id="mensajeAgregado" style="display:none;"></div>
                 <div class="divBuscarUsuario">
                     <input type="text" id="buscarUsuario" name="busqueda" placeholder="Buscar usuario">
                     <button id="botonBuscar">
@@ -278,7 +328,9 @@
         </div>
 
         <div class="chatMensajes">
-            <div id="nombreAmigo">Mi propio chat</div>
+            <div id="nombreAmigo">
+                Mi propio chat
+            </div>
             <div id="chat"></div>
             <div class="enviarMensaje">
                 <input type="text" id="message" placeholder="Escribe un mensaje...">
@@ -289,7 +341,7 @@
 
 
     <script>
-        document.getElementById('botonBuscar').addEventListener('click', function() {
+        document.getElementById('botonBuscar').addEventListener('click', function () {
             var busqueda = document.getElementById('buscarUsuario').value;
             if (busqueda) {
                 fetch('buscar_usuario.php?busqueda=' + encodeURIComponent(busqueda))
@@ -327,7 +379,7 @@
 
                                 // Añade la imagen al botón
                                 botonAmigo.appendChild(imagen);
-                                botonAmigo.onclick = function() {
+                                botonAmigo.onclick = function () {
                                     agregarAmigo(idAmigo);
                                 };
 
@@ -338,9 +390,11 @@
 
                                 div.appendChild(botonAmigo);
                                 resultadosDiv.appendChild(div);
+                                resultadosDiv.style.color = "white"
                             });
                         } else {
                             resultadosDiv.textContent = 'No se encontraron usuarios.';
+                            resultadosDiv.style.color = "red";
                         }
                     })
                     .catch(error => {
@@ -352,14 +406,14 @@
 
         function agregarAmigo(idAmigo) {
             fetch('agregar_amigo.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        idAmigo: idAmigo
-                    })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    idAmigo: idAmigo
                 })
+            })
                 .then(response => {
                     console.log('Response:', response); // Registro de la respuesta
                     if (!response.ok) {
@@ -371,10 +425,18 @@
                     console.log('Data:', data); // Registro de los datos
                     if (data.exito) {
                         document.getElementById('usuario-' + idAmigo).remove();
-                        alert('Solicitud de amistad enviada');
+                        mostrarMensaje('Solicitud de amistad enviada', 'exito');
                     } else {
-                        console.error('Error:', data.error);
-                        alert('Hubo un error al añadir al amigo: ' + data.error);
+                        console.log('Error:', data.error.replace(/localhost/g, ''));
+                        mostrarMensaje('Hubo un error al añadir al amigo: ' + data.error.replace(/localhost/g, ''), 'error');
+                    }
+
+                    // Función para mostrar mensajes en la página
+                    function mostrarMensaje(mensaje, tipo) {
+                        const mensajeElemento = document.getElementById('mensajeAgregado');
+                        mensajeElemento.innerText = mensaje;
+                        mensajeElemento.className = tipo; // puedes usar clases CSS para estilo
+                        mensajeElemento.style.display = 'block';
                     }
                 })
         }
@@ -444,11 +506,36 @@
                             // Añadir el botón al contenedor principal
                             div.appendChild(chatearBtn);
 
-                            // Agregar evento click para chatear
+                            function ocultarSidebar() {
+                                const sidebar = document.querySelector('.sidebar');
+                                const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+                                sidebar.style.display = 'none';
+                                volverAtrasBtn.style.display = 'block';
+                            }
+
+                            function handleVolverAtrasClick() {
+                                const sidebar = document.querySelector('.sidebar');
+                                const chatMensajes = document.querySelector('.chatMensajes');
+                                const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+                                sidebar.style.display = 'block';
+                                chatMensajes.style.display = 'none';
+                            }
+
+                            // Agregar evento click para chatear y ocultar el sidebar en modo responsive
                             div.addEventListener('click', () => {
                                 abrirChat(datos_usuario.id);
                                 nameAmigo.innerHTML = '';
-                                nameAmigo.textContent = 'Chat con ' + datos_usuario.nombre_usuario;
+
+
+                                // Ocultar el sidebar si la pantalla está en modo responsive
+                                if (window.innerWidth <= 940) {
+                                    nameAmigo.innerHTML = '<button id="volverAtrasBtn"><img src="../img/Icons/flecha_atras.png" alt="Flecha atrás" id="flecha_atras"></button> Chat con ' + datos_usuario.nombre_usuario;
+                                    ocultarSidebar();
+                                } else {
+                                    nameAmigo.innerHTML = '<button id="volverAtrasBtn" style="display: none;"><img src="../img/Icons/flecha_atras.png" alt="Flecha atrás" id="flecha_atras"></button> Chat con ' + datos_usuario.nombre_usuario;
+                                }
+                                document.getElementById("volverAtrasBtn").addEventListener("click", handleVolverAtrasClick);
+                                mostrarChat();
                             });
 
                             div.appendChild(chatearBtn);
@@ -459,6 +546,10 @@
                     }
 
                 })
+                .catch(error => {
+                    console.error('Error fetching amigos:', error);
+                    document.getElementById('amigos').textContent = 'No tienes amigos aún.';
+                });
         }
 
         const chatDiv = document.getElementById('chat');
@@ -526,8 +617,6 @@
         function abrirChat(idAmigo) {
             const chatDiv = document.getElementById('chat');
             friend_id = idAmigo; // Asignar el id del amigo
-
-            // Aquí podrías hacer cualquier otra acción necesaria antes de cargar los mensajes del amigo seleccionado
 
             // Llamar a fetchMessages() para cargar los mensajes del amigo seleccionado
             fetchMessages();
@@ -635,14 +724,14 @@
                         function aceptarSolicitud(id) {
                             // Aquí puedes hacer una solicitud AJAX para aceptar la solicitud
                             fetch('aceptar_solicitud.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        id: id
-                                    })
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id: id
                                 })
+                            })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -666,14 +755,14 @@
                         function cancelarSolicitud(id) {
                             // Hacer una solicitud AJAX para cancelar la solicitud
                             fetch('rechazar_solicitud.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        id: id
-                                    })
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id: id
                                 })
+                            })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -699,11 +788,11 @@
                 })
         }
 
-        window.onload = function() {
+        window.onload = function () {
             // Hacer una solicitud AJAX para obtener el usuario_id
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'get_session_id.php', true);
-            xhr.onload = function() {
+            xhr.onload = function () {
                 if (xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
                     var usuario_id = response.usuario_id;
@@ -716,6 +805,42 @@
             };
             xhr.send();
         };
+
+        function mostrarChat() {
+            const chatMensajes = document.querySelector('.chatMensajes');
+            chatMensajes.style.display = 'block';
+        }
+
+
+        window.addEventListener('resize', () => {
+            const chatMensajes = document.querySelector('.chatMensajes');
+            const sidebar = document.querySelector('.sidebar');
+            const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+
+            // Verificar si el chat está abierto y el tamaño de la pantalla está en modo responsive
+            if (chatMensajes.style.display === 'block' && window.innerWidth <= 940) {
+                sidebar.style.display = 'none';
+                volverAtrasBtn.style.display = 'block';
+            }
+
+            // Verificar si el tamaño de la pantalla supera el límite del modo responsive y el chat está abierto
+            if (window.innerWidth > 940 && chatMensajes.style.display === 'block') {
+                sidebar.style.display = 'block';
+                volverAtrasBtn.style.display = 'none';
+            }
+
+            if (sidebar.style.display === 'block' && window.innerWidth <= 940) {
+                chatMensajes.style.display = 'none';
+                volverAtrasBtn.style.display = 'none';
+            }
+
+    
+            if (window.innerWidth > 940 && sidebar.style.display === 'block') {
+                chatMensajes.style.display = 'block';
+                volverAtrasBtn.style.display = 'none';
+            }
+        });
+
     </script>
 
 

@@ -27,24 +27,33 @@ function registro(formRegistro) {
     });
 }
 
-// Función para validar que el nombre de usuario que no este vacio
 function comprobarInputUsuarioRegistro() {
   let registerForm = document.getElementById("registrar");
   let inputUsername = registerForm.querySelector("input[type='text']").value;
   let usernameErrorIcon = document.querySelector(".username-error");
   let errorMessage = registerForm.querySelector(".error-message-registro");
 
-  // If para comprobar si el usuario está vacío
+  // Verificar si el usuario está vacío
   if (inputUsername.trim() === "") {
     errorMessage.textContent = "Por favor, completa todos los campos.";
     errorMessage.style.opacity = "1";
     usernameErrorIcon.style.display = "block";
     return false;
-  } else {
-    usernameErrorIcon.style.display = "none";
-    return true;
   }
+  
+  // Verificar si el usuario tiene menos de 5 letras
+  if (inputUsername.length < 7) {
+    errorMessage.textContent = "El nombre de usuario debe tener al menos 5 carateres.";
+    errorMessage.style.opacity = "1";
+    usernameErrorIcon.style.display = "block";
+    return false;
+  }
+
+  // Si pasa todas las validaciones, ocultar el icono de error y retornar verdadero
+  usernameErrorIcon.style.display = "none";
+  return true;
 }
+
 
 // Función para validar que el nombre de usuario no existe
 async function comprobarUsuarioRegistro() {
