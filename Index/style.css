@@ -274,7 +274,17 @@ body {
     font-size: 22px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
+    #Titulo_phasmo {
+        font-size: 60px;
+    }
+
+    #desc_index {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 500px) {
     #Titulo_phasmo {
         font-size: 70px;
     }
@@ -284,7 +294,7 @@ body {
     }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 501px) and (max-width: 600px) {
     #Titulo_phasmo {
         font-size: 90px;
     }
