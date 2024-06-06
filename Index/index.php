@@ -28,15 +28,15 @@
             <span class="descServicios">Descubre las potentes características que hacen que nuestras soluciones se destaquen frente a la competencia.</span>
             <div class="tiposServicios">
                 <div class="servicios">
-                    <div class="miniTituloServicios"><i class="fa-regular fa-comment-dots"></i> Chat en línea</div>
+                    <div class="miniTituloServicios" id="enlaceChatServicios"><i class="fa-regular fa-comment-dots"></i> Chat en línea <code class="notranslate">🡥</code></div>
                     <div class="miniDescServicios">Chatea en linea con tus compañeros y mantén una comunicación con el fin de adivinar el fantasma misterioso.</div>
                 </div>
                 <div class="servicios">
-                    <div class="miniTituloServicios"><i class="fa-solid fa-video"></i> Contenido audiovisual</div>
+                    <div class="miniTituloServicios" id="enlaceVideosServicios"><i class="fa-solid fa-video"></i> Contenido audiovisual <code class="notranslate">🡥</code></div>
                     <div class="miniDescServicios">Visualiza o comparte contenido on-line y sorprendete con trucos nuevos e increibles.</div>
                 </div>
                 <div class="servicios">
-                    <div class="miniTituloServicios"><i class="fa-solid fa-ghost"></i> Averigüa el fantasma</div>
+                    <div class="miniTituloServicios" id="enlaceGuessServicios"><i class="fa-solid fa-ghost"></i> Averigüa el fantasma <code class="notranslate">🡥</code></div>
                     <div class="miniDescServicios">Descarta pruebas, recibe pistas ocultas y descubre el fantasma correcto.</div>
                 </div>
             </div>
@@ -102,6 +102,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tarjetasMapa = document.querySelectorAll(".tarjeta_mapa_corcho");
+            comprobarSesion();
 
             tarjetasMapa.forEach(tarjeta => {
                 tarjeta.addEventListener("click", function() {

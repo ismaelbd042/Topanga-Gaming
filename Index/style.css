@@ -272,6 +272,7 @@ body {
 
 .miniTituloServicios {
     font-size: 22px;
+    cursor: pointer;
 }
 
 @media (max-width: 400px) {
