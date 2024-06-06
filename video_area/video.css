@@ -28,12 +28,17 @@
 
 .subscribeButton {
     background: var(--Gradiente-Marca,
-        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 16px; /* Tamaño del texto */
+            radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+    color: white;
+    /* Color del texto */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px;
+    /* Tamaño del texto */
     display: flex;
     align-items: center;
     gap: 5px;
@@ -41,7 +46,8 @@
 }
 
 .subscribeButton:hover {
-    background: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+    background: #0056b3;
+    /* Cambia el color de fondo al pasar el cursor */
 }
 
 .divAbajoVideo {
@@ -74,7 +80,8 @@
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: -75%; /* Posiciona el tooltip encima del elemento */
+    bottom: -75%;
+    /* Posiciona el tooltip encima del elemento */
     left: 40%;
     margin-left: -46px;
     opacity: 0;
@@ -84,12 +91,14 @@
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
-    top: -34%; /* Parte inferior del tooltip */
+    top: -34%;
+    /* Parte inferior del tooltip */
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent #555 transparent; /* Triángulo */
+    border-color: transparent transparent #555 transparent;
+    /* Triángulo */
 }
 
 .tooltip:hover .tooltiptext {
@@ -102,7 +111,8 @@
 .divComentarios {
     width: 50%;
     position: relative;
-    padding-bottom: 60px; /* Espacio para el formulario */
+    padding-bottom: 60px;
+    /* Espacio para el formulario */
     padding: 10px;
     background-color: white;
     color: black;
@@ -124,7 +134,7 @@
     left: 0;
     width: 100%;
     padding: 10px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
 }
@@ -138,4 +148,20 @@
 #comentarioForm button {
     width: 18%;
     height: 30px;
+}
+
+@media (max-width: 1024px) {
+    .divVideoComentarios {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .divVideoAbierto {
+        width: 100%;
+    }
+
+    .divComentarios {
+        width: 100%;
+        height: 500px;
+    }
 }
