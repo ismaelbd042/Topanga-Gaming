@@ -46,7 +46,7 @@
             height: 100.3%;
             background-color: #494a60;
             position: absolute;
-            top: -1px;
+            top: -0.5px;
             right: -40px;
             border: solid 1px black;
             border-left: 0;
@@ -114,8 +114,10 @@
             border-radius: 5px;
             border: solid 2px #ccc;
             display: flex;
-            align-content: center;
+            flex-direction: row;
             justify-content: center;
+            align-items: center;
+            padding-top: 4px;
         }
 
         hr {
@@ -170,6 +172,7 @@
             letter-spacing: 1.5;
             display: flex;
             justify-content: start;
+            align-items: center;
         }
 
         #blur_pata_mono {
@@ -436,6 +439,60 @@
             color: #888;
             /* Add white background on hover for both buttons */
         }
+
+        @media (max-width: 700px) {
+            .container_guess_ghost {
+                columns: 1;
+            }
+
+            .tarjeta_fantasma_general {
+                display: flex;
+                width: 80%;
+                min-width: 220px;
+                height: 500px;
+            }
+
+            .div_izq {
+                width: 100%;
+                height: 47%;
+            }
+
+            .div_der {
+                width: 100%;
+                height: 47%;
+                flex-direction: column;
+            }
+
+            .div_iconos {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 10%;
+                align-items: center;
+            }
+
+            .div_iconos i {
+                top: 5px;
+                left: -10px;
+            }
+
+            .menu_lateral {
+                width: calc(100vw - 20px);
+            }
+
+            .herramientas_guess_ghost {
+                gap: 0;
+            }
+
+            .pruebas {
+                margin-bottom: 10px;
+            }
+
+            .flecha_esconder_menu {
+                width: 20px;
+                right: -20px;
+            }
+        }
     </style>
 </head>
 
@@ -605,7 +662,6 @@
                         <div class="div_pisadas">
                             <img src="../img/Icons/pisadas.svg" alt="" class="iconoP">
                             <div class="div_numeros"><?php echo $datos['velocidad']; ?> m/s</div>
-                            <img src="../img/Icons/altavoz.svg" alt="" class="iconoA">
                         </div>
                     </div>
                 </div>
