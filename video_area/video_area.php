@@ -42,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             FROM videos 
             JOIN usuarios ON videos.idAutor = usuarios.id
             ORDER BY videos.id DESC";
-
     }
 
     // Ejecutar la consulta SQL y mostrar el resultado
@@ -63,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<p>@ ' . $row['nombre_usuario'] . '</p>';
             echo '</div>';
         }
-
     } else {
         echo '<div class="divNoHayVideos">';
         echo '<img src="../img/Icons/noVideos.png" alt="No hay videos icono" class="imgNoVideos">';
@@ -95,7 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
     </div>
     <div class="divPrincipalVideos">
-        <nav class="sidebarVideos">
+        <button id="sidebarToggle" class="sidebarToggle"><img src="../img/Icons/inicio.png" alt=""></button>
+        <nav id="sidebarVideos" class="sidebarVideos">
             <ul>
                 <li class="inicioSidebar" id="inicioSidebar"><a><img src="../img/Icons/inicio.png" alt="">Inicio</a>
                 </li>
@@ -103,8 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Gusta</a></li>
                 <li class="canalSidebar" id="canalSidebar"><a><img src="../img/Icons/misvideos.png" alt="">Mis
                         Vídeos</a></li>
-                <li class="suscripcionesSidebar" id="suscripcionesSidebar"><a><img src="../img/Icons/suscripciones.png"
-                            alt="">Suscripciones</a></li>
+                <li class="suscripcionesSidebar" id="suscripcionesSidebar"><a><img src="../img/Icons/suscripciones.png" alt="">Suscripciones</a></li>
             </ul>
         </nav>
 
@@ -156,20 +154,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('sidebarToggle').addEventListener('click', function() {
+                    var sidebar = document.getElementById('sidebarVideos');
+                    if (sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    } else {
+                        sidebar.classList.add('open');
+                    }
+                });
                 // Obtener todos los elementos de la barra lateral
                 const sidebarItems = document.querySelectorAll('.sidebarVideos li');
 
                 // Agregar la clase 'selected' al primer elemento de la barra lateral
                 sidebarItems[0].classList.add('selected');
 
+                // Función para actualizar la imagen del botón
+                function updateButtonImage(src) {
+                    const imgElement = document.querySelector('#sidebarToggle img');
+                    imgElement.src = src;
+                }
+
                 // Agregar un evento click a cada elemento
                 sidebarItems.forEach(item => {
-                    item.addEventListener('click', function () {
+                    item.addEventListener('click', function() {
                         // Eliminar la clase 'selected' de todos los elementos de la barra lateral
                         sidebarItems.forEach(item => {
                             item.classList.remove('selected');
                         });
+
+                        // Eliminar la calse 'open' para cerrar el sidebar
+                        var sidebar = document.getElementById('sidebarVideos');
+                        sidebar.classList.remove('open');
 
                         // Agregar la clase 'selected' al elemento clickeado
                         this.classList.add('selected');
@@ -177,14 +193,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // Obtener el id del elemento clickeado
                         const selectedItem = this.getAttribute('id');
 
+                        // Actualizar la imagen del botón con la imagen del elemento clickeado
+                        const imgSrc = this.querySelector('img').src;
+                        updateButtonImage(imgSrc);
+
                         // Realizar una petición AJAX para cargar el contenido correspondiente basado en el id seleccionado
                         fetch(window.location.href, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: 'selectedItem=' + selectedItem
-                        })
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: 'selectedItem=' + selectedItem
+                            })
                             .then(response => response.text())
                             .then(data => {
                                 // Actualizar el contenido de acuerdo a la respuesta del servidor
@@ -199,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-            document.getElementById('searchInputVideo').addEventListener('input', function () {
+            document.getElementById('searchInputVideo').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
                 const videos = document.querySelectorAll('.video-item');
                 let visibleCount = 0;

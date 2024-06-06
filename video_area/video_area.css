@@ -5,7 +5,8 @@
     width: 100%;
     height: 70px;
     background-color: #222;
-    z-index: 1000; /* Asegúrate de que el header esté por encima de otros elementos */
+    z-index: 1000;
+    /* Asegúrate de que el header esté por encima de otros elementos */
 }
 
 .mainVentanaModal {
@@ -13,14 +14,14 @@
 }
 
 .sidebarVideos {
-    position: fixed; /* Habilitar posición fija */
+    position: fixed;
     left: 0;
-    top: 70px; /* Inicia debajo del header */
+    top: 70px;
     width: 200px;
-    height: calc(100vh - 70px); /* Asegura que ocupe el espacio restante de la ventana */
+    height: calc(100vh - 70px);
     background-color: #111;
     color: white;
-    /* padding-top: 20px; */ /* Este padding es opcional según tus necesidades */
+    transition: all 0.3s ease-in-out;
 }
 
 .sidebarVideos ul {
@@ -55,19 +56,23 @@
 }
 
 .selected {
-    background-color: #575757; /* Cambia este color por el que desees */
+    background-color: #575757;
+    /* Cambia este color por el que desees */
 }
 
 .divPrincipalVideos {
     display: flex;
-    margin-left: 200px; /* Asegura que el contenido principal no quede debajo de la sidebar */
+    margin-left: 200px;
+    /* Asegura que el contenido principal no quede debajo de la sidebar */
 }
 
 .main-contentVideos {
-    width: 100%; /* Ajusta el ancho según el espacio que ocupa la sidebar */
+    width: 100%;
+    /* Ajusta el ancho según el espacio que ocupa la sidebar */
     height: auto;
     /* border: solid 1px; */
-    margin-top: 70px; /* Asegura que el contenido principal esté alineado con el header */
+    margin-top: 70px;
+    /* Asegura que el contenido principal esté alineado con el header */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -88,7 +93,8 @@
 #searchInputVideo {
     padding: 8px;
     border: 2px solid #5F1495;
-    padding: 8px 8px 8px 30px; /* Espacio para la lupa */
+    padding: 8px 8px 8px 30px;
+    /* Espacio para la lupa */
     border-radius: 20px;
     width: 100%;
     background-color: transparent;
@@ -151,7 +157,8 @@
 }
 
 .play-icon::after {
-    content: "\25B6"; /* Unicode for play symbol */
+    content: "\25B6";
+    /* Unicode for play symbol */
     font-size: 2em;
     color: white;
     margin-left: 7%;
@@ -179,14 +186,18 @@
 .upload-video-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Espacio arriba del botón para separarlo de los videos */
-    margin-bottom: 40px; /* Espacio abajo del botón */
-    width: 100%; /* Asegura que el contenedor del botón ocupe el ancho completo */
+    margin-top: 20px;
+    /* Espacio arriba del botón para separarlo de los videos */
+    margin-bottom: 40px;
+    /* Espacio abajo del botón */
+    width: 100%;
+    /* Asegura que el contenedor del botón ocupe el ancho completo */
 }
 
 .upload-video-button {
     padding: 10px 20px;
-    background-color: #5F1495; /* Color de fondo del botón */
+    background-color: #5F1495;
+    /* Color de fondo del botón */
     color: white;
     border: none;
     border-radius: 5px;
@@ -195,5 +206,43 @@
 }
 
 .upload-video-button:hover {
-    background-color: #4a0e70; /* Color de fondo del botón al pasar el mouse */
+    background-color: #4a0e70;
+    /* Color de fondo del botón al pasar el mouse */
+}
+
+.sidebarToggle {
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    position: fixed;
+    top: 70px;
+    left: 12px;
+    z-index: 1;
+    display: none;
+}
+
+@media (max-width: 675px) {
+    .sidebarToggle {
+        display: block;
+    }
+
+    .sidebarToggle img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .sidebarVideos {
+        left: -200px;
+        z-index: 11;
+    }
+
+    .sidebarVideos.open {
+        left: 0;
+    }
+
+    .divPrincipalVideos {
+        margin-left: 0;
+    }
 }
