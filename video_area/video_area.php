@@ -217,7 +217,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             });
 
-
+            document.getElementById('searchInputVideo').addEventListener('click', function() {
+                // Eliminar la calse 'open' para cerrar el sidebar
+                var sidebar = document.getElementById('sidebarVideos');
+                sidebar.classList.remove('open');
+            });
 
             document.getElementById('searchInputVideo').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
