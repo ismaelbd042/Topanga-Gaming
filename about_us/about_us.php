@@ -153,7 +153,8 @@
             border: 1px solid white;
         }
 
-        .ventanaConfirmacion {
+        .ventanaConfirmacion,
+        .ventanaError {
             position: sticky;
             bottom: 20px;
             left: 20px;
@@ -170,7 +171,8 @@
             align-items: center;
         }
 
-        .ventanaConfirmacion img {
+        .ventanaConfirmacion img,
+        .ventanaError img {
             width: 30px;
             height: 30px;
         }
@@ -315,16 +317,29 @@
         <img src="../img/Icons/iconoOk.png" alt="">
         Mensaje enviado<br> correctamente.
     </div>
+    <div class="ventanaError" id="ventanaError" style="display: none;">
+        <img src="../img/Icons/iconoMal.png" alt="">
+        Error al enviar el mensaje.
+    </div>
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
             const ventanaConfirmacion = document.getElementById('ventanaConfirmacion');
+            const ventanaError = document.getElementById('ventanaError');
 
-            function mostrarYDesvanecer() {
+            function mostrarYDesvanecer1() {
                 ventanaConfirmacion.style.display = 'flex';
 
                 setTimeout(() => {
                     ventanaConfirmacion.style.display = 'none';
+                }, 2000); // 2 segundos
+            }
+
+            function mostrarYDesvanecer2() {
+                ventanaError.style.display = 'flex';
+
+                setTimeout(() => {
+                    ventanaError.style.display = 'none';
                 }, 2000); // 2 segundos
             }
 
@@ -336,12 +351,11 @@
                 })
                 .then(response => response.text())
                 .then(data => {
-                    mostrarYDesvanecer();
+                    mostrarYDesvanecer1();
                     this.reset(); // Reinicia el formulario después del envío exitoso
                 })
                 .catch(error => {
-                    document.getElementById('responseMessage').innerText = 'Error al enviar el formulario.';
-                    console.error('Error:', error);
+                    mostrarYDesvanecer2();
                 });
         });
     </script>
