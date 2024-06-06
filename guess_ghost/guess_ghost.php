@@ -288,12 +288,10 @@
         .div_pisadas {
             width: 55%;
             height: 95%;
-
             display: flex;
-            justify-content: space-evenly;
             flex-direction: row;
-            align-items: left;
             align-self: center;
+            justify-content: flex-end;
         }
 
         .div_evidencias_fantasma {
