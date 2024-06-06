@@ -22,8 +22,8 @@
         height: auto;
         align-items: center;
         text-align: center;
-        padding-top: 2em;
         overflow: hidden;
+        margin-bottom: 50px;
     }
 
     .container_carrousel {
@@ -71,10 +71,10 @@
         position: relative;
         width: 400px;
         height: auto;
-        /* transform: rotate(-20deg); */
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 10px;
         overflow: hidden;
+        max-height: 450px;
     }
 
     .container_equipamiento .div_info_equipamiento {

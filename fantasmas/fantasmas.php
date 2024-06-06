@@ -22,7 +22,7 @@
 
         .tarjeta_fantasma_general {
             width: 500px;
-            height: 700px;
+            height: auto;
             background: #000;
             border-radius: 30px;
             display: flex;
@@ -35,11 +35,8 @@
 
         .cuadrado_morado {
             width: 100%;
-            height: 55%;
-            clip-path: polygon(0% 0%, 100% 0%, 100% 85%,
-                    95% 88%, 88% 92%, 80% 95%, 72% 97%, 64% 99%, 55% 100%,
-                    45% 100%, 36% 99%, 28% 97%, 20% 95%, 12% 92%, 5% 88%,
-                    0% 85%);
+            height: 400px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 95% 88%, 88% 92%, 80% 95%, 72% 97%, 64% 99%, 55% 100%, 45% 100%, 36% 99%, 28% 97%, 20% 95%, 12% 92%, 5% 88%, 0% 85%);
             background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
             border-top-left-radius: 30px;
             border-bottom-left-radius: 30px;
@@ -81,7 +78,8 @@
 
         .pruebas {
             display: flex;
-            width: 33%;
+            max-width: 33%;
+            width: fit-content;
             flex-direction: column;
             gap: 5px;
         }
@@ -178,13 +176,14 @@
         echo '        <div class="pruebas_fantasmas">';
 
         // Generar el HTML para cada prueba del fantasma
-        $prueba_index = 1;
         foreach ($fantasma['pruebas'] as $prueba) {
-            echo '<div class="pruebas prueba' . $prueba_index . '">';
+            if ($fantasma['nombre'] == 'Mímico' && $prueba == 'Orbes Espectrales') {
+                continue; // Omitir la prueba si el fantasma es "Mimico" y la prueba es "Orbes Espectrales"
+            }
+            echo '<div class="pruebas">';
             echo '                <img src="../img/Fotos pruebas/' . $prueba . '.svg" alt="">';
             echo '                ' . htmlspecialchars($prueba);
             echo '            </div>';
-            $prueba_index++;
         }
 
         echo '        </div>';
