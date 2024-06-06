@@ -124,9 +124,9 @@
 
     // Array para almacenar los datos de los fantasmas y sus pruebas
     $pruebas = array();
-    echo '<div class="granTarjeta">';
     // Recorrer los resultados y agrupar los datos por fantasma
     while ($fila = mysqli_fetch_assoc($resultado)) {
+    echo '<div class="granTarjeta" id="' . quitarTildes($fila['prueba_id']) . '">';
         $prueba_id = $fila['prueba_id'];
         $nombre_prueba = $fila['nombre_prueba'];
         $extra_prueba = $fila['extra_prueba'];

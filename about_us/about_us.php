@@ -102,7 +102,7 @@
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            margin-left: 1%;
+            /* margin-left: 1%; */
         }
 
         .formilario_width3 {
@@ -112,7 +112,7 @@
             margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            margin-left: 9%;
+            /* margin-left: 9%; */
         }
 
         .formilario_width2 {
@@ -146,6 +146,12 @@
         .tamano_letra_formulario {
             font-size: 13px;
             color: white;
+        }
+
+        .tamano_letra_formulario {
+            width: 1000px;
+            padding-right: 62px;
+            /* border: solid 1px; */
         }
 
         hr {
@@ -267,7 +273,7 @@
             </div>
             <div class="fotos_sobre_nosotros">
                 <div class="info_sobre_nosotros">
-                    <div class="img_nosotros"><img src="../img/Fondo Index.png" alt=""></div>
+                    <div class="img_nosotros"><img src="../img/Fotos Nosotros/luccaFoto.jpg" alt=""></div>
                     <span>Lucca Manfredotti</span>
                     <span>CEO</span>
                 </div>
