@@ -153,6 +153,28 @@
             border: 1px solid white;
         }
 
+        .ventanaConfirmacion {
+            position: sticky;
+            bottom: 20px;
+            left: 20px;
+            flex-direction: row-reverse;
+            width: fit-content;
+            height: auto;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 7px;
+            background-color: #a2a2ad;
+            font-size: 15px;
+            color: black;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .ventanaConfirmacion img {
+            width: 30px;
+            height: 30px;
+        }
+
         @media (max-width: 768px) {
 
             .container_sobre_nosotros,
@@ -263,7 +285,7 @@
         <div class="container_contacto">
             <div class="texto_contacto">
                 <div class="titulo_contacto">Contact US</div>
-                <div class="desc_contacto">Tienes algunas preguntas/cuestiones o quieres trabajar con nosotros? Rellene el formulario que aparece a continuación y nos pondremos en contacto con usted lo antes posible.</div>
+                <div class="desc_contacto">¿Tienes algunas preguntas/cuestiones o quieres trabajar con nosotros? Rellene el formulario que aparece a continuación y nos pondremos en contacto con usted lo antes posible.</div>
             </div>
             <div class="formulario_contacto">
                 <form id="contactForm">
@@ -289,9 +311,22 @@
             </div>
         </div>
     </div>
+    <div class="ventanaConfirmacion" id="ventanaConfirmacion" style="display: none;">
+        <img src="../img/Icons/iconoOk.png" alt="">
+        Mensaje enviado<br> correctamente.
+    </div>
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+            const ventanaConfirmacion = document.getElementById('ventanaConfirmacion');
+
+            function mostrarYDesvanecer() {
+                ventanaConfirmacion.style.display = 'flex';
+
+                setTimeout(() => {
+                    ventanaConfirmacion.style.display = 'none';
+                }, 2000); // 2 segundos
+            }
 
             const formData = new FormData(this);
 
@@ -301,7 +336,7 @@
                 })
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('responseMessage').innerText = data;
+                    mostrarYDesvanecer();
                     this.reset(); // Reinicia el formulario después del envío exitoso
                 })
                 .catch(error => {
