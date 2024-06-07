@@ -343,7 +343,7 @@
 
 
     <script>
-        document.getElementById('botonBuscar').addEventListener('click', function () {
+        document.getElementById('botonBuscar').addEventListener('click', function() {
             var busqueda = document.getElementById('buscarUsuario').value;
             if (busqueda) {
                 fetch('buscar_usuario.php?busqueda=' + encodeURIComponent(busqueda))
@@ -381,7 +381,7 @@
 
                                 // Añade la imagen al botón
                                 botonAmigo.appendChild(imagen);
-                                botonAmigo.onclick = function () {
+                                botonAmigo.onclick = function() {
                                     agregarAmigo(idAmigo);
                                 };
 
@@ -408,14 +408,14 @@
 
         function agregarAmigo(idAmigo) {
             fetch('agregar_amigo.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    idAmigo: idAmigo
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idAmigo: idAmigo
+                    })
                 })
-            })
                 .then(response => {
                     console.log('Response:', response); // Registro de la respuesta
                     if (!response.ok) {
@@ -726,14 +726,14 @@
                         function aceptarSolicitud(id) {
                             // Aquí puedes hacer una solicitud AJAX para aceptar la solicitud
                             fetch('aceptar_solicitud.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    id: id
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        id: id
+                                    })
                                 })
-                            })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -757,14 +757,14 @@
                         function cancelarSolicitud(id) {
                             // Hacer una solicitud AJAX para cancelar la solicitud
                             fetch('rechazar_solicitud.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    id: id
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        id: id
+                                    })
                                 })
-                            })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -789,11 +789,11 @@
                 })
         }
 
-        window.onload = function () {
+        window.onload = function() {
             // Hacer una solicitud AJAX para obtener el usuario_id
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'get_session_id.php', true);
-            xhr.onload = function () {
+            xhr.onload = function() {
                 if (xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
                     var usuario_id = response.usuario_id;
@@ -835,18 +835,17 @@
                 volverAtrasBtn.style.display = 'none';
             }
 
-    
+
             if (window.innerWidth > 940 && sidebar.style.display === 'block') {
                 chatMensajes.style.display = 'block';
                 volverAtrasBtn.style.display = 'none';
             }
         });
-
     </script>
 
 
     <script src="../Index/script.js"></script>
-
+    <?php include "../header y footer/footer.html"; ?>
 </body>
 
 </html>

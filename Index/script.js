@@ -229,6 +229,16 @@ function verificarServicios() {
           .addEventListener("click", function () {
             window.location.href = "../guess_ghost/guess_ghost.php";
           });
+        document
+          .getElementById("footermenu__item_video")
+          .addEventListener("click", function () {
+            window.location.href = "../video_area/video_area.php";
+          });
+        document
+          .getElementById("footermenu__item_chat")
+          .addEventListener("click", function () {
+            window.location.href = "../chat_mensajes/chat.php";
+          });
       } else {
         document
           .getElementById("enlaceChatServicios")
@@ -239,6 +249,20 @@ function verificarServicios() {
           });
         document
           .getElementById("enlaceVideosServicios")
+          .addEventListener("click", function (event) {
+            event.preventDefault();
+            mostrarVentanaModal();
+            mostrarLogin();
+          });
+        document
+          .getElementById("footermenu__item_chat")
+          .addEventListener("click", function (event) {
+            event.preventDefault();
+            mostrarVentanaModal();
+            mostrarLogin();
+          });
+        document
+          .getElementById("footermenu__item_video")
           .addEventListener("click", function (event) {
             event.preventDefault();
             mostrarVentanaModal();

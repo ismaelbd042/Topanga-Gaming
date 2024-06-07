@@ -287,6 +287,9 @@
             }
         });
     </script>
+    <?php include "../header y footer/footer.html"; ?>
+    <style>
+    </style>
 </body>
 
 </html>
