@@ -227,6 +227,7 @@
             .email_formulario,
             .tamano_letra_formulario {
                 margin-left: 0;
+                padding-right: 0;
                 /* Eliminar el margen izquierdo */
             }
 
