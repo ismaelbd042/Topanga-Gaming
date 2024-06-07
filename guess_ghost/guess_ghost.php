@@ -624,7 +624,14 @@
             JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
             JOIN pruebas p ON p.id = pf.prueba_id
             ORDER BY f.id";
-        $result = $conexion->query($sql);
+        // Preparar la declaración
+        $stmt = $conexion->prepare($sql);
+
+        // Ejecutar la declaración
+        $stmt->execute();
+
+        // Obtener el resultado
+        $result = $stmt->get_result();
 
         $fantasmas = [];
         if ($result->num_rows > 0) {

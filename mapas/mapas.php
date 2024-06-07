@@ -126,38 +126,42 @@
     // Verificar la conexión
     if (mysqli_connect_errno()) {
         echo "Error al conectar con la base de datos: " . mysqli_connect_error();
+        exit();
     }
 
     // Obtener el nombre del mapa desde la URL
     $nombreMapa = isset($_GET['mapa']) ? $_GET['mapa'] : '6_Tanglewood_Drive';
     $nombreMapaLimpio = str_replace('_', ' ', $nombreMapa);
 
-    // Consultar los datos del mapa específico
-    $query = "SELECT * FROM mapas WHERE nombre = '$nombreMapaLimpio'";
-    $result = mysqli_query($conexion, $query);
+    // Consultar los datos del mapa específico usando una sentencia preparada
+    $query = "SELECT * FROM mapas WHERE nombre = ?";
+    $stmt = $conexion->prepare($query);
+    $stmt->bind_param("s", $nombreMapaLimpio);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     // Verificar si se obtuvieron resultados
-    if ($result && mysqli_num_rows($result) > 0) {
-        $mapa = mysqli_fetch_assoc($result);
-        $imagen_fondo = '../img/Fotos mapas/' . $nombreMapa . '.png';
+    if ($result && $result->num_rows > 0) {
+        $mapa = $result->fetch_assoc();
+        $imagen_fondo = '../img/Fotos mapas/' . htmlspecialchars($nombreMapa, ENT_QUOTES, 'UTF-8') . '.png';
     ?>
         <div class="container_general_mapas">
             <div class="div_foto_nombreMapa" style="background: url('<?php echo $imagen_fondo; ?>'); background-size: cover;">
-                <div class="div_nombre_mapa"><?php echo $mapa['nombre']; ?></div>
+                <div class="div_nombre_mapa"><?php echo htmlspecialchars($mapa['nombre'], ENT_QUOTES, 'UTF-8'); ?></div>
             </div>
             <div class="div_informacion_mapa">
                 <div class="cuadro_informacion">Información Acerca del Mapa</div>
                 <div class="cuadro_informacion2">
-                    Este mapa es <?php echo $mapa['tamaño']; ?>, tiene <?php echo $mapa['plantas']; ?> plantas, tambien tiene <?php echo $mapa['habitaciones']; ?> habitaciones(los numero entre guiones representan las habitaciones por cada planta desde la planta de arriba hasta la planta baja),
-                    por otra parte tiene <?php echo $mapa['salidas']; ?> salidas, tambien <?php echo $mapa['grifos']; ?> grifos, <?php echo $mapa['camaras']; ?> camaras, <?php echo $mapa['escondites']; ?>
-                    escondites y este mapa se desbloquea en el nivel <?php echo $mapa['nivel_desbloqueo']; ?> de experiencia.
+                    Este mapa es <?php echo htmlspecialchars($mapa['tamaño'], ENT_QUOTES, 'UTF-8'); ?>, tiene <?php echo htmlspecialchars($mapa['plantas'], ENT_QUOTES, 'UTF-8'); ?> plantas, también tiene <?php echo htmlspecialchars($mapa['habitaciones'], ENT_QUOTES, 'UTF-8'); ?> habitaciones (los números entre guiones representan las habitaciones por cada planta desde la planta de arriba hasta la planta baja),
+                    por otra parte tiene <?php echo htmlspecialchars($mapa['salidas'], ENT_QUOTES, 'UTF-8'); ?> salidas, también <?php echo htmlspecialchars($mapa['grifos'], ENT_QUOTES, 'UTF-8'); ?> grifos, <?php echo htmlspecialchars($mapa['camaras'], ENT_QUOTES, 'UTF-8'); ?> cámaras, <?php echo htmlspecialchars($mapa['escondites'], ENT_QUOTES, 'UTF-8'); ?>
+                    escondites y este mapa se desbloquea en el nivel <?php echo htmlspecialchars($mapa['nivel_desbloqueo'], ENT_QUOTES, 'UTF-8'); ?> de experiencia.
                 </div>
             </div>
             <div class="div_ubicacion_objetos">
                 <div class="div_general_ubicacionesObjetos">
-                    <div class="div_titulo_ubicacionObjetos">Ubicacion de los Objetos en el Mapa</div>
+                    <div class="div_titulo_ubicacionObjetos">Ubicación de los Objetos en el Mapa</div>
                     <div class="div_objeto_maldito">
-                        <img src="<?php echo $mapa['img']; ?>" alt="Plano del Mapa" class="imagen_plano_objetos">
+                        <img src="<?php echo htmlspecialchars($mapa['img'], ENT_QUOTES, 'UTF-8'); ?>" alt="Plano del Mapa" class="imagen_plano_objetos">
                     </div>
                 </div>
             </div>
@@ -166,6 +170,9 @@
     } else {
         echo "<div class='container_general_mapas'><p>Mapa no encontrado.</p></div>";
     }
+
+    // Cerrar la conexión a la base de datos
+    $stmt->close();
     mysqli_close($conexion);
     ?>
 
