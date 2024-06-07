@@ -274,11 +274,13 @@
 
             .sidebar {
                 width: 100%;
+                height: 100vh;
             }
 
             .chatMensajes {
                 width: 100%;
                 display: none;
+                height: 100vh;
             }
 
         }
@@ -735,7 +737,7 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
-                                        alert('Solicitud aceptada');
+                                        // alert('Solicitud aceptada');
                                         // Aquí puedes actualizar la interfaz de usuario según sea necesario
                                         // Por ejemplo, remover el elemento del DOM
                                         var solicitudElement = document.querySelector(`#solicitud-${id}`);
@@ -766,7 +768,6 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
-                                        alert('Solicitud cancelada');
                                         // Aquí puedes actualizar la interfaz de usuario según sea necesario
                                         // Por ejemplo, remover el elemento del DOM
                                         var solicitudElement = document.querySelector(`#solicitud-${id}`);

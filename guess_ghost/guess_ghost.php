@@ -46,7 +46,7 @@
             height: 100.3%;
             background-color: #494a60;
             position: absolute;
-            top: -0.5px;
+            top: -0.7px;
             right: -40px;
             border: solid 1px black;
             border-left: 0;
@@ -75,10 +75,11 @@
             display: flex;
             flex-direction: column;
             gap: 1vh;
+            overflow-y: auto;
         }
 
         .titulo_pruebas {
-            font-size: 28px;
+            font-size: 25px;
         }
 
         .pruebas {

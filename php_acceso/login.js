@@ -49,6 +49,14 @@ function comprobarInputUsuarioRegistro() {
     return false;
   }
 
+  // Verificar si el usuario tiene menos de 5 letras
+  if (inputUsername.length > 15) {
+    errorMessage.textContent = "El nombre no debe superar los 15 caracteres.";
+    errorMessage.style.opacity = "1";
+    usernameErrorIcon.style.display = "block";
+    return false;
+  }
+
   // Si pasa todas las validaciones, ocultar el icono de error y retornar verdadero
   usernameErrorIcon.style.display = "none";
   return true;

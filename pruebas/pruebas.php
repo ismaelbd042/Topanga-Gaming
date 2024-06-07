@@ -104,6 +104,12 @@
             font-family: OctoberCrow;
             margin-top: 30px;
         }
+      
+        @media (max-width: 530px) {
+            .tarjeta_pruebas_general {
+                width: 400px;
+            }
+        }
     </style>
 </head>
 
