@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedItem = $_POST['selectedItem'];
 
     // Realizar una acción basada en el elemento seleccionado
+    $conn = getConexion();
     if ($selectedItem == 'meGustaSidebar') {
         // Realizar la consulta SQL correspondiente para el elemento "Me Gusta"
         $idAutor = $_SESSION['id'];
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         FROM videos
         JOIN usuarios ON videos.idAutor = usuarios.id 
         JOIN meGusta ON videos.id = meGusta.idVideo
-        WHERE meGusta.idUsuario = $idAutor
+        WHERE meGusta.idUsuario = ?
         ORDER BY videos.id DESC";
     } elseif ($selectedItem == 'canalSidebar') {
         // Realizar la consulta SQL correspondiente para el elemento "Mis Vídeos"
@@ -24,9 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT videos.id, videos.nombreVideo, videos.video, usuarios.nombre_usuario 
             FROM videos 
             JOIN usuarios ON videos.idAutor = usuarios.id 
-            WHERE videos.idAutor = $idAutor
+            WHERE videos.idAutor = ?
             ORDER BY videos.id DESC";
-        $isCanalSidebar = true;
     } elseif ($selectedItem == 'suscripcionesSidebar') {
         // Realizar la consulta SQL correspondiente para el elemento "Suscripciones"
         $idAutor = $_SESSION['id'];
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         FROM videos
         JOIN usuarios ON videos.idAutor = usuarios.id 
         JOIN suscripciones ON videos.idAutor = suscripciones.idStreamer
-        WHERE suscripciones.idUsuario = $idAutor
+        WHERE suscripciones.idUsuario = ?
         ORDER BY videos.id DESC";
     } else {
         // Realizar la consulta SQL correspondiente para el elemento "Inicio" (o cualquier otra acción predeterminada)
@@ -44,31 +44,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ORDER BY videos.id DESC";
     }
 
-    // Ejecutar la consulta SQL y mostrar el resultado
-    $conn = getConexion();
-    $result = $conn->query($sql);
+    // Preparar la consulta
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        // Asociar parámetros y ejecutar la consulta
+        $stmt->bind_param("i", $_SESSION['id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="video-item" data-nombre-video="' . $row['nombreVideo'] . '" data-nombre-autor="' . $row['nombre_usuario'] . '">';
-            echo '<a href="video.php?id=' . $row['id'] . '">';
-            echo '<video>';
-            echo '<source src="' . $row['video'] . '" type="video/mp4">';
-            echo 'Your browser does not support the video tag.';
-            echo '</video>';
-            echo '<div class="play-icon"></div>';
-            echo '</a>';
-            echo '<h2>' . $row['nombreVideo'] . '</h2>';
-            echo '<p>@ ' . $row['nombre_usuario'] . '</p>';
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="video-item" data-nombre-video="' . htmlspecialchars($row['nombreVideo']) . '" data-nombre-autor="' . htmlspecialchars($row['nombre_usuario']) . '">';
+                echo '<a href="video.php?id=' . htmlspecialchars($row['id']) . '">';
+                echo '<video>';
+                echo '<source src="' . htmlspecialchars($row['video']) . '" type="video/mp4">';
+                echo 'Your browser does not support the video tag.';
+                echo '</video>';
+                echo '<div class="play-icon"></div>';
+                echo '</a>';
+                echo '<h2>' . htmlspecialchars($row['nombreVideo']) . '</h2>';
+                echo '<p>@ ' . htmlspecialchars($row['nombre_usuario']) . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo '<div class="divNoHayVideos">';
+            echo '<img src="../img/Icons/noVideos.png" alt="No hay videos icono" class="imgNoVideos">';
+            echo '<p id="noVideosMessage">Lo sentimos, no hay videos en esta sección.</p>';
             echo '</div>';
         }
     } else {
-        echo '<div class="divNoHayVideos">';
-        echo '<img src="../img/Icons/noVideos.png" alt="No hay videos icono" class="imgNoVideos">';
-        echo '<p id="noVideosMessage">Lo sentimos, no hay videos en esta sección.</p>';
-        echo '</div>';
+        echo "Error en la preparación de la consulta: " . $conn->error;
     }
 
+    $stmt->close();
+    $conn->close();
     exit; // Finalizar la ejecución del script después de mostrar el resultado
 }
 ?>
