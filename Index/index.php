@@ -138,6 +138,7 @@
         }
     </script>
     <script src="script.js"></script>
+    <?php include "../header y footer/footer.html"; ?>
 </body>
 
 </html>

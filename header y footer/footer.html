@@ -1,0 +1,168 @@
+<html>
+<style>
+    .footer {
+        position: relative;
+        width: 100%;
+        background: #0c0c0c;
+        min-height: 100px;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+    .footersocial-icon,
+    .footermenu {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+        flex-wrap: wrap;
+    }
+
+    .footersocial-icon__item,
+    .footermenu__item {
+        list-style: none;
+    }
+
+    .footersocial-icon__link {
+        font-size: 2rem;
+        color: #fff;
+        margin: 0 10px;
+        display: inline-block;
+        transition: 0.5s;
+    }
+
+    .footersocial-icon__link:hover {
+        transform: translateY(-10px);
+    }
+
+    .footermenu__link {
+        font-size: 1.2rem;
+        color: #fff;
+        margin: 0 10px;
+        display: inline-block;
+        transition: 0.5s;
+        text-decoration: none;
+        opacity: 0.75;
+        font-weight: 300;
+    }
+
+    .footermenu__link:hover {
+        opacity: 1;
+    }
+
+    .footerfooter p {
+        color: #fff;
+        margin: 15px 0 10px 0;
+        font-size: 1rem;
+        font-weight: 300;
+    }
+
+    .footerwave {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url("../img/ola.png");
+        background-size: 1000px 100px;
+    }
+
+    .footerwave#footerwave1 {
+        z-index: 1000;
+        opacity: 1;
+        bottom: 0;
+        animation: animateWaves 4s linear infinite;
+    }
+
+    .footerwave#footerwave2 {
+        z-index: 999;
+        opacity: 0.5;
+        bottom: 10px;
+        animation: animate 4s linear infinite !important;
+    }
+
+    .footerwave#footerwave3 {
+        z-index: 1000;
+        opacity: 0.2;
+        bottom: 15px;
+        animation: animateWaves 3s linear infinite;
+    }
+
+    .footerwave#footerwave4 {
+        z-index: 999;
+        opacity: 0.7;
+        bottom: 20px;
+        animation: animate 3s linear infinite;
+    }
+
+    @keyframes animateWaves {
+        0% {
+            background-position-x: 1000px;
+        }
+
+        100% {
+            background-positon-x: 0px;
+        }
+    }
+
+    @keyframes animate {
+        0% {
+            background-position-x: -1000px;
+        }
+
+        100% {
+            background-positon-x: 0px;
+        }
+    }
+</style>
+
+<body>
+    <footer class="footer">
+        <div class="footerwaves">
+            <div class="footerwave" id="footerwave1"></div>
+            <div class="footerwave" id="footerwave2"></div>
+            <div class="footerwave" id="footerwave3"></div>
+            <div class="footerwave" id="footerwave4"></div>
+        </div>
+        <ul class="footersocial-icon">
+            <li class="footersocial-icon__item"><a class="footersocial-icon__link"
+                    href="https://www.facebook.com/checkpoint/1501092823525282/?next=https%3A%2F%2Fwww.facebook.com%2Fsearch%2Ftop%2F%3Fq%3Duniversidad%2Beuropea%2B">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a></li>
+            <li class="footersocial-icon__item"><a class="footersocial-icon__link" href="https://x.com/TopangaUem">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a></li>
+            <li class="footersocial-icon__item"><a class="footersocial-icon__link"
+                    href="https://www.youtube.com/channel/UC13txNUYCWF2PyiwxrLzAnQ">
+                    <ion-icon name="logo-youtube"></ion-icon>
+                </a></li>
+            <li class="footersocial-icon__item"><a class="footersocial-icon__link" href="">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a></li>
+        </ul>
+        <ul class="footermenu">
+            <li class="footermenu__item"><a class="footermenu__link" href="">Home</a></li>
+            <li class="footermenu__item"><a class="footermenu__link"
+                    href="https://store.steampowered.com/news/app/739630" target="_blank">News</a></li>
+            <li class="footermenu__item"><a class="footermenu__link"
+                    href="../Index/index.php#indexServicios">Services</a></li>
+            <li class="footermenu__item"><a class="footermenu__link"
+                    href="../about_us/about_us.php#formulario_contacto">Contact</a>
+            </li>
+            <li class="footermenu__item"><a class="footermenu__link"
+                    href="../about_us/about_us.php#container_about_us">About us</a>
+            </li>
+
+        </ul>
+        <p>&copy;2024 Topanga Gaming | All Rights Reserved</p>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
