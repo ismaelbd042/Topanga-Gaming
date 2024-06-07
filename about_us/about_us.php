@@ -161,7 +161,7 @@
 
         .ventanaConfirmacion,
         .ventanaError {
-            position: sticky;
+            position: fixed;
             bottom: 20px;
             left: 20px;
             flex-direction: row-reverse;
@@ -175,6 +175,7 @@
             color: black;
             gap: 5px;
             align-items: center;
+            z-index: 1001;
         }
 
         .ventanaConfirmacion img,
