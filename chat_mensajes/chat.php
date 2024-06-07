@@ -14,11 +14,10 @@
         }
 
         .container {
-            /* color: white; */
             display: flex;
             width: 100%;
             height: 100%;
-            /* border: solid 1px; */
+            margin-bottom: 150px;
         }
 
         .sidebar {
@@ -488,12 +487,13 @@
                             div.style.padding = '10px';
                             div.style.boxSizing = 'border-box';
                             div.style.cursor = 'pointer';
+                            div.style.backgroundColor = '#555555';
                             div.addEventListener('mouseenter', () => {
                                 div.style.backgroundColor = 'rgba(255, 248, 239, 0.568)';
                             });
 
                             div.addEventListener('mouseleave', () => {
-                                div.style.backgroundColor = 'grey'; // O el color original que prefieras
+                                div.style.backgroundColor = '#555555'; // O el color original que prefieras
                             });
 
                             // Estilo para el botón
