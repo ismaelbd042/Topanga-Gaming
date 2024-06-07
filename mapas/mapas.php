@@ -38,6 +38,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            /* background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%); */
+
+            /* background-image: url(../img/FotoFondoGris.png);
+            background-size: cover;
+            background-repeat: no-repeat; */
         }
 
         .div_ubicacion_objetos {
@@ -47,7 +53,10 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
+            /* background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%); */
+            /* background-image: url(../img/FotoFondoPlanosMapas.png);
+            background-size: cover;
+            background-repeat: no-repeat; */
         }
 
         .div_nombre_mapa {

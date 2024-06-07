@@ -149,7 +149,7 @@
         }
 
         .tamano_letra_formulario {
-            width: 1000px;
+            /* width: 1000px; */
             padding-right: 62px;
             /* border: solid 1px; */
         }
@@ -283,7 +283,7 @@
                     <span>CEO</span>
                 </div>
                 <div class="info_sobre_nosotros">
-                    <div class="img_nosotros"><img src="../img/Fotos Nosotros/alvaroFoto.png" alt=""></div>
+                    <div class="img_nosotros"><img src="../img/Fotos Nosotros/alvaro.png" alt=""></div>
                     <span>Álvaro Serrano</span>
                     <span>CEO</span>
                 </div>
