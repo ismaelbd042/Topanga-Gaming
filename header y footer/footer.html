@@ -146,16 +146,16 @@
                 </a></li>
         </ul>
         <ul class="footermenu">
-            <li class="footermenu__item"><a class="footermenu__link" href="">Home</a></li>
-            <li class="footermenu__item"><a class="footermenu__link"
-                    href="https://store.steampowered.com/news/app/739630" target="_blank">News</a></li>
-            <li class="footermenu__item"><a class="footermenu__link"
-                    href="../Index/index.php#indexServicios">Services</a></li>
-            <li class="footermenu__item"><a class="footermenu__link"
-                    href="../about_us/about_us.php#formulario_contacto">Contact</a>
+            <li class="footermenu__item"><a class="footermenu__link" href="../Index/index.php">Phasmophobia</a></li>
+            <li class="footermenu__item" id="footermenu__item_chat"><a class="footermenu__link"
+                    id="footermenu__link_chat" href="">Chat</a></li>
+            <li class=" footermenu__item" id="footermenu__item_video"><a class="footermenu__link"
+                    id="footermenu__link_video" href="">Zona de
+                    videos</a></li>
+            <li class="footermenu__item"><a class="footermenu__link" href="../guess_ghost/guess_ghost.php">Averigua el
+                    fantasma</a>
             </li>
-            <li class="footermenu__item"><a class="footermenu__link"
-                    href="../about_us/about_us.php#container_about_us">About us</a>
+            <li class="footermenu__item"><a class="footermenu__link" href="../about_us/about_us.php">About us</a>
             </li>
 
         </ul>
@@ -163,6 +163,90 @@
     </footer>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("../php_acceso/verificar_sesion.php")
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.sesion_activa) {
+                        document
+                            .getElementById("footermenu__link_video").href = "../video_area/video_area.php";
+                        document
+                            .getElementById("footermenu__link_chat").href = "../chat_mensajes/chat.php";
+                    } else {
+                        document
+                            .getElementById("footermenu__item_chat")
+                            .addEventListener("click", function (event) {
+                                event.preventDefault();
+                                mostrarVentanaModal();
+                                mostrarLogin();
+                            });
+                        document
+                            .getElementById("footermenu__item_video")
+                            .addEventListener("click", function (event) {
+                                event.preventDefault();
+                                mostrarVentanaModal();
+                                mostrarLogin();
+                            });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error al verificar la sesión:", error);
+                });
+            // Obtener la ventana modal y el checkbox
+            let modal = document.querySelector(".mainVentanaModal");
+            let chkVentanaModal = document.getElementById("chkVentanaModal");
+            let overlay = document.querySelector(".overlay");
+
+            // Obtener los botones de inicio de sesión y registro
+            let btnIniciarSesion = document.querySelector(".iniciarSesion");
+            let btnRegistrarse = document.querySelector(".registrarse");
+
+            // Función para cambiar la ventana modal al estado de inicio de sesión
+            function mostrarLogin() {
+                window.scroll({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+                modal.style.display = "block";
+                overlay.style.display = "block";
+                setTimeout(function () {
+                    modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
+                }, 100); // Pequeña demora antes de aplicar la transformación
+                chkVentanaModal.checked = true;
+            }
+
+            // Función para cambiar la ventana modal al estado de registro
+            function mostrarSignUp() {
+                window.scroll({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+                modal.style.display = "block";
+                overlay.style.display = "block";
+                setTimeout(function () {
+                    modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
+                }, 100); // Pequeña demora antes de aplicar la transformación
+                chkVentanaModal.checked = false;
+            }
+
+            // Función para cerrar la ventana modal
+            function ocultarVentanaModal() {
+                modal.style.transform = "translate(-50%, 100%)";
+                setTimeout(function () {
+                    modal.style.display = "none";
+                }, 500);
+                overlay.style.display = "none";
+            }
+
+            // Agregar eventos de clic a los botones
+            btnIniciarSesion.addEventListener("click", mostrarLogin);
+            btnRegistrarse.addEventListener("click", mostrarSignUp);
+            overlay.addEventListener("click", ocultarVentanaModal);
+        });
+    </script>
 </body>
 
 </html>

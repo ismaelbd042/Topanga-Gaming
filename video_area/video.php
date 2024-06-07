@@ -308,9 +308,7 @@
             });
         });
     </script>
-
-
-
+    <?php include "../header y footer/footer.html"; ?>
 </body>
 
 </html>

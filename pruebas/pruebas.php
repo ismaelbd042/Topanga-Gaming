@@ -175,7 +175,9 @@
     ?>
 
     <script src="../Index/script.js"></script>
-
+    <script>
+    </script>
+    <?php include "../header y footer/footer.html"; ?>
 </body>
 
 </html>
