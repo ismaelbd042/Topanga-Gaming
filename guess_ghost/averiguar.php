@@ -31,17 +31,20 @@ switch ($combination) {
                 GROUP BY f.id
                 HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
         break;
+
     case '010': // Solo cordura
         $sql = "SELECT f.id AS id_fantasma
                 FROM fantasmas f
-                WHERE f.cordura " . implode(' OR ', $cordura);
+                WHERE f.cordura " . implode(' AND f.cordura ', $cordura);
         break;
+
     case '001': // Solo velocidad
         $sql =
             "SELECT f.id AS id_fantasma
                 FROM fantasmas f
-                WHERE f.velocidad_desc LIKE '%" . implode("%' AND f.cordura LIKE '%", $velocidad) . "%'";
+                WHERE f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%'";
         break;
+
     case '110': // Pruebas y cordura
         $sql = "SELECT f.id AS id_fantasma
             FROM fantasmas f
@@ -52,10 +55,11 @@ switch ($combination) {
             return "'" . $prueba . "'";
         }, $pruebas);
         $sql .= implode(",", $pruebaNombres) . ")
-            AND (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
+            AND (f.cordura " . implode(' AND f.cordura ', $cordura) . ")
             GROUP BY f.id
             HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
         break;
+
     case '101': // Pruebas y velocidad
         $sql = "SELECT f.id AS id_fantasma
             FROM fantasmas f
@@ -66,14 +70,16 @@ switch ($combination) {
             return "'" . $prueba . "'";
         }, $pruebas);
         $sql .= implode(",", $pruebaNombres) . ")
-            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')";
+            AND f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%'
+            GROUP BY f.id
+            HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
         break;
 
     case '011': // Cordura y velocidad
         $sql = "SELECT f.id AS id_fantasma
             FROM fantasmas f
-            WHERE (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
-            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')";
+            WHERE f.cordura " . implode(' AND f.cordura ', $cordura) . "
+            AND f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%'";
         break;
 
     case '111': // Pruebas, cordura y velocidad
@@ -86,8 +92,8 @@ switch ($combination) {
             return "'" . $prueba . "'";
         }, $pruebas);
         $sql .= implode(",", $pruebaNombres) . ")
-            AND (f.cordura " . implode(' OR f.cordura ', $cordura) . ")
-            AND (f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%')
+            AND f.cordura " . implode(' AND f.cordura ', $cordura) . "
+            AND f.velocidad_desc LIKE '%" . implode("%' AND f.velocidad_desc LIKE '%", $velocidad) . "%'
             GROUP BY f.id
             HAVING COUNT(DISTINCT p.nombre) = " . count($pruebas);
         break;
