@@ -1,248 +1,231 @@
 .divHeaderYFooter {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background-color: #222;
-    z-index: 1000;
-    /* Asegúrate de que el header esté por encima de otros elementos */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #222;
+  z-index: 1000;
+  /* Asegúrate de que el header esté por encima de otros elementos */
 }
 
 .mainVentanaModal {
-    margin-top: 280px;
+  margin-top: 280px;
 }
 
 .sidebarVideos {
-    position: fixed;
-    left: 0;
-    top: 70px;
-    width: 200px;
-    height: calc(100vh - 70px);
-    background-color: #111;
-    color: white;
-    transition: all 0.3s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 70px;
+  width: 200px;
+  height: calc(100vh - 70px);
+  background-color: #111;
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebarVideos ul {
-    list-style-type: none;
-    padding: 0;
-    cursor: pointer;
+  list-style-type: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .sidebarVideos ul li {
-    text-align: left;
+  text-align: left;
 }
 
 .sidebarVideos ul li a {
-    height: 50px;
-    color: white;
-    text-decoration: none;
-    display: block;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
+  height: 50px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
 }
 
 .sidebarVideos ul li img {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
 }
 
 .sidebarVideos ul li a:hover {
-    background-color: #575757;
+  background-color: #575757;
 }
 
 .selected {
-    background-color: #575757;
-    /* Cambia este color por el que desees */
+  background-color: #575757;
+  /* Cambia este color por el que desees */
 }
 
 .divPrincipalVideos {
-    display: flex;
-    margin-left: 200px;
-    /* Asegura que el contenido principal no quede debajo de la sidebar */
+  display: flex;
+  margin-left: 200px;
+  /* Asegura que el contenido principal no quede debajo de la sidebar */
 }
 
 .main-contentVideos {
-    width: 100%;
-    /* Ajusta el ancho según el espacio que ocupa la sidebar */
-    height: auto;
-    /* border: solid 1px; */
-    margin-top: 70px;
-    /* Asegura que el contenido principal esté alineado con el header */
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  width: 100%;
+  /* Ajusta el ancho según el espacio que ocupa la sidebar */
+  height: auto;
+  /* border: solid 1px; */
+  margin-top: 70px;
+  /* Asegura que el contenido principal esté alineado con el header */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
-
 
 /*************Zona Videos*******************/
 
 .search-containerVideo {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 40%;
-    justify-content: center;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 40%;
+  justify-content: center;
 }
 
 #searchInputVideo {
-    padding: 8px;
-    border: 2px solid #5F1495;
-    padding: 8px 8px 8px 30px;
-    /* Espacio para la lupa */
-    border-radius: 20px;
-    width: 100%;
-    background-color: transparent;
-    color: white;
+  padding: 8px;
+  border: 2px solid #5f1495;
+  padding: 8px 8px 8px 30px;
+  /* Espacio para la lupa */
+  border-radius: 20px;
+  width: 100%;
+  background-color: transparent;
+  color: white;
 }
 
 .search-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    min-width: 260px;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  min-width: 260px;
 }
 
 .search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    pointer-events: none;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
 }
 
 .divWrapVideos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 7%;
-    width: 100%;
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7%;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .video-item {
-    max-width: 420px;
-    min-width: 20%;
-    margin-bottom: 30px;
-    position: relative;
+  max-width: 420px;
+  min-width: 20%;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .video-item video {
-    width: 100%;
-    border-radius: 20px;
+  width: 100%;
+  border-radius: 20px;
 }
 
 .play-icon {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background-color: rgba(100, 98, 98, 0.5);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-color: rgba(100, 98, 98, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .play-icon::after {
-    content: "\25B6";
-    /* Unicode for play symbol */
-    font-size: 2em;
-    color: white;
-    margin-left: 7%;
+  content: "\25B6";
+  /* Unicode for play symbol */
+  font-size: 2em;
+  color: white;
+  margin-left: 7%;
 }
 
 .video-item:hover .play-icon {
-    opacity: 1;
+  opacity: 1;
 }
 
 .video-item:hover video {
-    filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 .divNoHayVideos {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .imgNoVideos {
-    width: 100%;
-    /* display: flex; */
+  width: 100%;
+  /* display: flex; */
 }
 
 .upload-video-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    /* Espacio arriba del botón para separarlo de los videos */
-    margin-bottom: 40px;
-    /* Espacio abajo del botón */
-    width: 100%;
-    /* Asegura que el contenedor del botón ocupe el ancho completo */
-}
-
-.upload-video-button {
-    padding: 10px 20px;
-    background-color: #5F1495;
-    /* Color de fondo del botón */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upload-video-button:hover {
-    background-color: #4a0e70;
-    /* Color de fondo del botón al pasar el mouse */
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  /* Espacio arriba del botón para separarlo de los videos */
+  margin-bottom: 40px;
+  /* Espacio abajo del botón */
+  width: 100%;
+  /* Asegura que el contenedor del botón ocupe el ancho completo */
 }
 
 .sidebarToggle {
-    font-size: 30px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #fff;
-    position: fixed;
-    top: 70px;
-    left: 12px;
-    z-index: 1;
-    display: none;
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+  position: fixed;
+  top: 70px;
+  left: 12px;
+  z-index: 1;
+  display: none;
 }
 
 @media (max-width: 675px) {
-    .sidebarToggle {
-        display: block;
-    }
+  .sidebarToggle {
+    display: block;
+  }
 
-    .sidebarToggle img {
-        width: 25px;
-        height: 25px;
-    }
+  .sidebarToggle img {
+    width: 25px;
+    height: 25px;
+  }
 
-    .sidebarVideos {
-        left: -200px;
-        z-index: 11;
-    }
+  .sidebarVideos {
+    left: -200px;
+    z-index: 11;
+  }
 
-    .sidebarVideos.open {
-        left: 0;
-    }
+  .sidebarVideos.open {
+    left: 0;
+  }
 
-    .divPrincipalVideos {
-        margin-left: 0;
-    }
+  .divPrincipalVideos {
+    margin-left: 0;
+  }
 }
