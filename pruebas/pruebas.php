@@ -104,7 +104,7 @@
             font-family: OctoberCrow;
             margin-top: 30px;
         }
-
+      
         @media (max-width: 530px) {
             .tarjeta_pruebas_general {
                 width: 400px;
@@ -126,7 +126,9 @@
     // Consulta para obtener los datos de la base de datos
     $query = "SELECT p.id AS prueba_id, p.nombre AS nombre_prueba, p.extra AS extra_prueba
             FROM pruebas p";
-    $resultado = mysqli_query($conexion, $query);
+    $stmt = $conexion->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
     // Array para almacenar los datos de los fantasmas y sus pruebas
     $pruebas = array();
