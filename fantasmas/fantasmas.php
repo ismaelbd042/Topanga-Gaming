@@ -120,6 +120,10 @@
             text-align: center;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
+
+        .imgPruebasFantasmas {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -181,7 +185,7 @@
                 continue; // Omitir la prueba si el fantasma es "Mimico" y la prueba es "Orbes Espectrales"
             }
             echo '<div class="pruebas">';
-            echo '                <img src="../img/Fotos pruebas/' . $prueba . '.svg" alt="">';
+            echo '                <img src="../img/Fotos pruebas/' . $prueba . '.svg" class="imgPruebasFantasmas">';
             echo '                ' . htmlspecialchars($prueba);
             echo '            </div>';
         }

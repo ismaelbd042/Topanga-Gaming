@@ -24,7 +24,8 @@
         .tarjeta_pruebas_general {
             width: 500px;
             height: 600px;
-            background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);;
+            background: radial-gradient(185.32% 99.8% at 11.32% 52.18%, #003 0%, #5F1495 100%);
+            ;
             border-radius: 30px;
             display: flex;
             flex-direction: column;
@@ -104,6 +105,11 @@
             margin-top: 30px;
         }
 
+        @media (max-width: 530px) {
+            .tarjeta_pruebas_general {
+                width: 400px;
+            }
+        }
     </style>
 </head>
 
@@ -126,7 +132,7 @@
     $pruebas = array();
     // Recorrer los resultados y agrupar los datos por fantasma
     while ($fila = mysqli_fetch_assoc($resultado)) {
-    echo '<div class="granTarjeta" id="' . quitarTildes($fila['prueba_id']) . '">';
+        echo '<div class="granTarjeta" id="' . quitarTildes($fila['prueba_id']) . '">';
         $prueba_id = $fila['prueba_id'];
         $nombre_prueba = $fila['nombre_prueba'];
         $extra_prueba = $fila['extra_prueba'];
@@ -143,7 +149,7 @@
     // Generar el HTML para cada fantasma
     foreach ($pruebas as $prueba) {
         echo '<div class="tarjeta_pruebas_general" id="' . quitarTildes($prueba['nombre']) . '">';
-        echo '    <div class="nombre_prueba">'. quitarTildes(htmlspecialchars($prueba['nombre'])) . '</div>';
+        echo '    <div class="nombre_prueba">' . quitarTildes(htmlspecialchars($prueba['nombre'])) . '</div>';
         echo '    <div class="cuadrado_foto"><img src="../img/Fotos Pruebas Juego/' . strtolower($prueba['nombre']) . '.svg"></div>';
         echo '    <div class="extra_prueba">' . htmlspecialchars($prueba['extra']) . '</div>';
         echo '    <div class="cuadrado_video"><video src="../img/VideosPruebas/' . strtolower($prueba['nombre']) . '1.mp4" autoplay loop muted></video></div>';
