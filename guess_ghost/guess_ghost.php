@@ -625,14 +625,7 @@
             JOIN pruebas_fantasmas pf ON f.id = pf.fantasma_id
             JOIN pruebas p ON p.id = pf.prueba_id
             ORDER BY f.id";
-        // Preparar la declaración
-        $stmt = $conexion->prepare($sql);
-
-        // Ejecutar la declaración
-        $stmt->execute();
-
-        // Obtener el resultado
-        $result = $stmt->get_result();
+        $result = $conexion->query($sql);
 
         $fantasmas = [];
         if ($result->num_rows > 0) {
@@ -739,10 +732,10 @@
                 normal: "normal",
                 rapido: "rapido",
                 con_vision: "vision",
-                tarde: "<= 40",
+                tarde: "<=40",
                 normal_cordura: "BETWEEN 41 AND 50",
                 pronto: "BETWEEN 51 AND 74",
-                muy_pronto: ">= 75"
+                muy_pronto: ">=75"
             };
 
             var botonesPruebas = document.querySelectorAll('.row_pruebas button');
@@ -768,7 +761,7 @@
                     // Separar los nombres en categorías correspondientes
                     var dataToSend = {
                         pruebas: nombresPruebas.filter(nombre => ["Medidor EMF 5", "Ultravioleta", "Escritura Fantasmal", "Temperaturas Heladas", "Proyector D.O.T.S.", "Orbes Espectrales", "Spirit Box"].includes(nombre)),
-                        cordura: nombresPruebas.filter(nombre => ["<= 40", "BETWEEN 41 AND 50", "BETWEEN 51 AND 74", ">= 75"].includes(nombre)),
+                        cordura: nombresPruebas.filter(nombre => ["<=40", "BETWEEN 41 AND 50", "BETWEEN 51 AND 74", ">=75"].includes(nombre)),
                         velocidad: nombresPruebas.filter(nombre => ["lento", "normal", "rapido", "vision"].includes(nombre))
                     };
 

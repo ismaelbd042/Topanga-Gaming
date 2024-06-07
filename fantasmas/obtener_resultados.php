@@ -9,21 +9,16 @@ $conexion = getConexion();
 $data = json_decode(file_get_contents("php://input"), true);
 $pruebas_seleccionadas = isset($data['pruebas']) ? $data['pruebas'] : [];
 
-// Construir la cláusula HAVING según las pruebas seleccionadas usando sentencias preparadas
+// Construir la cláusula WHERE según las pruebas seleccionadas
 $filtro = "";
-$params = [];
-$types = "";
-
 if (!empty($pruebas_seleccionadas)) {
     $filtro = "HAVING ";
     $pruebas_count = count($pruebas_seleccionadas);
     for ($i = 0; $i < $pruebas_count; $i++) {
-        $filtro .= "SUM(IF(pf.prueba_id = ?, 1, 0)) > 0";
+        $filtro .= "SUM(IF(pf.prueba_id = " . $pruebas_seleccionadas[$i] . ", 1, 0)) > 0";
         if ($i < $pruebas_count - 1) {
             $filtro .= " AND ";
         }
-        $params[] = $pruebas_seleccionadas[$i];
-        $types .= "i";
     }
 }
 
@@ -36,16 +31,11 @@ $sql = "SELECT f.nombre AS nombre_fantasma, f.descripcion AS descripcion_fantasm
         GROUP BY f.id
         $filtro";
 
-$stmt = $conexion->prepare($sql);
-if (!empty($params)) {
-    $stmt->bind_param($types, ...$params);
-}
-$stmt->execute();
-$result = $stmt->get_result();
+$result = mysqli_query($conexion, $sql);
 
-if ($result->num_rows > 0) {
+if (mysqli_num_rows($result) > 0) {
     // Generar las tarjetas HTML para cada fantasma
-    while ($row = $result->fetch_assoc()) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo '<div class="tarjeta_fantasma_general" id="' . quitarTildes($row["nombre_fantasma"]) . '">';
         echo '<div class="cuadrado_morado"><img src="../img/Fotos fantasmas/' . strtolower($row["nombre_fantasma"]) . '.svg"></div>';
         echo '<div class="info_fantasma">';
@@ -78,5 +68,4 @@ function quitarTildes($cadena)
 }
 
 // Cerrar la conexión a la base de datos
-$stmt->close();
 mysqli_close($conexion);

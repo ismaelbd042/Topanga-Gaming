@@ -11,24 +11,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validar que los campos no estén vacíos
     if (!empty($nombreApellidos) && !empty($correo) && !empty($descripcion)) {
-        // Preparar la inserción en la tabla de Contacto
-        $insertar_contacto = $conexion->prepare("INSERT INTO Contacto (nombre, correo, mensaje) VALUES (?, ?, ?)");
-        $insertar_contacto->bind_param("sss", $nombreApellidos, $correo, $descripcion);
+        // Realizar la inserción en la tabla de Contacto
+        $insertar_contacto = "INSERT INTO Contacto (nombre, correo, mensaje) 
+                             VALUES ('$nombreApellidos', '$correo', '$descripcion')";
 
-        if ($insertar_contacto->execute()) {
+        if (mysqli_query($conexion, $insertar_contacto)) {
             // La inserción fue exitosa
             echo "Mensaje Enviado.";
         } else {
             // Error al insertar
-            echo "Error al enviar el mensaje: " . $conexion->error;
+            echo "Error al enviar el mensaje: " . mysqli_error($conexion);
         }
-
-        // Cerrar la sentencia
-        $insertar_contacto->close();
     } else {
         echo "Por favor, complete todos los campos del formulario.";
     }
 
     // Cerrar la conexión
-    $conexion->close();
+    mysqli_close($conexion);
 }
+
