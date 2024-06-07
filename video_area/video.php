@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Index/style.css">
     <link rel="stylesheet" href="video.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script>
     <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
     <title>Topanga Gaming</title>
 </head>
@@ -93,7 +94,7 @@
     // Obtener comentarios del video específico
     $sqlComentarios = "SELECT c.comment, c.idUsuario, u.nombre_usuario FROM comentarios c
                         INNER JOIN usuarios u ON c.idUsuario = u.id
-                        WHERE c.idVideo = ? ORDER BY c.id ASC";
+                        WHERE c.idVideo = ? ORDER BY c.id DESC";
     $stmt = $conn->prepare($sqlComentarios);
     $stmt->bind_param("i", $idVideo);
     $stmt->execute();
@@ -143,14 +144,23 @@
             </div>
         </div>
         <div class="divComentarios">
-            <h2>Comentarios del vídeo</h2>
+            <h2>.</h2>
             <div class="divEnviarComentario">
                 <?php if (!empty($comentarios)) : ?>
                     <?php
+                    function generateColorFromName($name)
+                    {
+                        // Genera un color basado en el hash del nombre del usuario
+                        $hash = md5($name);
+                        return '#' . substr($hash, 0, 6);
+                    }
+
                     foreach ($comentarios as $comentario) :
+                        $nombre_usuario = htmlspecialchars($comentario['nombre_usuario']);
+                        $comment = htmlspecialchars($comentario['comment']);
+                        $color = generateColorFromName($nombre_usuario);
                         echo '<div class="comentario">';
-                        echo '<p>' . htmlspecialchars($comentario['nombre_usuario']) . ': ' .
-                            htmlspecialchars($comentario['comment']) . '</p>';
+                        echo '<p><span style="color:' . $color . ';">' . $nombre_usuario . ':</span> ' . $comment . '</p>';
                         echo '</div>';
                     endforeach;
                     ?>
@@ -162,7 +172,9 @@
                 <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['id'] ?>">
                 <input type="hidden" id="nombreUsuario" value="<?php echo $_SESSION['nombre_usuario'] ?>">
                 <textarea id="comment" required></textarea>
-                <button type="submit">Enviar comentario</button>
+                <button type="submit">
+                    Enviar <i class="fas fa-paper-plane"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -277,6 +289,12 @@
         }
 
         $(document).ready(function() {
+            function generateColorFromName(name) {
+                // Genera un color basado en el hash del nombre del usuario
+                var hash = md5(name);
+                return '#' + hash.slice(0, 6);
+            }
+
             $('#comentarioForm').submit(function(event) {
                 event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
 
@@ -284,6 +302,7 @@
                 var idUsuario = $('#idUsuario').val();
                 var nombreUsuario = $('#nombreUsuario').val();
                 var comment = $('#comment').val();
+                var color = generateColorFromName(nombreUsuario);
 
                 $.ajax({
                     url: 'enviar_comentario.php',
@@ -300,13 +319,18 @@
                             noComentariosMsg.remove(); // Eliminar el mensaje
                         }
                         // Agregar el nuevo comentario a la lista de comentarios
-                        $('.divEnviarComentario').append('<div class="comentario"><p>' + nombreUsuario + ': ' + comment + '</p></div>');
+                        $('.divEnviarComentario').prepend('<div class="comentario"><p><span style="color:' + color + ';">' + nombreUsuario + '</span>: ' + comment + '</p></div>');
                         // Limpiar el formulario
                         $('#comentarioForm')[0].reset();
                     }
                 });
             });
         });
+
+        window.onload = function() {
+            var div = document.getElementById('divEnviarComentario');
+            div.scrollTop = div.scrollHeight;
+        };
     </script>
     <?php include "../header y footer/footer.html"; ?>
 </body>

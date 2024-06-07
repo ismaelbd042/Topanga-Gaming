@@ -395,7 +395,7 @@
                             });
                         } else {
                             resultadosDiv.textContent = 'No se encontraron usuarios.';
-                            resultadosDiv.style.color = "red";
+                            resultadosDiv.style.color = "#ff3f3f";
                         }
                     })
                     .catch(error => {

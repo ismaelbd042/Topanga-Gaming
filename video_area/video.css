@@ -1,6 +1,8 @@
 .divVideoComentarios {
     margin: 30px;
     display: flex;
+    gap: 15px;
+    margin-bottom: 150px;
 }
 
 .divVideoAbierto {
@@ -110,12 +112,16 @@
 
 .divComentarios {
     width: 50%;
+    height: 50%;
     position: relative;
     padding-bottom: 60px;
     /* Espacio para el formulario */
     padding: 10px;
-    background-color: white;
-    color: black;
+    /* background-color: white; */
+    color: white;
+    border: solid 2px grey;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .divComentarios h2 {
@@ -124,30 +130,38 @@
 }
 
 .divEnviarComentario {
-    height: 320px;
+    max-height: 400px;
     overflow-y: scroll;
+}
+
+.divEnviarComentario .comentario {
+    z-index: 1;
 }
 
 #comentarioForm {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     padding: 10px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
+    /* background-color: white; */
+    border-radius: 10px;
 }
 
 #comentarioForm textarea {
     width: 80%;
     height: 30px;
     resize: none;
+    border-radius: 10px 0 0 10px;
 }
 
 #comentarioForm button {
     width: 18%;
-    height: 30px;
+    height: 32px;
+    border-radius: 0 10px 10px 0;
 }
 
 @media (max-width: 1024px) {
@@ -162,6 +176,10 @@
 
     .divComentarios {
         width: 100%;
-        height: 500px;
+        height: 400px;
+    }
+
+    .divEnviarComentario {
+        max-height: 350px;
     }
 }
