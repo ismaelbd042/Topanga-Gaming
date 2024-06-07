@@ -168,7 +168,7 @@
             $nombreSinTildes = quitarTildesyN($row["nombre"]);
             $nombreLower = strtolower($row["nombre"]);
             echo '<div class="granTarjeta">';
-            echo '<div class="tarjeta_objeto_general">';
+            echo '<div class="tarjeta_objeto_general" id="' . $nombreSinTildes . '">';
             echo '<div class="div_nombre_foto">';
             echo '<div class="nombre_objeto">' . $nombreSinTildes . '</div>';
             echo '<img src="../img/Fotos Objetos/' . $nombreLower . '3.svg" class="imagen_pequeña_objeto_magico"></img>';
