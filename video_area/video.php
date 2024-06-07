@@ -93,7 +93,7 @@
     // Obtener comentarios del video específico
     $sqlComentarios = "SELECT c.comment, c.idUsuario, u.nombre_usuario FROM comentarios c
                         INNER JOIN usuarios u ON c.idUsuario = u.id
-                        WHERE c.idVideo = ? ORDER BY c.id DESC";
+                        WHERE c.idVideo = ? ORDER BY c.id ASC";
     $stmt = $conn->prepare($sqlComentarios);
     $stmt->bind_param("i", $idVideo);
     $stmt->execute();
