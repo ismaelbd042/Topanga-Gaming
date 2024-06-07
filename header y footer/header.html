@@ -1,11 +1,7 @@
 <head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
   @import url("https://fonts.googleapis.com/css?family=Titillium+Web:400,600");
@@ -219,7 +215,7 @@
     width: auto;
   }
 
-  .subsubmenu > li > a {
+  .subsubmenu>li>a {
     width: 100%;
   }
 
@@ -284,7 +280,7 @@
 
   .menu_mapas {
     width: 900px;
-    top: 85px;
+    top: 175px;
     column-count: 2;
     column-rule: 1px solid #ccc;
   }
@@ -300,10 +296,8 @@
     padding: 0 1.5em;
     width: auto;
     color: #fff;
-    background: var(
-      --Gradiente-Marca,
-      radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%)
-    );
+    background: var(--Gradiente-Marca,
+        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
     border: 0;
     font-size: 16px;
     border-radius: 5px;
@@ -337,7 +331,8 @@
   } */
 
   #nombreSesionIniciada {
-    display: inline-block; /* or block if necessary */
+    display: inline-block;
+    /* or block if necessary */
     width: 100%;
     white-space: nowrap;
   }
@@ -440,10 +435,8 @@
 
   .btn-registro:hover {
     color: white;
-    background: var(
-      --Gradiente-Marca,
-      radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%)
-    );
+    background: var(--Gradiente-Marca,
+        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
     box-shadow: 2px 2px rgba(255, 255, 255, 0.616);
   }
 
@@ -455,6 +448,7 @@
 
   /* A partir de aqui es provisional ya que esto esta para los 5 <li> del nav */
   @media (max-width: 2000px) {
+
     /* Aqui hacer que los botones de iniciar sesion y registrarse sean solo uno */
     .iniciarSesion {
       display: none;
@@ -503,7 +497,7 @@
       color: white;
     }
 
-    #check:checked ~ .menu {
+    #check:checked~.menu {
       right: 0;
     }
 
@@ -546,14 +540,12 @@
 <header>
   <ul class="nav">
     <li id="boton-logo">
-      <a href="../index/index.php"
-        ><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav"
-      /></a>
+      <a href="../index/index.php"><img src="../img/Logo principal.svg" alt="Logo" id="logo-nav" /></a>
     </li>
     <input type="checkbox" id="check" />
     <span class="menu">
       <li id="baseDeDatos">
-        <a href="">Phasmophobia</a>
+        <a href="../Index/index.php">Phasmophobia</a>
         <ul class="submenu">
           <li id="li_pruebas">
             <a href="../pruebas/pruebas.php">Pruebas</a>
@@ -563,22 +555,16 @@
                 <a href="../pruebas/pruebas.php#Ultravioleta">Ultravioleta</a>
               </li>
               <li>
-                <a href="../pruebas/pruebas.php#Escritura Fantasmal"
-                  >Escritura fantasma</a
-                >
+                <a href="../pruebas/pruebas.php#Escritura Fantasmal">Escritura fantasma</a>
               </li>
               <li>
-                <a href="../pruebas/pruebas.php#Temperaturas Heladas"
-                  >Temperaturas heladas</a
-                >
+                <a href="../pruebas/pruebas.php#Temperaturas Heladas">Temperaturas heladas</a>
               </li>
               <li>
                 <a href="../pruebas/pruebas.php#Proyector D.O.T.S.">DOTs</a>
               </li>
               <li>
-                <a href="../pruebas/pruebas.php#Orbes Espectrales"
-                  >Orbes fantasmales</a
-                >
+                <a href="../pruebas/pruebas.php#Orbes Espectrales">Orbes fantasmales</a>
               </li>
               <li>
                 <a href="../pruebas/pruebas.php#Spirit Box">Spirit Box</a>
@@ -586,116 +572,32 @@
             </ul>
           </li>
           <li id="li_objetos">
-            <a href="../objetos malditos/objetos malditos.php"
-              >Objetos malditos</a
-            >
+            <a href="../objetos malditos/objetos malditos.php">Objetos malditos</a>
             <ul class="subsubmenu menu_objetos_malditos">
               <li>
-                <a href="../objetos malditos/objetos malditos.php#Pata de mono"
-                  >Pata de mono</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Pata de mono">Pata de mono</a>
               </li>
               <li>
-                <a
-                  href="../objetos malditos/objetos malditos.php#Caja de musica"
-                  >Caja de música</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Caja de musica">Caja de música</a>
               </li>
               <li>
-                <a
-                  href="../objetos malditos/objetos malditos.php#Espejo encantado"
-                  >Espejo encantado</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Espejo encantado">Espejo encantado</a>
               </li>
               <li>
-                <a href="../objetos malditos/objetos malditos.php#Muneco vudu"
-                  >Muñeco vudú</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Muneco vudu">Muñeco vudú</a>
               </li>
               <li>
-                <a
-                  href="../objetos malditos/objetos malditos.php#Cartas del tarot"
-                  >Cartas del tarot</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Cartas del tarot">Cartas del tarot</a>
               </li>
               <li>
-                <a
-                  href="../objetos malditos/objetos malditos.php#Circulo de invocacion"
-                  >Círculo de invocación</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Circulo de invocacion">Círculo de invocación</a>
               </li>
               <li>
-                <a
-                  href="../objetos malditos/objetos malditos.php#Tablero de ouija"
-                  >Tablero de ouija</a
-                >
+                <a href="../objetos malditos/objetos malditos.php#Tablero de ouija">Tablero de ouija</a>
               </li>
             </ul>
           </li>
           <!--  -->
-          <li id="li_mapas">
-            <a href="../Index/index.php#Index2">Mapas</a>
-            <ul class="subsubmenu menu_mapas">
-              <li>
-                <a href="../mapas/mapas.php?mapa=6_Tanglewood_Drive"
-                  >6 Tanglewood Drive</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=10_Ridgeview_Court"
-                  >10 Ridgeview Court</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=13_Willow_Street"
-                  >13 Willow Street</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=42_Edgefield_Road"
-                  >42 Edgefield Road</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=Bleasdale_Farmhouse"
-                  >Bleasdale Farmhouse</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=Brownstone_High_School"
-                  >Brownstone High School</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=Grafton_Farmhouse"
-                  >Grafton Farmhouse</a
-                >
-              </li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=Maple_Lodge_Campsite"
-                  >Maple Lodge Campsite</a
-                >
-              </li>
-              <li><a href="../mapas/mapas.php?mapa=Prison">Prison</a></li>
-              <li>
-                <a href="../mapas/mapas.php?mapa=Camp_Woodwind"
-                  >Camp Woodwind</a
-                >
-              </li>
-              <li>
-                <a
-                  href="../mapas/mapas.php?mapa=Sunny_Meadows_Mental_Institution"
-                  >Sunny Meadows Mental Institution</a
-                >
-              </li>
-              <li>
-                <a
-                  href="../mapas/mapas.php?mapa=Sunny_Meadows_Mental_Institution_(Restricted)"
-                  >Sunny Meadows Mental Institution Restricted</a
-                >
-              </li>
-            </ul>
-          </li>
           <li id="li_fantasmas">
             <a href="../fantasmas/fantasmas.php">Fantasmas</a>
             <ul class="subsubmenu menu_fantasmas">
@@ -739,95 +641,102 @@
             <a href="../equipamiento/equipamiento.php">Equipamiento</a>
             <ul class="subsubmenu menu_equipamiento">
               <li>
-                <a href="../equipamiento/equipamiento.php#ProyectorD.O.T.S."
-                  >Proyector D.O.T.S.</a
-                >
+                <a href="../equipamiento/equipamiento.php#ProyectorD.O.T.S.">Proyector D.O.T.S.</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#MedidorEMF"
-                  >Medidor EMF</a
-                >
+                <a href="../equipamiento/equipamiento.php#MedidorEMF">Medidor EMF</a>
               </li>
               <li>
                 <a href="../equipamiento/equipamiento.php#Linterna">Linterna</a>
               </li>
               <li>
-                <a
-                  href="../equipamiento/equipamiento.php#Librodeescriturafantasma"
-                  >Libro de escritura fantasma</a
-                >
+                <a href="../equipamiento/equipamiento.php#Librodeescriturafantasma">Libro de escritura fantasma</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#SpiritBox"
-                  >Spirit Box</a
-                >
+                <a href="../equipamiento/equipamiento.php#SpiritBox">Spirit Box</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Termómetro"
-                  >Termómetro</a
-                >
+                <a href="../equipamiento/equipamiento.php#Termómetro">Termómetro</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Linternaultravioleta"
-                  >Linterna ultravioleta</a
-                >
+                <a href="../equipamiento/equipamiento.php#Linternaultravioleta">Linterna ultravioleta</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Cámaradevídeo"
-                  >Cámara de vídeo</a
-                >
+                <a href="../equipamiento/equipamiento.php#Cámaradevídeo">Cámara de vídeo</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Crucifijo"
-                  >Crucifijo</a
-                >
+                <a href="../equipamiento/equipamiento.php#Crucifijo">Crucifijo</a>
               </li>
               <li>
                 <a href="../equipamiento/equipamiento.php#Lumbre">Lumbre</a>
               </li>
               <li>
-                <a
-                  href="../equipamiento/equipamiento.php#Equipamientoparalacabeza"
-                  >Equipamiento de cabeza</a
-                >
+                <a href="../equipamiento/equipamiento.php#Equipamientoparalacabeza">Equipamiento de cabeza</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Encendedor"
-                  >Encendedor</a
-                >
+                <a href="../equipamiento/equipamiento.php#Encendedor">Encendedor</a>
               </li>
               <li>
                 <a href="../equipamiento/equipamiento.php#Incienso">Incienso</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Sensordemovimiento"
-                  >Sensor de movimiento</a
-                >
+                <a href="../equipamiento/equipamiento.php#Sensordemovimiento">Sensor de movimiento</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Micrófonoparabólico"
-                  >Micrófono parabólico</a
-                >
+                <a href="../equipamiento/equipamiento.php#Micrófonoparabólico">Micrófono parabólico</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Cámaradefotos"
-                  >Cámara de fotos</a
-                >
+                <a href="../equipamiento/equipamiento.php#Cámaradefotos">Cámara de fotos</a>
               </li>
               <li><a href="../equipamiento/equipamiento.php#Sal">Sal</a></li>
               <li>
-                <a
-                  href="../equipamiento/equipamiento.php#Medicaciónparalacordura"
-                  >Medicación para la cordura</a
-                >
+                <a href="../equipamiento/equipamiento.php#Medicaciónparalacordura">Medicación para la cordura</a>
               </li>
               <li>
-                <a href="../equipamiento/equipamiento.php#Sensordesonido"
-                  >Sensor de sonido</a
-                >
+                <a href="../equipamiento/equipamiento.php#Sensordesonido">Sensor de sonido</a>
               </li>
               <li>
                 <a href="../equipamiento/equipamiento.php#Trípode">Trípode</a>
+              </li>
+            </ul>
+          </li>
+          <li id="li_mapas">
+            <a href="../Index/index.php#Index2">Mapas</a>
+            <ul class="subsubmenu menu_mapas">
+              <li>
+                <a href="../mapas/mapas.php?mapa=6_Tanglewood_Drive">6 Tanglewood Drive</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=10_Ridgeview_Court">10 Ridgeview Court</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=13_Willow_Street">13 Willow Street</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=42_Edgefield_Road">42 Edgefield Road</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Bleasdale_Farmhouse">Bleasdale Farmhouse</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Brownstone_High_School">Brownstone High School</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Grafton_Farmhouse">Grafton Farmhouse</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Maple_Lodge_Campsite">Maple Lodge Campsite</a>
+              </li>
+              <li><a href="../mapas/mapas.php?mapa=Prison">Prison</a></li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Camp_Woodwind">Camp Woodwind</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Sunny_Meadows_Mental_Institution">Sunny Meadows Mental Institution</a>
+              </li>
+              <li>
+                <a href="../mapas/mapas.php?mapa=Sunny_Meadows_Mental_Institution_(Restricted)">Sunny Meadows Mental
+                  Institution Restricted</a>
               </li>
             </ul>
           </li>

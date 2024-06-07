@@ -40,10 +40,11 @@ function comprobarInputUsuarioRegistro() {
     usernameErrorIcon.style.display = "block";
     return false;
   }
-  
+
   // Verificar si el usuario tiene menos de 5 letras
   if (inputUsername.length < 7) {
-    errorMessage.textContent = "El nombre de usuario debe tener al menos 5 carateres.";
+    errorMessage.textContent =
+      "El nombre de usuario debe tener al menos 7 carateres.";
     errorMessage.style.opacity = "1";
     usernameErrorIcon.style.display = "block";
     return false;
@@ -61,7 +62,6 @@ function comprobarInputUsuarioRegistro() {
   usernameErrorIcon.style.display = "none";
   return true;
 }
-
 
 // Función para validar que el nombre de usuario no existe
 async function comprobarUsuarioRegistro() {
