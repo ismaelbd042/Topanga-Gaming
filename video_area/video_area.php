@@ -81,6 +81,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="video_area.css">
     <link rel="stylesheet" href="../Index/style.css">
     <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
+    <style>
+        .upload-video-container .upload-video-button {
+            height: 35px;
+            padding: 0 1em;
+            width: auto;
+            color: #003;
+            background: #e2e275;
+            border: 0;
+            font-size: 16px;
+            border-radius: 2px;
+            transition: color 0.8s ease;
+        }
+
+        .upload-video-container .upload-video-button:hover {
+            color: white;
+            background: var(--Gradiente-Marca,
+                    radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+            box-shadow: 2px 2px rgba(255, 255, 255, 0.616);
+        }
+
+        .upload-video-container .upload-video-button:active {
+            color: white;
+            background: #5f1495;
+            box-shadow: none;
+        }
+    </style>
     <title>Topanga Gaming</title>
 </head>
 
@@ -102,7 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Gusta</a></li>
                 <li class="canalSidebar" id="canalSidebar"><a><img src="../img/Icons/misvideos.png" alt="">Mis
                         Vídeos</a></li>
-                <li class="suscripcionesSidebar" id="suscripcionesSidebar"><a><img src="../img/Icons/suscripciones.png" alt="">Suscripciones</a></li>
+                <li class="suscripcionesSidebar" id="suscripcionesSidebar"><a><img src="../img/Icons/suscripciones.png"
+                            alt="">Suscripciones</a></li>
             </ul>
         </nav>
 
@@ -154,8 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('sidebarToggle').addEventListener('click', function () {
                     var sidebar = document.getElementById('sidebarVideos');
                     if (sidebar.classList.contains('open')) {
                         sidebar.classList.remove('open');
@@ -177,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Agregar un evento click a cada elemento
                 sidebarItems.forEach(item => {
-                    item.addEventListener('click', function() {
+                    item.addEventListener('click', function () {
                         // Eliminar la clase 'selected' de todos los elementos de la barra lateral
                         sidebarItems.forEach(item => {
                             item.classList.remove('selected');
@@ -199,12 +226,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Realizar una petición AJAX para cargar el contenido correspondiente basado en el id seleccionado
                         fetch(window.location.href, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                },
-                                body: 'selectedItem=' + selectedItem
-                            })
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: 'selectedItem=' + selectedItem
+                        })
                             .then(response => response.text())
                             .then(data => {
                                 // Actualizar el contenido de acuerdo a la respuesta del servidor
@@ -217,13 +244,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             });
 
-            document.getElementById('searchInputVideo').addEventListener('click', function() {
+            document.getElementById('searchInputVideo').addEventListener('click', function () {
                 // Eliminar la calse 'open' para cerrar el sidebar
                 var sidebar = document.getElementById('sidebarVideos');
                 sidebar.classList.remove('open');
             });
 
-            document.getElementById('searchInputVideo').addEventListener('input', function() {
+            document.getElementById('searchInputVideo').addEventListener('input', function () {
                 const searchTerm = this.value.toLowerCase();
                 const videos = document.querySelectorAll('.video-item');
                 let visibleCount = 0;
