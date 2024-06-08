@@ -38,7 +38,7 @@
             max-width: 400px;
             overflow: scroll;
             padding: 20px;
-            max-height: 600px;
+            max-height: 80vh;
             background-color: #fff;
             border-radius: 4px;
         }
@@ -107,7 +107,14 @@
                     const pregunta = button.getAttribute('data-preguntas');
                     const formattedPregunta = pregunta.replace(/\n/g, '<br>');
                     document.getElementById('modal-preguntas-texto').innerHTML = formattedPregunta;
+                    document.body.classList.add("no-scroll");
                 });
+            });
+
+            document.getElementById("btn-modal").addEventListener("change", (event) => {
+                if (!event.target.checked) {
+                    document.body.classList.remove("no-scroll");
+                }
             });
         });
     </script>
