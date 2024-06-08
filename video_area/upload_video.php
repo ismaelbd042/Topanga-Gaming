@@ -9,6 +9,20 @@
     <link rel="shortcut icon" href="../img/Logo fondo blanco.svg" type="image/x-icon">
     <title>Topanga Gaming</title>
     <style>
+        .imgVolverAtrasVideo {
+            background: transparent;
+            /* width: 23px; */
+            border: none;
+            margin-left: 15px;
+            margin-top: 15px;
+            padding-bottom: -20px;
+            cursor: pointer;
+        }
+
+        .imgVolverAtrasVideo img {
+            width: 40px;
+        }
+
         .upload-video-form-container {
             position: relative;
             z-index: 2;
@@ -78,7 +92,7 @@
     <div class="overlay"></div>
     <?php
     session_start(); // Iniciar sesión si no se ha iniciado aún
-
+    
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
@@ -90,7 +104,7 @@
         // Obtener los datos del formulario
         $nombreVideo = $_POST['nombreVideo'];
         $idAutor = $_SESSION['id']; // Asume que el ID del usuario está almacenado en la sesión
-
+    
         // Manejar la subida del archivo
         $target_dir = "videosMP4/"; // Use the absolute path
         $target_file = $target_dir . basename($_FILES["videoFile"]["name"]);
@@ -145,7 +159,9 @@
         }
     }
     ?>
-
+    <button onclick="location.href='../video_area/video_area.php'" class="imgVolverAtrasVideo">
+        <img src="../img/Icons/flecha_atras.png" alt="">
+    </button>
     <div class="container_subir_video">
         <div class="upload-video-form-container">
             <form action="upload_video.php" method="post" enctype="multipart/form-data">
