@@ -1,5 +1,21 @@
+.imgVolverAtrasVideo {
+    background: transparent;
+    /* width: 23px; */
+    border: none;
+    margin-left: 15px;
+    margin-top: 15px;
+    padding-bottom: -20px;
+    cursor: pointer;
+}
+
+.imgVolverAtrasVideo img {
+    width: 40px;
+}
+
 .divVideoComentarios {
-    margin: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
     display: flex;
     gap: 15px;
     margin-bottom: 150px;
@@ -29,18 +45,16 @@
 }
 
 .subscribeButton {
-    background: var(--Gradiente-Marca,
-            radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
-    color: white;
-    /* Color del texto */
-    border: none;
-    /* Sin borde */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    cursor: pointer;
-    /* Cambia el cursor al pasar sobre el botón */
+    height: 30px;
+    padding: 0 1.5em;
+    width: auto;
+    color: #003;
+    background: #e2e275;
+    border: 0;
     font-size: 16px;
-    /* Tamaño del texto */
+    border-radius: 2px;
+    transition: color 0.8s ease;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -48,9 +62,17 @@
 }
 
 .subscribeButton:hover {
-    background: #0056b3;
-    /* Cambia el color de fondo al pasar el cursor */
+    color: white;
+    background: var(--Gradiente-Marca,
+        radial-gradient(80.89% 43.8% at 50% 50%, #003 0%, #5f1495 100%));
+    box-shadow: 2px 2px rgba(255, 255, 255, 0.616);
 }
+
+.subscribeButton:active {
+    color: white;
+    background: #5f1495;
+    box-shadow: none;
+  }
 
 .divAbajoVideo {
     display: flex;
@@ -85,7 +107,7 @@
     bottom: -75%;
     /* Posiciona el tooltip encima del elemento */
     left: 40%;
-    margin-left: -46px;
+    margin-left: -47px;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -93,7 +115,7 @@
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
-    top: -34%;
+    top: -28%;
     /* Parte inferior del tooltip */
     left: 50%;
     margin-left: -5px;
@@ -112,7 +134,8 @@
 
 .divComentarios {
     width: 50%;
-    height: 50%;
+    /* height: 50%; */
+    height: 450px;
     position: relative;
     padding-bottom: 60px;
     /* Espacio para el formulario */

@@ -126,12 +126,12 @@
 
         .boton_formulario {
             width: 100%;
-            background: #a2a2ad;
+            background: grey;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            color: white;
+            color: black;
         }
 
         .boton_formulario:hover {

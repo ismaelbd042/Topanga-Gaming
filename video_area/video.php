@@ -15,7 +15,7 @@
     <div class="overlay"></div>
     <?php
     session_start(); // Iniciar sesión si no se ha iniciado aún
-
+    
     include "../header y footer/header.html";
     include "../header y footer/VentanaModal.html";
     include "../database/connect.php";
@@ -111,6 +111,9 @@
     $stmt->close();
     $conn->close();
     ?>
+    <button onclick="location.href='../video_area/video_area.php'" class="imgVolverAtrasVideo">
+        <img src="../img/Icons/flecha_atras.png" alt="" >
+    </button>
     <div class="divVideoComentarios">
         <div class="divVideoAbierto">
             <h1><?php echo $video['nombreVideo']; ?></h1>
@@ -120,23 +123,24 @@
             </video>
             <div class="divAbajoVideo">
                 <p>@<?php echo $video['nombre_usuario']; ?>
-                    <?php if ($suscripcion_activa) : ?>
+                    <?php if ($suscripcion_activa): ?>
                         <button class="subscribeButton" id="cancelarSuscripcion">
-                            <img src="../img/Icons/suscribirseCancelar.png" alt="Campana Suscripción" class="imgCampanaSuscripcion">
+                            <i class="fas fa-bell-slash" class="imgCampanaSuscripcion"></i>
                             Cancelar suscripción
                         </button>
-                    <?php else : ?>
+                    <?php else: ?>
                         <button class="subscribeButton" id="aceptarSuscripcion">
-                            <img src="../img/Icons/suscribirse.png" alt="Campana Suscripción" class="imgCampanaSuscripcion">
+                            <i class="fas fa-bell" class="imgCampanaSuscripcion"></i>
                             Suscribirse
                         </button>
                     <?php endif; ?>
                 </p>
                 <div class="tooltip">
-                    <?php if ($megusta_activa) : ?>
-                        <img src="../img/Icons/corazonRelleno.png" alt="Corazon de me gusta" class="imgCorazon" id="nolikeButton">
+                    <?php if ($megusta_activa): ?>
+                        <img src="../img/Icons/corazonRelleno.png" alt="Corazon de me gusta" class="imgCorazon"
+                            id="nolikeButton">
                         <span class="tooltiptext">No me gusta</span>
-                    <?php else : ?>
+                    <?php else: ?>
                         <img src="../img/Icons/corazon.png" alt="Corazon de me gusta" class="imgCorazon" id="likeButton">
                         <span class="tooltiptext">Me gusta</span>
                     <?php endif; ?>
@@ -146,7 +150,7 @@
         <div class="divComentarios">
             <h2>.</h2>
             <div class="divEnviarComentario">
-                <?php if (!empty($comentarios)) : ?>
+                <?php if (!empty($comentarios)): ?>
                     <?php
                     function generateColorFromName($name)
                     {
@@ -155,7 +159,7 @@
                         return '#' . substr($hash, 0, 6);
                     }
 
-                    foreach ($comentarios as $comentario) :
+                    foreach ($comentarios as $comentario):
                         $nombre_usuario = htmlspecialchars($comentario['nombre_usuario']);
                         $comment = htmlspecialchars($comentario['comment']);
                         $color = generateColorFromName($nombre_usuario);
@@ -164,7 +168,7 @@
                         echo '</div>';
                     endforeach;
                     ?>
-                <?php else : ?>
+                <?php else: ?>
                     <p id="noComentarios">¡Sé el primero en comentar!</p>
                 <?php endif; ?>
             </div>
@@ -182,22 +186,22 @@
     <script src="../Index/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Suscripción
-            $("#aceptarSuscripcion").click(function() {
+            $("#aceptarSuscripcion").click(function () {
                 suscribirse(<?php echo $video['idAutor']; ?>);
             });
 
-            $("#cancelarSuscripcion").click(function() {
+            $("#cancelarSuscripcion").click(function () {
                 cancelarSuscripcion(<?php echo $video['idAutor']; ?>);
             });
 
             // Me gusta
-            $("#nolikeButton").click(function() {
+            $("#nolikeButton").click(function () {
                 quitarMeGusta(<?php echo $video_id; ?>);
             });
 
-            $("#likeButton").click(function() {
+            $("#likeButton").click(function () {
                 darMeGusta(<?php echo $video_id; ?>);
             });
         });
@@ -209,12 +213,12 @@
                 data: {
                     idAutor: idAutor
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#aceptarSuscripcion")
-                        .html('<img src="../img/Icons/suscribirseCancelar.png" alt="Campana Suscripción" class="imgCampanaSuscripcion"> Cancelar suscripción')
+                        .html('<i class="fas fa-bell-slash" class="imgCampanaSuscripcion"></i> Cancelar suscripción')
                         .attr("id", "cancelarSuscripcion")
                         .unbind("click")
-                        .click(function() {
+                        .click(function () {
                             cancelarSuscripcion(idAutor);
                         });
                 }
@@ -228,12 +232,12 @@
                 data: {
                     idAutor: idAutor
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#cancelarSuscripcion")
-                        .html('<img src="../img/Icons/suscribirse.png" alt="Campana Suscripción" class="imgCampanaSuscripcion"> Suscribirse')
+                        .html('<i class="fas fa-bell" class="imgCampanaSuscripcion"></i> Suscribirse')
                         .attr("id", "aceptarSuscripcion")
                         .unbind("click")
-                        .click(function() {
+                        .click(function () {
                             suscribirse(idAutor);
                         });
                 }
@@ -247,18 +251,18 @@
                 data: {
                     video_id: video_id
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#likeButton")
                         .attr("src", "../img/Icons/corazonRelleno.png")
                         .attr("id", "nolikeButton")
                         .unbind("click")
-                        .click(function() {
+                        .click(function () {
                             quitarMeGusta(video_id);
                         });
                     $(".tooltiptext")
                         .html("No me gusta")
                 },
-                error: function(response) {
+                error: function (response) {
                     console.log("Error al dar Me Gusta: " + response);
                 }
             });
@@ -271,31 +275,31 @@
                 data: {
                     video_id: video_id
                 },
-                success: function(response) {
+                success: function (response) {
                     $("#nolikeButton")
                         .attr("src", "../img/Icons/corazon.png")
                         .attr("id", "likeButton")
                         .unbind("click")
-                        .click(function() {
+                        .click(function () {
                             darMeGusta(video_id);
                         });
                     $(".tooltiptext")
                         .html("Me gusta")
                 },
-                error: function(response) {
+                error: function (response) {
                     console.log("Error al quitar Me Gusta: " + response);
                 }
             });
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             function generateColorFromName(name) {
                 // Genera un color basado en el hash del nombre del usuario
                 var hash = md5(name);
                 return '#' + hash.slice(0, 6);
             }
 
-            $('#comentarioForm').submit(function(event) {
+            $('#comentarioForm').submit(function (event) {
                 event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
 
                 var idVideo = <?php echo $idVideo; ?>;
@@ -312,7 +316,7 @@
                         idUsuario: idUsuario,
                         comment: comment
                     },
-                    success: function(response) {
+                    success: function (response) {
                         // Verificar si existe el mensaje "No hay comentarios"
                         var noComentariosMsg = $('#noComentarios');
                         if (noComentariosMsg.length) {
@@ -327,7 +331,7 @@
             });
         });
 
-        window.onload = function() {
+        window.onload = function () {
             var div = document.getElementById('divEnviarComentario');
             div.scrollTop = div.scrollHeight;
         };
