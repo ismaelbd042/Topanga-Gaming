@@ -20,6 +20,7 @@ function mostrarVentanaModal() {
   function mostrarLogin() {
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll"); // Añadir la clase no-scroll al body
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -30,6 +31,7 @@ function mostrarVentanaModal() {
   function mostrarSignUp() {
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll"); // Añadir la clase no-scroll al body
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -41,6 +43,7 @@ function mostrarVentanaModal() {
     modal.style.transform = "translate(-50%, 100%)";
     setTimeout(function () {
       modal.style.display = "none";
+      document.body.classList.remove("no-scroll"); // Eliminar la clase no-scroll del body
     }, 500);
     overlay.style.display = "none";
   }
@@ -178,6 +181,7 @@ function comprobarSesion() {
   function mostrarLogin() {
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll");
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -188,6 +192,7 @@ function comprobarSesion() {
   function mostrarSignUp() {
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll");
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -197,6 +202,7 @@ function comprobarSesion() {
   // Función para cerrar la ventana modal
   function ocultarVentanaModal() {
     modal.style.transform = "translate(-50%, 100%)";
+    document.body.classList.remove("no-scroll");
     setTimeout(function () {
       modal.style.display = "none";
     }, 500);
@@ -296,6 +302,7 @@ function verificarServicios() {
     });
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll");
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -311,6 +318,7 @@ function verificarServicios() {
     });
     modal.style.display = "block";
     overlay.style.display = "block";
+    document.body.classList.add("no-scroll");
     setTimeout(function () {
       modal.style.transform = "translate(-50%, -50%)"; // Cambiar la transformación para deslizarse desde abajo
     }, 100); // Pequeña demora antes de aplicar la transformación
@@ -320,6 +328,7 @@ function verificarServicios() {
   // Función para cerrar la ventana modal
   function ocultarVentanaModal() {
     modal.style.transform = "translate(-50%, 100%)";
+    document.body.classList.remove("no-scroll");
     setTimeout(function () {
       modal.style.display = "none";
     }, 500);
