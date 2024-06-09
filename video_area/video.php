@@ -186,6 +186,7 @@
     <script src="../Index/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Esto es para suscribirse al canal donde depende del autor del video
         $(document).ready(function () {
             // Suscripción
             $("#aceptarSuscripcion").click(function () {
@@ -205,7 +206,7 @@
                 darMeGusta(<?php echo $video_id; ?>);
             });
         });
-
+// Funcion de suscribirse
         function suscribirse(idAutor) {
             $.ajax({
                 type: "POST",
@@ -224,7 +225,7 @@
                 }
             });
         }
-
+// Funcion para cancelar la susscripcion
         function cancelarSuscripcion(idAutor) {
             $.ajax({
                 type: "POST",
@@ -243,7 +244,7 @@
                 }
             });
         }
-
+// Damos me gusta al video
         function darMeGusta(video_id) {
             $.ajax({
                 type: "POST",
@@ -267,7 +268,7 @@
                 }
             });
         }
-
+// Quitamos me gusta al video
         function quitarMeGusta(video_id) {
             $.ajax({
                 type: "POST",
