@@ -5,7 +5,7 @@ session_start();
 
 $busqueda = $_GET['busqueda'];
 $busqueda = $conn->real_escape_string($busqueda);
-
+// Seleccionamos de la base de datos
 $sql = "SELECT id, nombre_usuario, correo 
         FROM usuarios 
         WHERE nombre_usuario LIKE '%$busqueda%' 
@@ -21,7 +21,7 @@ $sql = "SELECT id, nombre_usuario, correo
         AND id != {$_SESSION['id']}";
 
 $resultado = $conn->query($sql);
-
+// Recorremos por los resultados anteriores
 $usuarios = array();
 if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {

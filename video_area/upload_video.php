@@ -99,6 +99,26 @@
 
     $conn = getConexion();
 
+    ?>
+
+    <button onclick="location.href='../video_area/video_area.php'" class="imgVolverAtrasVideo">
+        <img src="../img/Icons/flecha_atras.png" alt="">
+    </button>
+    <div class="container_subir_video">
+        <div class="upload-video-form-container">
+            <form action="upload_video.php" method="post" enctype="multipart/form-data">
+                <label for="nombreVideo">Nombre del Video:</label>
+                <input type="text" name="nombreVideo" id="nombreVideo" required>
+
+                <label for="videoFile">Selecciona el Video:</label>
+                <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
+
+                <input type="submit" value="Subir Video" name="submit">
+            </form>
+        </div>
+    </div>
+    <?php
+
     // Verificar si el formulario fue enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["videoFile"])) {
         // Obtener los datos del formulario
@@ -159,22 +179,6 @@
         }
     }
     ?>
-    <button onclick="location.href='../video_area/video_area.php'" class="imgVolverAtrasVideo">
-        <img src="../img/Icons/flecha_atras.png" alt="">
-    </button>
-    <div class="container_subir_video">
-        <div class="upload-video-form-container">
-            <form action="upload_video.php" method="post" enctype="multipart/form-data">
-                <label for="nombreVideo">Nombre del Video:</label>
-                <input type="text" name="nombreVideo" id="nombreVideo" required>
-
-                <label for="videoFile">Selecciona el Video:</label>
-                <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
-
-                <input type="submit" value="Subir Video" name="submit">
-            </form>
-        </div>
-    </div>
 </body>
 <script src="../Index/script.js"></script>
 
